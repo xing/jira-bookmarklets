@@ -14,7 +14,7 @@
 // bookmarklet wrapper
 // javascript:void(function(){})();
 ///////////////////////////////////////////////////////////////////////////////
-String.prototype.truncate = function (maxlength) {
+;String.prototype.truncate = function (maxlength) {
 
   'use strict';
 
