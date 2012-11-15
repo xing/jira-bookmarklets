@@ -1,7 +1,4 @@
-// version 0.0.1
-// 2012-10-10 Copyright (c) 2012, Christian Angermann
-// Released under the GPL license
-// http://www.gnu.org/copyleft/gpl.html
+// version 1.0.0
 // ==UserScript==
 // @name        TicketPrint
 // @namespace   http://jira.com
@@ -11,8 +8,6 @@
 // @include     https://jira.*.*/jira/browse/*
 // @version     1
 // ==/UserScript==
-// bookmarklet wrapper
-// javascript:void(function(){})();
 ///////////////////////////////////////////////////////////////////////////////
 ;String.prototype.truncate = function (maxlength) {
 
