@@ -7,17 +7,17 @@
 .gm-table,
 .gm-table th,
 .gm-table td {
-  border: .1mm solid #DDD;
+  border: 1px solid #DDD;
 }
 .gm-table td {
   vertical-align: top;
 }
 .gm-hd {
+  color: #999;
   font-size: .8em;
   line-height: 1.4em;
   text-transform: uppercase;
   text-align: left;
-  color: #999;
 }
 .h1 { font-size: 3em; }
 .h2 { font-size: 2.4em; }
