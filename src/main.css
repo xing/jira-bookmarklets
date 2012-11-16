@@ -6,12 +6,8 @@
 }
 .gm-table,
 .gm-table th,
-.gm-table td {
-  border: 1px solid #DDD;
-}
-.gm-table td {
-  vertical-align: top;
-}
+.gm-table td { border: 1px solid #DDD; }
+.gm-table td { vertical-align: top; }
 .gm-hd {
   color: #999;
   font-size: .8em;
@@ -45,9 +41,7 @@
       -o-hyphens: auto;
          hyphens: auto;
 }
-.gm-inner {
-  padding: 2mm 3mm;
-}
+.gm-inner { padding: 2mm 3mm; }
 /* ----------------------------- sections */
 .gm-desc .gm-inner {
   overflow: hidden;
@@ -78,13 +72,10 @@
   text-align: center;
   text-transform: uppercase;
 }
-.gm-container .gm-print {
-  margin: 0 10px 0 0;
-}
+.gm-container .gm-print { margin: 0 10px 0 0; }
 @media print {
-  html, body {
-    background-color: white;
-  }
+  html, body { background-color: white; }
+  .gm-hd { color: #999; }
   #page,
   .aui-blanket,
   .gm-container .form-footer,
@@ -105,9 +96,7 @@
     width: 100%;
     z-index: 2501;
   }
-  .gm-container .form-body {
-    padding: 0!important;
-  }
+  .gm-container .form-body { padding: 0!important; }
 }
 @media screen {
   .gm-container {
@@ -117,7 +106,5 @@
     top: 0;
     width: 18.9cm;
   }
-  .gm-container .form-body {
-    padding: 2mm!important;
-  }
+  .gm-container .form-body { padding: 2mm !important; }
 }
