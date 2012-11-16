@@ -11,5 +11,4 @@ echo -n ';xing.jira.Application.showPopup()'                   >> bookmarklet.js
 echo -n '})();'                                                >> bookmarklet.js
 
 mv bookmarklet.js jira-ticket-print-bookmarklet.js
-mv compressed.js  jira-ticket-print.min.js
-rm compressed.css
+rm compressed.js compressed.css
