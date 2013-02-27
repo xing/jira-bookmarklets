@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>QUnit basic example</title>
+    <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.11.0.css">
+  </head>
+  <body>
+    <div id="qunit"></div>
+    <div id="qunit-fixture">
+
+      <div id="issue-content">
+        <header class="issue-header js-stalker" id="stalker">
+          <div class="issue-header-content">
+            <div id="heading-avatar">
+              <img width="48" height="48" src="/jira/secure/projectavatar?pid=10250&amp;avatarId=10082&amp;size=large" class="project-avatar-48" alt="" id="project-avatar" />
+            </div>
+            <ul class="breadcrumbs">
+              <li><a href="/jira/browse/XWS" id="project-name-val">XWS</a></li>
+              <li><a href="/jira/browse/XWS-1332" rel="70038" id="key-val">XWS-1332</a></li>
+            </ul>
+            <h1 id="summary-val" class="editable-field inactive" title="Click to edit">
+              Docs: Wrong information regarding test consumer keys
+              <span class="overlay-icon icon icon-edit-sml"></span>
+            </h1>
+            <div class="command-bar">
+              <div class="ops-cont">
+                <div class="ops-menus aui-toolbar">
+                  <div class="toolbar-split toolbar-split-left">
+                    <ul class="toolbar-group">
+                      <li class="toolbar-item">
+                        <a href="/jira/secure/EditIssue!default.jspa?id=70038" class="toolbar-trigger issueaction-edit-issue" title="Edit this issue ( Type 'e' )" id="edit-issue"><span class="icon butt-edit"></span><span class="trigger-text">Edit</span></a>
+                      </li>
+                    </ul>
+                    <ul class="toolbar-group " id="opsbar-opsbar-operations">
+                      <li class="toolbar-item">
+                        <a href="/jira/secure/AssignIssue!default.jspa?id=70038" class="toolbar-trigger issueaction-assign-issue" title="Assign this issue to someone ( Type 'a' )" id="assign-issue">Assign</a>
+                      </li>
+                      <li class="toolbar-item">
+                        <a href="/jira/secure/AssignIssue.jspa?atl_token=A8AY-ICEU-NKPP-HQHO|95d25bf7fccf41a682928e71e4fef0411676b257|lin&amp;id=70038&amp;assignee=christian.angermann" class="toolbar-trigger conjoined issueaction-assign-to-me" title="Assign this issue to me" id="assign-to-me">Assign To Me</a>
+                      </li>
+                      <li class="toolbar-item">
+                        <a href="/jira/secure/AddComment!default.jspa?id=70038" class="inline-comment toolbar-trigger conjoined issueaction-comment-issue" title="Comment on this issue ( Type 'm' )" id="comment-issue">Comment</a>
+                      </li>
+                      <li class="toolbar-item toolbar-dropdown">
+                        <a href="#" class="toolbar-trigger js-default-dropdown" id="opsbar-operations_more"><span class="dropdown-text">More Actions</span><span class="icon drop-menu"></span></a>
+                        <div class="aui-list hidden">
+                          <ul class="aui-list-section aui-first">
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/GHGoToBoard.jspa?issueId=70038" title="View this issue on an Agile board" id="greenhopper-rapidboard-operation" class="aui-list-item-link issueaction-greenhopper-rapidboard-operation js-rapidboard-operation-issue opsbar-operations">Agile Board</a>
+                            </li>
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/RankTop.jspa?issueId=70038" title="" id="greenhopper-rank-top-operation" class="aui-list-item-link issueaction-greenhopper-rank-top-operation opsbar-operations">Rank to Top</a>
+                            </li>
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/RankBottom.jspa?issueId=70038" title="" id="greenhopper-rank-bottom-operation" class="aui-list-item-link issueaction-greenhopper-rank-bottom-operation opsbar-operations">Rank to Bottom</a>
+                            </li>
+                          </ul>
+                          <ul class="aui-list-section ">
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/CreateWorklog!default.jspa?id=70038" title="Log work against this issue" id="log-work" class="aui-list-item-link issueaction-log-work opsbar-operations">Log Work</a>
+                            </li>
+                          </ul>
+                          <ul class="aui-list-section ">
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/AttachFile!default.jspa?id=70038" title="Attach one or more files to this issue" id="attach-file" class="aui-list-item-link issueaction-attach-file opsbar-operations">Attach Files</a>
+                            </li>
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/AttachScreenshot!default.jspa?id=70038" title="Attach a screenshot to this issue" id="attach-screenshot" class="aui-list-item-link issueaction-attach-screenshot opsbar-operations">Attach Screenshot</a>
+                            </li>
+                          </ul>
+                          <ul class="aui-list-section ">
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/VoteOrWatchIssue.jspa?atl_token=A8AY-ICEU-NKPP-HQHO|95d25bf7fccf41a682928e71e4fef0411676b257|lin&amp;id=70038&amp;vote=vote" title="Vote for this issue" id="toggle-vote-issue" class="aui-list-item-link issueaction-vote-issue opsbar-operations">Add Vote</a>
+                            </li>
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/ViewVoters!default.jspa?id=70038" title="View voters for this issue" id="view-voters" class="aui-list-item-link issueaction-view-voters opsbar-operations">Voters</a>
+                            </li>
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/VoteOrWatchIssue.jspa?atl_token=A8AY-ICEU-NKPP-HQHO|95d25bf7fccf41a682928e71e4fef0411676b257|lin&amp;id=70038&amp;watch=watch" title="Start watching this issue" id="toggle-watch-issue" class="aui-list-item-link issueaction-watch-issue opsbar-operations">Watch Issue</a>
+                            </li>
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/ManageWatchers!default.jspa?id=70038" title="Manage the watchers of this issue" id="manage-watchers" class="aui-list-item-link issueaction-manage-watchers opsbar-operations">Watchers</a>
+                            </li>
+                          </ul>
+                          <ul class="aui-list-section ">
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/CreateSubTaskIssue!default.jspa?parentIssueId=70038" title="Create sub-task for this issue" id="create-subtask" class="aui-list-item-link issueaction-create-subtask opsbar-operations">Create Sub-Task</a>
+                            </li>
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/ConvertIssue.jspa?id=70038" title="Convert this issue to sub-task" id="issue-to-subtask" class="aui-list-item-link issueaction-issue-to-subtask opsbar-operations">Convert to Sub-Task</a>
+                            </li>
+                          </ul>
+                          <ul class="aui-list-section  aui-last">
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/MoveIssue!default.jspa?id=70038" title="Move this issue to another project or issue type." id="move-issue" class="aui-list-item-link issueaction-move-issue opsbar-operations">Move</a>
+                            </li>
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/LinkJiraIssue!default.jspa?id=70038" title="Link this issue to another issue or item" id="link-issue" class="aui-list-item-link issueaction-link-issue opsbar-operations">Link</a>
+                            </li>
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/CloneIssueDetails!default.jspa?id=70038" title="Clone this issue" id="clone-issue" class="aui-list-item-link issueaction-clone-issue opsbar-operations">Clone</a>
+                            </li>
+                            <li class="aui-list-item">
+                              <a href="/jira/secure/EditLabels!default.jspa?id=70038" title="Edit this issue's labels ( Type 'l' )" id="edit-labels" class="aui-list-item-link issueaction-edit-labels opsbar-operations">Labels</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                    <ul class="toolbar-group " id="opsbar-opsbar-transitions">
+                      <li class="toolbar-item">
+                        <a href="/jira/secure/WorkflowUIDispatcher.jspa?id=70038&amp;action=11&amp;atl_token=A8AY-ICEU-NKPP-HQHO|95d25bf7fccf41a682928e71e4fef0411676b257|lin" class="toolbar-trigger issueaction-workflow-transition" title="" id="action_id_11">Start Progress</a>
+                      </li>
+                      <li class="toolbar-item">
+                        <a href="/jira/secure/WorkflowUIDispatcher.jspa?id=70038&amp;action=41&amp;atl_token=A8AY-ICEU-NKPP-HQHO|95d25bf7fccf41a682928e71e4fef0411676b257|lin" class="toolbar-trigger issueaction-workflow-transition" title="" id="action_id_41">Estimate Issue</a>
+                      </li>
+                      <li class="toolbar-item toolbar-dropdown disabled">
+                        <span class="toolbar-trigger" id="opsbar-transitions_more">
+                        <span class="dropdown-text">Workflow</span>
+                        <span class="icon drop-menu"></span>
+                        </span>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="toolbar-split toolbar-split-right">
+                    <ul class="toolbar-group pluggable-ops">
+                      <li class="toolbar-item">
+                        <a href="#" rel="nofollow" class="toolbar-trigger" title="Share this issue by emailing other users ( Type 's' )" id="jira-share-trigger"><span class="icon icon-share"></span>Share</a>
+                      </li>
+                      <li class="toolbar-item toolbar-dropdown">
+                        <a class="toolbar-trigger js-default-dropdown" title="View this issue in another format" href="#"><span class="dropdown-text"><span class="icon icon-view"></span>Views</span><span class="icon drop-menu"></span></a>
+                        <div class="aui-list hidden">
+                          <ul class="aui-first aui-last aui-list-section">
+                            <li class="aui-list-item">
+                              <a href="/jira/si/jira.issueviews:issue-xml/XWS-1332/XWS-1332.xml" rel="nofollow" class="aui-list-item-link">XML</a>
+                            </li>
+                            <li class="aui-list-item">
+                              <a href="/jira/si/jira.issueviews:issue-word/XWS-1332/XWS-1332.doc" rel="nofollow" class="aui-list-item-link">Word</a>
+                            </li>
+                            <li class="aui-list-item">
+                              <a href="/jira/si/jira.issueviews:issue-html/XWS-1332/XWS-1332.html" rel="nofollow" class="aui-list-item-link">Printable</a>
+                            </li>
+                          </ul>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+        <div class="content-container issue-body-content navigator-collapsed">
+          <div class="content-body aui-panel">
+            <div class="aui-group">
+              <div class="aui-item issue-main-column">
+                <div id="details-module" class="module toggle-wrap">
+                  <div class="mod-header" id="details-module_heading">
+                    <h3 class="toggle-title">Details</h3>
+                  </div>
+                  <div class="mod-content">
+                    <ul class="property-list two-cols" id="issuedetails">
+                      <li class="item">
+                        <div class="wrap">
+                          <strong class="name">Type:</strong>
+                          <span class="value" id="type-val">
+                          <img width="16" height="16" title="Bug - A problem which impairs or prevents the functions of the product." src="/jira/images/icons/bug.gif" alt="Bug" /> Bug
+                          </span>
+                        </div>
+                      </li>
+                      <li class="item item-right">
+                        <div class="wrap">
+                          <strong class="name">Status:</strong>
+                          <span class="value" id="status-val">
+                          <img width="16" height="16" title="Recorded - The issue is reported and waiting to be reviewed." src="/jira/images/icons/status_generic.gif" alt="Recorded" /> Recorded
+                          </span>
+                          <span class="status-view">(<a title="Agile Workflow w resolved: XWS-1332" class="issueaction-viewworkflow" href="/jira/plugins/servlet/workflow/thumbnail/getThumbnail?workflowName=Agile Workflow w resolved&amp;stepId=1&amp;width=full&amp;height=full">View Workflow</a>)</span>
+                        </div>
+                      </li>
+                      <li class="item">
+                        <div class="wrap">
+                          <strong class="name">Priority:</strong>
+                          <span class="value editable-field inactive" id="priority-val" title="Click to edit">
+                          <img width="16" height="16" title="Undefined - Default Priority. The issue needs to be reviewed and classified." src="/jira/images/icons/priority_undefined.gif" alt="Undefined" /> Undefined
+                          <span class="overlay-icon icon icon-edit-sml"></span></span>
+                        </div>
+                      </li>
+                      <li class="item item-right">
+                        <div class="wrap">
+                          <strong class="name">Resolution:</strong>
+                          <span class="value unresolved" id="resolution-val">
+                          Unresolved
+                          </span>
+                        </div>
+                      </li>
+                      <li class="item">
+                        <div class="wrap">
+                          <strong class="name">Affects Version/s:</strong>
+                          <span class="value" id="versions-val">
+                          None
+                          </span>
+                        </div>
+                      </li>
+                      <li class="item item-right">
+                        <div class="wrap">
+                          <strong class="name">Fix Version/s:</strong>
+                          <span class="value editable-field inactive" id="fixfor-val" title="Click to edit">
+                          None
+                          <span class="overlay-icon icon icon-edit-sml"></span></span>
+                        </div>
+                      </li>
+                      <li class="item">
+                        <div class="wrap">
+                          <strong class="name">Component/s:</strong>
+                          <span class="value editable-field inactive" id="components-val" title="Click to edit">
+                          <span id="components-field" class="shorten" style="height: auto;">
+                          <a title="Developer Site [Product Owner, Team] Issues having to do with External Developer-facing site where documentation and External Developers can manage their Developer accounts." href="/jira/browse/XWS/component/10657">Developer Site</a>                                                    </span>
+                          <span class="overlay-icon icon icon-edit-sml"></span></span>
+                        </div>
+                      </li>
+                      <li class="item item-right">
+                        <div class="wrap">
+                          <strong class="name">Security Level:</strong>
+                          <span class="value" id="security-val">
+                          <span class="note">Project participants</span>
+                          </span>
+                        </div>
+                      </li>
+                      <li class="item full-width">
+                        <div id="wrap-labels" class="wrap">
+                          <strong class="name">Labels:</strong>
+                          <div class="labels-wrap value editable-field inactive" title="Click to edit">
+                            <ul id="labels-70038-value" class="labels">
+                              <li><a title="ok" href="/jira/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels+%3D+ok" class="lozenge"><span>ok</span></a></li>
+                              <li><a href="/jira/secure/EditLabels!default.jspa?id=70038&amp;noLink=false" id="edit-labels-70038-labels" class="icon icon-edit-sml edit-labels" title="Follow link"><span>Labels</span></a></li>
+                            </ul>
+                            <span class="overlay-icon icon icon-edit-sml"></span>
+                          </div>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div id="descriptionmodule" class="module toggle-wrap">
+                  <div class="mod-header" id="descriptionmodule_heading">
+                    <h3 class="toggle-title">Description</h3>
+                  </div>
+                  <div class="mod-content">
+                    <div id="description-val" class="editable-field inactive" title="Click to edit">
+                      <div class="user-content-block">
+                        <p>We have an old and incorrect statement in our API documentation regarding the test consumer key.</p>
+                        <p>In <a href="https://dev.xing.com/docs" title="Follow link">https://dev.xing.com/docs</a> we write:</p>
+                        <p>Test Consumer Key:<br />
+                          "....All requests to the API will be made via your own XING user ID."
+                        </p>
+                        <p>This information is not valid anymore since we removed the restriction to test consumers. </p>
+                        <p>Acceptance criteria:</p>
+                        <ul type="square" class="alternate">
+                          <li>remove the above mentioned statement from the documentation</li>
+                        </ul>
+                      </div>
+                      <span class="overlay-icon icon icon-edit-sml"></span>
+                    </div>
+                  </div>
+                </div>
+                <div id="drag-and-drop-attachment-upload-status-panel" class="module toggle-wrap hidden">
+                  <div class="mod-header" id="drag-and-drop-attachment-upload-status-panel_heading">
+                    <h3 class="toggle-title">Uploading files</h3>
+                  </div>
+                  <div class="mod-content">
+                    <div id="dnd_module" class="module toggle-wrap">
+                      <div id="dnd_status">
+                        <div id="dnd_progress"></div>
+                        <div class="aui-message warning hidden" id="dnd_failed">
+                          <span class="aui-icon icon-warning"></span>
+                          <p>Some files have not been uploaded successfully. <a href="">Please reload this page.</a></p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div id="activitymodule" class="module toggle-wrap">
+                  <div class="mod-header" id="activitymodule_heading">
+                    <h3 class="toggle-title">Activity</h3>
+                  </div>
+                  <div class="mod-content">
+                    <div class="tabwrap tabs2">
+                      <ul class="tabs horizontal" id="issue-tabs">
+                        <li data-href="/jira/browse/XWS-1332?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel" data-label="All" data-key="com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel" data-id="all-tabpanel">
+                          <a href="/jira/browse/XWS-1332?page=com.atlassian.jira.plugin.system.issuetabpanels:all-tabpanel" id="all-tabpanel" class="ajax-activity-content"><strong>All</strong></a>
+                        </li>
+                        <li data-href="/jira/browse/XWS-1332?page=com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel" data-label="Comments" data-key="com.atlassian.jira.plugin.system.issuetabpanels:comment-tabpanel" data-id="comment-tabpanel" id="comment-tabpanel" class="active">
+                          <strong>Comments</strong>
+                        </li>
+                        <li data-href="/jira/browse/XWS-1332?page=com.atlassian.jira.plugin.system.issuetabpanels:worklog-tabpanel" data-label="Work Log" data-key="com.atlassian.jira.plugin.system.issuetabpanels:worklog-tabpanel" data-id="worklog-tabpanel">
+                          <a href="/jira/browse/XWS-1332?page=com.atlassian.jira.plugin.system.issuetabpanels:worklog-tabpanel" id="worklog-tabpanel" class="ajax-activity-content"><strong>Work Log</strong></a>
+                        </li>
+                        <li data-href="/jira/browse/XWS-1332?page=com.atlassian.jira.plugin.system.issuetabpanels:changehistory-tabpanel" data-label="History" data-key="com.atlassian.jira.plugin.system.issuetabpanels:changehistory-tabpanel" data-id="changehistory-tabpanel">
+                          <a href="/jira/browse/XWS-1332?page=com.atlassian.jira.plugin.system.issuetabpanels:changehistory-tabpanel" id="changehistory-tabpanel" class="ajax-activity-content"><strong>History</strong></a>
+                        </li>
+                        <li data-href="/jira/browse/XWS-1332?page=com.atlassian.streams.streams-jira-plugin:activity-stream-issue-tab" data-label="Activity" data-key="com.atlassian.streams.streams-jira-plugin:activity-stream-issue-tab" data-id="activity-stream-issue-tab">
+                          <a href="/jira/browse/XWS-1332?page=com.atlassian.streams.streams-jira-plugin:activity-stream-issue-tab" id="activity-stream-issue-tab" class="ajax-activity-content"><strong>Activity</strong></a>
+                        </li>
+                        <li data-href="/jira/browse/XWS-1332?page=com.googlecode.jira-suite-utilities:transitions-summary-tabpanel" data-label="Transitions Summary" data-key="com.googlecode.jira-suite-utilities:transitions-summary-tabpanel" data-id="transitions-summary-tabpanel">
+                          <a href="/jira/browse/XWS-1332?page=com.googlecode.jira-suite-utilities:transitions-summary-tabpanel" id="transitions-summary-tabpanel" class=""><strong>Transitions Summary</strong></a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="issuePanelProgress"></div>
+                    <div id="issue_actions_container" class="issuePanelContainer">
+                      <div class="message-container">
+                        There are no comments yet on this issue.
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="module" id="addcomment">
+                  <div class="mod-content">
+                    <form method="post" id="issue-comment-add" class="aui ajs-dirty-warning-exempt" action="/jira/secure/AddComment.jspa?atl_token=A8AY-ICEU-NKPP-HQHO%7C95d25bf7fccf41a682928e71e4fef0411676b257%7Clin">
+                      <div class="form-body">
+                        <div class="hidden">
+                          <input type="hidden" value="A8AY-ICEU-NKPP-HQHO|95d25bf7fccf41a682928e71e4fef0411676b257|lin" name="atl_token" />
+                        </div>
+                        <div class="hidden">
+                          <input type="hidden" value="70038" name="id" />
+                        </div>
+                      </div>
+                      <div class="field-group aui-field-wikiedit comment-input">
+                        <label for="comment">Comment</label>
+                        <div class="wiki-edit">
+                          <div class="wiki-edit-content" id="comment-wiki-edit">
+                            <textarea data-issuekey="XWS-1332" data-projectkey="XWS" wrap="virtual" rows="10" name="comment" id="comment" cols="60" class="textarea long-field wiki-textfield mentionable"></textarea>
+                            <div class="content-inner">
+                            </div>
+                          </div>
+                        </div>
+                        <div class="field-tools">
+                          <a title="preview" id="comment-preview_link" href="#" class="wiki-renderer fullscreen">preview</a>
+                          <a title="wiki markup help" onclick="window.open('/jira/secure/WikiRendererHelpAction.jspa?section=texteffects', 'wiki_renderer_notation_help', 'width=780, height=575, resizable, scrollbars=yes'); return false;" id="viewHelp" href="/jira/secure/WikiRendererHelpAction.jspa?section=texteffects" class="wiki-renderer help-icon">wiki markup help</a>
+                        </div>
+                        <div class="security-level">
+                          <fieldset class="hidden parameters">
+                            <input type="hidden" value="Viewable by All Users" title="securityLevelViewableByAll" />
+                            <input type="hidden" value="Restricted to &lt;span class='redText'&gt;{0}&lt;/span&gt;" title="securityLevelViewableRestrictedTo" />
+                          </fieldset>
+                          <div id="commentLevel-multi-select" class="select-menu">
+                            <a href="#" class="drop"><span class="icon  icon-unlocked"></span><span class="icon drop-menu"></span></a>
+                            <div tabindex="-1" id="commentLevel-suggestions" class="aui-list aui-list-checked"></div>
+                          </div>
+                          <div id="commentLevel-multi-select" class="select-menu">
+                            <div tabindex="-1" id="commentLevel-suggestions" class="aui-list aui-list-checked"></div>
+                          </div>
+                          <select id="commentLevel" name="commentLevel" multiple="multiple" style="display: none;">
+                            <option value="">All Users</option>
+                            <optgroup label="Project Roles">
+                              <option value="role:10080">Commenters</option>
+                              <option value="role:10001">Developers</option>
+                            </optgroup>
+                            <optgroup label="Groups">
+                              <option value="group:Frontend Team">Frontend Team</option>
+                              <option value="group:QA Team">QA Team</option>
+                              <option value="group:XING Mitarbeiter">XING Mitarbeiter</option>
+                              <option value="group:XING-Employees">XING-Employees</option>
+                              <option value="group:confluence-users">confluence-users</option>
+                              <option value="group:jira-users">jira-users</option>
+                            </optgroup>
+                          </select>
+                          <span class="current-level">Viewable by All Users</span>
+                        </div>
+                        <div class="description">Only for comments. Enter additional information about the issue into the description area.</div>
+                      </div>
+                      <div class="buttons-container form-footer">
+                        <div class="buttons">
+                          <input type="submit" value="Add" title="Press Ctrl+s to submit this form" name="Add" id="issue-comment-add-submit" class="button" accesskey="s" />
+                          <a title="Press Ctrl+` to cancel" id="issue-comment-add-cancel" href="#" class="cancel" accesskey="`">Cancel</a>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                  <div class="mod-footer">
+                    <ul class="ops">
+                      <li><a class="first last button" name="add-comment" id="footer-comment-button" href="#">Comment</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="aui-item issue-side-column" id="viewissuesidebar">
+                <div id="peoplemodule" class="module toggle-wrap">
+                  <div class="mod-header" id="peoplemodule_heading">
+                    <h3 class="toggle-title">People</h3>
+                  </div>
+                  <div class="mod-content">
+                    <ul id="peopledetails" class="item-details">
+                      <li class="people-details">
+                        <dl>
+                          <dt>Assignee:</dt>
+                          <dd>
+                            <span id="assignee-val" class="editable-field inactive" title="Click to edit">        <span id="issue_summary_assignee_bjoern.minkmar" rel="bjoern.minkmar" class="user-hover">Björn Minkmar</span><span class="overlay-icon icon icon-edit-sml"></span></span>
+                          </dd>
+                        </dl>
+                        <dl>
+                          <dt>Reporter:</dt>
+                          <dd>
+                            <span id="reporter-val">        <span id="issue_summary_reporter_bjoern.minkmar" rel="bjoern.minkmar" class="user-hover">Björn Minkmar</span></span>
+                          </dd>
+                        </dl>
+                      </li>
+                    </ul>
+                    <div id="votes-val">
+                      <a title="Vote for this issue" rel="70038" id="vote-toggle" href="/jira/secure/VoteOrWatchIssue.jspa?atl_token=A8AY-ICEU-NKPP-HQHO|95d25bf7fccf41a682928e71e4fef0411676b257|lin&amp;id=70038&amp;vote=vote"><span class="icon icon-vote-off"></span><span class="action-text">Vote</span></a>
+                      <a title="View Voters" id="view-voter-list" href="/jira/secure/ViewVoters!default.jspa?id=70038">(<span id="vote-data">0</span>)</a>
+                    </div>
+                    <div id="watchers-val">
+                      <a title="Start watching this issue" rel="70038" id="watching-toggle" href="/jira/secure/VoteOrWatchIssue.jspa?atl_token=A8AY-ICEU-NKPP-HQHO|95d25bf7fccf41a682928e71e4fef0411676b257|lin&amp;id=70038&amp;watch=watch"><span class="icon icon-watch-off"></span><span class="action-text">Watch</span></a>
+                      <a title="View Watchers" id="view-watcher-list" href="/jira/secure/ManageWatchers!default.jspa?id=70038">(<span id="watcher-data">1</span>)</a>
+                    </div>
+                  </div>
+                </div>
+                <div id="datesmodule" class="module toggle-wrap">
+                  <div class="mod-header" id="datesmodule_heading">
+                    <h3 class="toggle-title">Dates</h3>
+                  </div>
+                  <div class="mod-content">
+                    <ul class="item-details">
+                      <li>
+                        <dl class="dates">
+                          <dt>Created:</dt>
+                          <dd title="2013-02-15 11:13 AM" class="date user-tz">
+                            <span id="create-date" data-name="Created">
+                            <time datetime="2013-02-15T11:13+0100">2013-02-15 11:13 AM</time>                                     </span>
+                          </dd>
+                        </dl>
+                        <dl class="dates">
+                          <dt>Updated:</dt>
+                          <dd title="2013-02-18 12:22 PM" class="date user-tz">
+                            <span id="updated-date" data-name="Updated">
+                            <time datetime="2013-02-18T12:22+0100">2013-02-18 12:22 PM</time>                                     </span>
+                          </dd>
+                        </dl>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div id="greenhopper-agile-issue-web-panel" class="module toggle-wrap ghx-issue-web-panel">
+                  <div class="mod-header" id="greenhopper-agile-issue-web-panel_heading">
+                    <h3 class="toggle-title">Agile</h3>
+                  </div>
+                  <div class="mod-content">
+                    <ul class="item-details ghx-separated">
+                      <li>
+                        <dl>
+                          <dt>Active Sprint:</dt>
+                          <dd>
+                            <a title="View this sprint on the Scrum board" href="/jira/secure/GHGoToBoard.jspa?sprintId=71" class="issueaction-greenhopper-rapidboard-operation js-rapidboard-operation-sprint">Severe Issues &amp; Job Posting</a>
+                            <span class="ghx-sub-info">ends 2013-03-29</span><br />
+                          </dd>
+                        </dl>
+                      </li>
+                      <li>
+                        <a title="View this issue on an Agile board" href="/jira/secure/GHGoToBoard.jspa?issueId=70038&amp;inline=true" class="issueaction-greenhopper-rapidboard-operation js-rapidboard-operation-issue">
+                        View on Board
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <div id="drag-and-drop-attachment-panel" class="module toggle-wrap collapsed">
+                  <div class="mod-header" id="drag-and-drop-attachment-panel_heading">
+                    <h3 class="toggle-title">Drag and Drop</h3>
+                  </div>
+                  <div class="mod-content">
+                    <div class="module toggle-wrap expanded" id="draganddropattachments">
+                      <div id="dnd_content">
+                        <div class="attachments-drop-zone" id="dnd_drop_zone">
+                          <div class="drop-zone-image"></div>
+                          <div class="drop-zone-text">Drop files here to attach them</div>
+                        </div>
+                        <input type="file" multiple="" class="ignore-inline-attach" id="dnd_file_elem" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="issue-body">
+            </div>
+          </div>
+        </div>
+        <fieldset class="hidden parameters">
+          <input type="hidden" value="Click to view {0} more" id="viewMoreMsg" />
+          <input type="hidden" value="Hide" id="hideMsg" />
+          <input type="hidden" value="Cannot perform this operation. You are not logged in." id="error-401" />
+          <input type="hidden" value="Remove vote for this issue" id="issueOpTitleUnvote" />
+          <input type="hidden" value="Vote for this issue" id="issueOpTitleVote" />
+          <input type="hidden" value="Start watching this issue" id="issueOpTitleWatch" />
+          <input type="hidden" value="Stop watching this issue" id="issueOpTitleUnwatch" />
+          <input type="hidden" value="Remove Vote" id="issueOpUnvote" />
+          <input type="hidden" value="Add Vote" id="issueOpVote" />
+          <input type="hidden" value="Watch Issue" id="issueOpWatch" />
+          <input type="hidden" value="Stop Watching" id="issueOpUnwatch" />
+          <input type="hidden" value="Vote" id="i18nVote" />
+          <input type="hidden" value="Voted" id="i18nVoted" />
+          <input type="hidden" value="Watch" id="i18nWatch" />
+          <input type="hidden" value="Watching" id="i18nWatching" />
+        </fieldset>
+      </div>
+      <span id="due-date" data-name="Due" class="editable-field inactive" title="Click to edit">
+        <time datetime="2013-03-25">2013-03-25</time>
+        <span class="overlay-icon icon icon-edit-sml"></span>
+      </span>
+
+      <div id="greenhopper-agile-issue-web-panel" class="module toggle-wrap ghx-issue-web-panel">
+        <div class="mod-header" id="greenhopper-agile-issue-web-panel_heading">
+          <h3 class="toggle-title">Agile</h3>
+        </div>
+        <div class="mod-content">
+          <ul class="item-details ghx-separated">
+            <li>
+              <dl>
+                <dt>Completed Sprint:</dt>
+                <dd>
+                  <a title="View the Sprint Report for this sprint" href="/jira/secure/GHGoToBoard.jspa?sprintId=78" class="issueaction-greenhopper-rapidboard-operation js-rapidboard-operation-sprint">YAML Stop Final</a>
+                  <span class="ghx-sub-info">ended 2013-02-13</span><br />
+                </dd>
+              </dl>
+            </li>
+            <li>
+              <a title="View this issue on an Agile board" href="/jira/secure/GHGoToBoard.jspa?issueId=62098&amp;inline=true" class="issueaction-greenhopper-rapidboard-operation js-rapidboard-operation-issue">
+              View on Board
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <!-- <script src="http://code.jquery.com/qunit/qunit-1.11.0.js"></script> -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script src="../src/js/helpers.js"></script>
+    <script src="../src/js/data.js"></script>
+    <script src="../src/js/table_format.js"></script>
+    <script src="../src/js/table_builder.js"></script>
+    <script src="../src/js/application.js"></script>
+  </body>
+</html>
