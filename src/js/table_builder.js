@@ -1,5 +1,6 @@
 var xing = xing || {};
 xing.jira = xing.jira || {};
+
 xing.jira.TableBuilder = (function ($) {
 
   'use strict';

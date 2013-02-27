@@ -46,7 +46,7 @@ xing.jira.tableFormat = function (data) {
             options: {cssClass: 'gm-snap-left h5'}
           },
           body: {
-            text: data.members.join(' '),
+            text: data.collaborators.join(' ') + '<button id="gm-add-collaborator">Add Collaborators</button>',
             options: {cssClass: 'gm-snap-left h5'}
           }
         }

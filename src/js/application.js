@@ -48,6 +48,34 @@ xing.jira.Application = (function ($) {
     });
   }
 
+  function updateHTML() {
+    $('#gm-popup').remove();
+    var builder = xing.jira.TableBuilder,
+      format = xing.jira.tableFormat(xing.jira.DataCollector.data)
+    ;
+
+    $('body').append(
+      $('<div id="gm-popup">'
+        + '<div class="gm-container aui-popup box-shadow">'
+        + '<h2 class="aui-popup-heading">Print preview</h2>'
+        + '<div class="aui-popup-content">'
+        + '<div class="form-body">'
+        + builder.build(format)
+        + '</div>'
+        + '<div class="buttons-container form-footer">'
+        + '<div class="buttons">'
+        + '<button class="gm-print aui-button">Print</button>'
+        + '<a class="gm-cancel cancel" href="#">Cancel</a>'
+        + '</div>'
+        + '</div>'
+        + '</div>'
+        + '</div>'
+        + '<div class="aui-blanket"></div>'
+        + '</div>'
+       )
+    );
+  }
+
   var module = {
 
     addStyle: function (css) {
@@ -72,30 +100,13 @@ xing.jira.Application = (function ($) {
 
     showPopup: function () {
 
-      if ($('.gm-popup')[0]) {
+      if ($('#gm-popup')[0]) {
         return false;
       }
+      // register observer
+      xing.jira.DataCollector.subscribe(this);
 
-      $('body').append(
-        $('<div id="gm-popup">'
-           + '<div class="gm-container aui-popup box-shadow">'
-             + '<h2 class="aui-popup-heading">Print preview</h2>'
-             + '<div class="aui-popup-content">'
-               + '<div class="form-body">'
-                 + xing.jira.TableBuilder.build(xing.jira.tableFormat(xing.jira.data))
-               + '</div>'
-               + '<div class="buttons-container form-footer">'
-                 + '<div class="buttons">'
-                   + '<button class="gm-print aui-button">Print</button>'
-                   + '<a class="gm-cancel cancel" href="#">Cancel</a>'
-                 + '</div>'
-               + '</div>'
-             + '</div>'
-           + '</div>'
-           + '<div class="aui-blanket"></div>'
-         + '</div>'
-        )
-      );
+      updateHTML();
 
       $('.gm-container')
         .delegate('.gm-print', 'click', function (event) {
@@ -111,12 +122,21 @@ xing.jira.Application = (function ($) {
           hidePopup();
         })
       ;
+
+      $('#gm-popup').on('click', '#gm-add-collaborator', function () {
+        xing.jira.DataCollector.addCollaborators();
+      });
+    },
+
+    update: function () {
+      updateHTML();
     },
 
     init: function (css) {
       // module.addStyle(css);
       // addButton();
     }
+
 
   };
 
