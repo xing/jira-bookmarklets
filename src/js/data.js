@@ -39,10 +39,13 @@ xing.jira.DataCollector = (function ($) {
       },
 
       addCollaborators: function () {
-        var collaborators = localStorage.getItem(module.STORAGE_KEY) || '';
-        collaborators = window.prompt('Please enter your collaborators!\nNote: Separate the names with a comma e.g. "Jeffrey, Walter"', collaborators || '');
-        localStorage.setItem(this.STORAGE_KEY, collaborators);
-        this.update({collaborators: normalize(collaborators)});
+        var collaborators = localStorage.getItem(module.STORAGE_KEY) || '',
+          updatedCollaborators = window.prompt('Please enter your collaborators!\nNote: Separate the names with a comma e.g. "Jeffrey, Walter"', collaborators || '')
+        ;
+        if (!!updatedCollaborators && collaborators !== updatedCollaborators) {
+          localStorage.setItem(this.STORAGE_KEY, updatedCollaborators);
+          this.update({collaborators: normalize(updatedCollaborators)});
+        }
       },
 
       getCollaborators: function () {

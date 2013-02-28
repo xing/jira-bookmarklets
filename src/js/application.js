@@ -57,22 +57,22 @@ xing.jira.Application = (function ($) {
     $('body').append(
       $('<div id="gm-popup">'
         + '<div class="gm-container aui-popup box-shadow">'
-        + '<h2 class="aui-popup-heading">Print preview</h2>'
-        + '<div class="aui-popup-content">'
-        + '<div class="form-body">'
-        + builder.build(format)
-        + '</div>'
-        + '<div class="buttons-container form-footer">'
-        + '<div class="buttons">'
-        + '<button class="gm-print aui-button">Print</button>'
-        + '<a class="gm-cancel cancel" href="#">Cancel</a>'
-        + '</div>'
-        + '</div>'
-        + '</div>'
+          + '<h2 class="aui-popup-heading">Print preview</h2>'
+          + '<div class="aui-popup-content">'
+            + '<div class="form-body">'
+              + builder.build(format)
+            + '</div>'
+            + '<div class="buttons-container form-footer">'
+              + '<div class="buttons">'
+                + '<button class="gm-print aui-button">Print</button>'
+                + '<a class="gm-cancel cancel" href="#">Cancel</a>'
+              + '</div>'
+            + '</div>'
+          + '</div>'
         + '</div>'
         + '<div class="aui-blanket"></div>'
-        + '</div>'
-       )
+      + '</div>'
+      )
     );
   }
 
@@ -123,7 +123,7 @@ xing.jira.Application = (function ($) {
         })
       ;
 
-      $('#gm-popup').on('click', '#gm-add-collaborator', function () {
+      $('body').on('click', '#gm-add-collaborator', function () {
         xing.jira.DataCollector.addCollaborators();
       });
     },
@@ -133,8 +133,8 @@ xing.jira.Application = (function ($) {
     },
 
     init: function (css) {
-      // module.addStyle(css);
-      // addButton();
+      module.addStyle(css);
+      addButton();
     }
 
 

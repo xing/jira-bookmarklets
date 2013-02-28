@@ -79,7 +79,8 @@
   #page,
   .aui-blanket,
   .gm-container .form-footer,
-  .gm-container .aui-popup-heading {
+  .gm-container .aui-popup-heading,
+  #gm-add-collaborator {
     display: none;
   }
   .gm-container {

@@ -10,7 +10,7 @@ xing.jira.TableBuilder = (function ($) {
   }
 
   function options(tag, additionalClass) {
-    additionalClass = ' ' + additionalClass || '';
+    additionalClass = ' ' + (additionalClass || '');
     var options = tag['options'] || {},
       cssClass = 'cssClass' in options ? options.cssClass : '',
       attrs = '',
@@ -50,7 +50,6 @@ xing.jira.TableBuilder = (function ($) {
         result = '',
         tag = cellData.head ? 'th' : 'td'
       ;
-
       result += module.cellTitle(cell);
       result += module.cellBody(cell);
 
