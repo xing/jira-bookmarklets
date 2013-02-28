@@ -1,10 +1,10 @@
 #!/bin/bash
 
-cat src/js/helpers.js       >  combined.js
-cat src/js/data.js          >> combined.js
-cat src/js/table_format.js  >> combined.js
-cat src/js/table_builder.js >> combined.js
-cat src/js/application.js   >> combined.js
+cat src/js/helpers.js        >  combined.js
+cat src/js/data_collector.js >> combined.js
+cat src/js/table_format.js   >> combined.js
+cat src/js/table_builder.js  >> combined.js
+cat src/js/application.js    >> combined.js
 
 java -jar build/yuicompressor-2.4.7.jar combined.js --type js  -o compressed.js
 java -jar build/yuicompressor-2.4.7.jar src/css/main.css --type css -o compressed.css
