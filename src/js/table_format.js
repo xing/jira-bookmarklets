@@ -29,7 +29,10 @@ xing.jira.tableFormat = function (data) {
     ], [
       {
         cell: {
-          options: {rowspan: 1},
+          options: {
+            rowspan: 1,
+            cssClass: (data.dueDate ? 'gm-warning' : '')
+          },
           title: {
             text: 'Due date'
           },

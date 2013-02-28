@@ -62,6 +62,13 @@
     margin: auto;
     width: 40px;
 }
+.gm-warning {
+  background-color: #E94902;
+  color: white;
+}
+.gm-warning .gm-hd {
+  color: white;
+}
 .gm-date-content .gm-hd {
   padding: 0 0 1px;
   text-align: center;

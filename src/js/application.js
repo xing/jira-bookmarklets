@@ -108,24 +108,20 @@ xing.jira.Application = (function ($) {
 
       updateHTML();
 
-      $('.gm-container')
-        .delegate('.gm-print', 'click', function (event) {
-        // jQuery 1.7+
-        // .on('click', '.gm-print', function (event) {
+      $('body')
+        .on('click', '.gm-print', function (event) {
           event.preventDefault();
           window.print();
+          hidePopup();
         })
-        .delegate('.gm-cancel', 'click', function (event) {
-        // jQuery 1.7+
-        // .on('click', '.gm-cancel', function (event) {
+        .on('click', '.gm-cancel', function (event) {
           event.preventDefault();
           hidePopup();
         })
+        .on('click', '#gm-add-collaborator', function () {
+          xing.jira.DataCollector.addCollaborators();
+        })
       ;
-
-      $('body').on('click', '#gm-add-collaborator', function () {
-        xing.jira.DataCollector.addCollaborators();
-      });
     },
 
     update: function () {
