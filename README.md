@@ -1,6 +1,6 @@
-# Jira Ticket Print
+# Jira Helpers
 
-This small script will print a Jira ticket.
+This is a summary of client side script helpers.
 
 ## Installation
 
