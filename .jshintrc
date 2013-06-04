@@ -1,0 +1,31 @@
+{
+  /* Enforcing options */
+  "validthis":    true,     /* suppresses warnings about possible strict violations when the code is running in strict mode and you use this in a non-constructor function */
+  "browser":      true,     /* defines globals exposed by modern browsers */
+  "camelcase":    true,     /* allows you to force all variable names to use either camelCase style or UPPER_CASE with underscores */
+  "curly":        false,    /* requires you to always put curly braces around blocks in loops and conditionals */
+  "eqeqeq":       true,     /* prohibits the use of == and != in favor of === and !== */
+  "forin":        false,    /* requires all for in loops to filter object's items */
+  "indent":       2,        /* use two level indention */
+  "noarg":        true,     /* prohibits the use of arguments.caller and arguments.callee */
+  "noempty":      true,     /* warns when you have an empty block in your code */
+  "plusplus":     true,     /* prohibits the use of unary increment and decrement operators */
+  "quotmark":     "single", /* use single quote by general */
+  "undef":        true,     /* prohibits the use of explicitly undeclared variables */
+  "unused":       true,     /* warns when you define and never use your variables */
+  "globals":      {         /* register of global objects */
+    "Namespace": true,
+    "xing": true,
+    "chrome": true
+  },
+  "maxparams":    4,        /* set the max number of formal parameters allowed per function */
+  "maxdepth":     2,        /* control how nested do you want your blocks to be */
+  "maxlen":       80,       /* maximum length of a line */
+  /* Relaxing options */
+  "asi":          false,    /* set semicolon are required */
+  "laxcomma":     true,     /* suppresses warnings about comma-first coding style (node.js)*/
+  "smarttabs":    false,    /* don't suppresses warnings about mixed tabs and spaces */
+  /* Environments */
+  "jquery":       true,
+  "devel":        true
+}
