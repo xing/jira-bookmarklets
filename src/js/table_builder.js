@@ -9,7 +9,7 @@ xing.jira.TableBuilder = (function ($) {
     return 'text' in tag ? tag.text : '';
   }
 
-  function options(tag, additionalClass) {
+  function addOptions(tag, additionalClass) {
     additionalClass = ' ' + (additionalClass || '');
     var options = tag['options'] || {},
       cssClass = 'cssClass' in options ? options.cssClass : '',
@@ -42,7 +42,7 @@ xing.jira.TableBuilder = (function ($) {
         result += module.cell(cellData);
       });
 
-      return '<tr' + options(rowData) + '>' + result + '</tr>';
+      return '<tr' + addOptions(rowData) + '>' + result + '</tr>';
     },
 
     cell: function (cellData) {
@@ -53,7 +53,9 @@ xing.jira.TableBuilder = (function ($) {
       result += module.cellTitle(cell);
       result += module.cellBody(cell);
 
-      return '<' + tag + options(cell) + '><div class="gm-inner">' + result + '</div></' + tag +'>';
+      return '<' + tag + addOptions(cell) + '>' +
+               '<div class="gm-inner">' + result + '</div>' +
+             '</' + tag + '>';
     },
 
     cellBody: function (cell) {
@@ -62,7 +64,7 @@ xing.jira.TableBuilder = (function ($) {
       if ('body' in cell) {
         var body = cell.body;
 
-        result += '<div' + options(body, 'gm-bd') + '>' + text(body) + '</div>';
+        result += '<div' + addOptions(body, 'gm-bd') + '>' + text(body) + '</div>';
       }
       return result;
     },
@@ -72,7 +74,7 @@ xing.jira.TableBuilder = (function ($) {
 
       if ('title' in cell) {
         var title = cell.title;
-        result += '<div' + options(title, 'gm-hd') + '>' + text(title) + '</div>';
+        result += '<div' + addOptions(title, 'gm-hd') + '>' + text(title) + '</div>';
       }
       return result;
     },

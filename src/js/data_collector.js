@@ -1,19 +1,30 @@
 var xing = xing || {};
 xing.jira = xing.jira || {};
 
-xing.jira.DataCollector = (function ($) {
+xing.jira.DataCollector = (function ($, undefined) {
 
   'use strict';
+
+  // @private
 
   function normalize(string) {
     return string.split(/,/);
   }
 
+  function _getStoredTicketsArray() {
+    var storedTickets = localStorage.getItem(module.TICKET_KEY),
+      tickets = storedTickets && storedTickets[0] ? JSON.parse(storedTickets) : []
+    ;
+    return tickets;
+  }
+
+  // @public
 
   var $target = $('#greenhopper-agile-issue-web-panel dd a'),
-
+    hostname = location.hostname,
     module = {
-      STORAGE_KEY: 'jira-collaborators',
+      COLLABORATOR_KEY: hostname + '.collaborators',
+      TICKET_KEY: hostname + 'ticket',
 
       observers: [],
 
@@ -38,18 +49,42 @@ xing.jira.DataCollector = (function ($) {
         });
       },
 
+      storeTicket: function (markup) {
+        var storedTickets = _getStoredTicketsArray(),
+          tickets = storedTickets.concat([markup])
+        ;
+        localStorage.setItem(module.TICKET_KEY, JSON.stringify(tickets));
+      },
+
+      getStoredTickets: function () {
+        return _getStoredTicketsArray();
+      },
+
+      removeStoredTickets: function (itemNumber) {
+        if (itemNumber !== undefined) {
+          var storedTickets = _getStoredTicketsArray();
+          if (storedTickets[0]) {
+            storedTickets.splice(itemNumber, 1);
+            localStorage.setItem(module.TICKET_KEY, JSON.stringify(storedTickets));
+          }
+        } else {
+          localStorage.removeItem(module.TICKET_KEY);
+        }
+        return _getStoredTicketsArray();
+      },
+
       addCollaborators: function () {
-        var collaborators = localStorage.getItem(module.STORAGE_KEY) || '',
+        var collaborators = localStorage.getItem(module.COLLABORATOR_KEY) || '',
           updatedCollaborators = window.prompt('Please enter your collaborators!\nNote: Separate the names with a comma e.g. "Jeffrey, Walter"', collaborators || '')
         ;
         if (!!updatedCollaborators && collaborators !== updatedCollaborators) {
-          localStorage.setItem(this.STORAGE_KEY, updatedCollaborators);
+          localStorage.setItem(this.COLLABORATOR_KEY, updatedCollaborators);
           this.update({collaborators: normalize(updatedCollaborators)});
         }
       },
 
       getCollaborators: function () {
-        var collaborators = localStorage.getItem(module.STORAGE_KEY) || '';
+        var collaborators = localStorage.getItem(module.COLLABORATOR_KEY) || '';
         return normalize(collaborators);
       },
 
@@ -69,17 +104,13 @@ xing.jira.DataCollector = (function ($) {
         }
 
         return '';
-      },
-
-      getTicketNumber: function () {
-        return ($('#key-val').text() || '').replace(/-/, '<br>');
       }
 
     }
   ;
 
   module.update({
-    number:        module.getTicketNumber(),
+    number:        $('#key-val').text() || '',
     description:   $('#description-val').text() || '',
     dueDate:       module.getDate($('#due-date time')),
     collaborators: module.getCollaborators(),

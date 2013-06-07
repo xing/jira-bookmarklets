@@ -12,8 +12,8 @@ xing.jira.tableFormat = function (data) {
         cell: {
           options: {cssClass: 'gm-number gm-center gm-20'},
           body: {
-            text: data.number,
-            options: {cssClass: 'h1'}
+            text: data.number.replace(/-/, '<br>'),
+            options: {cssClass: 'h1', title: data.number}
           }
         }
       }, {

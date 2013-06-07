@@ -3,11 +3,18 @@
   font: 10pt helvetica, arial, sans-serif;
   background-color: #FFF;
   width: 100%;
+  padding-bottom: 2mm;
 }
 .gm-table,
 .gm-table th,
 .gm-table td { border: 1px solid #DDD; }
 .gm-table td { vertical-align: top; }
+.gm-pick-more i {
+  font-size: 1.4em;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 0;
+}
 .gm-hd {
   color: #999;
   font-size: .8em;
@@ -26,8 +33,88 @@
   line-height: 1.4em;
 }
 .gm-snap-left { float: left; }
+.gm-grid-item { display: inline-block; }
 .gm-10 { width: 10%; }
 .gm-20 { width: 20%; }
+.gm-40 { width: 40%; }
+.gm-60 { width: 60%; }
+
+.gm-printable-tickets ul {
+  padding: 0;
+}
+.gm-printable-tickets-label {
+  float: left;
+  padding-right: 5px;
+  padding-top: 3px;
+}
+.gm-printable-tickets li {
+  list-style: none;
+  display: block;
+  margin-right: 2px;
+  line-height: 0;
+  width: 12px;
+  height: 8px;
+  padding: 1px 1px 1px 3px;
+  float: left;
+  background-color: #bbb;
+}
+
+.gm-printable-tickets li:nth-child(2n+1) {
+  border-bottom: none;
+}
+.gm-printable-tickets li:nth-child(2n)  {
+  border-top: none;
+  left: -18px;
+  margin-right: -13px;
+  position: relative;
+  top: 10px;
+}
+.gm-printable-tickets li:nth-child(2n+1):last-child {
+  height: 18px;
+}
+.gm-printable-tickets li:nth-child(2n+1):after {
+  color: black;
+  content: "";
+  display: list-item;
+  font-weight: bold;
+  left: 19px;
+  list-style-position: outside;
+  list-style-type: decimal;
+  opacity: 0.3;
+  position: relative;
+  top: -7px;
+  z-index: 1;
+  pointer-events: none;
+}
+.gm-ticket-section {
+  display: inline-block;
+  line-height: 0;
+  background-color: #F2F88D;
+  text-indent: -99em;
+  overflow: hidden;
+  position: relative;
+  width: 12px;
+  height: 8px;
+}
+.gm-remove-ticket {
+  background-color: white;
+}
+.gm-remove-ticket:hover {
+  background-color: #E94902;
+}
+.gm-remove-ticket:hover:after {
+  content: "✖";
+  color: white;
+  display: inline-block;
+  height: 100%;
+  line-height: 0.5em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: center;
+  text-indent: 10%;
+  width: 100%;
+}
 .gm-center { text-align: center;}
 .gm-left { text-align: left;}
 .gm-title .gm-inner {
@@ -105,8 +192,12 @@
     z-index: 2501;
   }
   .gm-container .form-body { padding: 0!important; }
+  .gm-table:nth-child(2n) { margin-top: 2.75cm; }
 }
 @media screen {
+  .form-body {
+    height: 460px;
+  }
   .gm-container {
     left: 50%;
     margin-left: -9cm;
@@ -115,4 +206,8 @@
     width: 18.9cm;
   }
   .gm-container .form-body { padding: 2mm !important; }
+  .gm-table:nth-child(2n) {
+    margin-top: 2mm;
+    margin-bottom: 2mm;
+  }
 }
