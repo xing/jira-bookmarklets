@@ -1,21 +1,25 @@
 # Jira Helpers
 
 This is a summary of client side script helpers.
+It exist 3 bookmarklets that improve your Jira workflow.
+
+- [Print out your Jira tickets in a Taskboard Format](/xws/jira-ticket-print/raw/master/jira-ticket-print-bookmarklet.js)
+- [Pick a Jira ticket for print ticket bookmarklet](/xws/jira-ticket-print/raw/master/jira-store-ticket-print-bookmarklet.js)
+- [toggle all additional lists in the backlog view](/xws/jira-ticket-print/raw/master/jira-list-toggle-bookmarklet.js)
 
 ## Installation
 
 ### Bookmarklet - Print a single ticket on the ticket view
 
-1. Click the [jira-ticket-print-bookmarklet.js](/xws/jira-ticket-print/raw/master/jira-ticket-print-bookmarklet.js) and copy the content of this script.
+1. Pick one of this scripts and copy the content of this script
 2. Create an new bookmark in your browser
-3. Enter 'Jira Ticket Print' as a title
+3. Enter a for you understandable name as a title
 4. Paste the script in the Location field and save it
-5. Done! Now you can print Jira tickets
+5. Done!
 
-### Bookmarklet - Toggle list on the planing board view
+## Release notes
 
-1. Click the [jira-list-toggle-bookmarklet.js](/xws/jira-ticket-print/raw/master/jira-list-toggle-bookmarklet.js) and copy the content of this script.
-2. Create an new bookmark in your browser
-3. Enter 'Jira Toggle Lists' as a title
-4. Paste the script in the Location field and save it
-5. Done! Now you can toggle Jira planing lists
+### Version 1.2
+
+- Make it possible to print out multiple tickets on one time
+- Add a bookmarklet to pick up a ticket - for multiple ticket - without showing the print dialog

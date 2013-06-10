@@ -14,8 +14,8 @@
   "undef":        true,     /* prohibits the use of explicitly undeclared variables */
   "unused":       true,     /* warns when you define and never use your variables */
   "globals":      {         /* register of global objects */
-    "Namespace": true,
     "xing": true,
+    "AJS": true,
     "chrome": true
   },
   "maxparams":    4,        /* set the max number of formal parameters allowed per function */
