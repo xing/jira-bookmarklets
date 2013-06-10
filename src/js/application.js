@@ -75,23 +75,21 @@ xing.jira.Application = (function ($) {
     ;
 
     pageMarkup = '';
-    storedTickets.forEach(function (ticket) {
-      pageMarkup += buildPageIcon(ticket);
+    storedTickets.forEach(function(markup) {
+      if ($(markup).find('.gm-number').text() !== $(currentTicketMarkup).find('.gm-number').text()) {
+        storedTicketsMarkup += '<li>' + markup + '</li>';
+        pageMarkup += buildPageIcon(markup);
+      }
     });
+
     pageMarkup += buildPageIcon(currentTicketMarkup, true);
 
     pageMarkup = '' +
-      '<div class="gm-printable-tickets">' +
-        '<span class="gm-printable-tickets-label">Selected Ticket: </span>' +
+      '<div class="gm-tickets-pagination">' +
+        '<span class="gm-tickets-pagination-label">Selected Ticket: </span>' +
         '<ul>' + pageMarkup + '</ul>' +
       '</div>'
     ;
-
-    storedTickets.forEach(function(markup) {
-      if (markup !== currentTicketMarkup) {
-        storedTicketsMarkup += '<li>' + markup + '</li>';
-      }
-    });
 
     $('body').append(
       $('<div id="gm-popup">' +
@@ -109,8 +107,9 @@ xing.jira.Application = (function ($) {
                  pageMarkup +
                '</div>' +
                '<div class="buttons gm-40 gm-grid-item">' +
-                 '<button class="gm-pick-more aui-button">' +
-                   '<i>+</i> Select another' +
+                 '<label for="gm-select-ticket">Select another:</label>&nbsp;' +
+                 '<button id="gm-select-ticket" class="gm-pick-more aui-button">' +
+                   '<i>+</i>' +
                  '</button>&nbsp;' +
                  '<button class="gm-print aui-button">Print</button>' +
                  '<a class="gm-cancel cancel" href="#">Cancel</a>' +
@@ -124,7 +123,9 @@ xing.jira.Application = (function ($) {
     );
   }
 
-  var module = {
+  var DataCollector = xing.jira.DataCollector,
+  module = {
+
 
     addStyle: function (css) {
       var head,
@@ -146,8 +147,27 @@ xing.jira.Application = (function ($) {
       style.innerHTML += css + '\n';
     },
 
+    storeTicketHandler: function () {
+      module.update();
+      var $latestTicket = $('#gm-popup .gm-table:last'),
+        markup = ''
+      ;
+
+      markup = $latestTicket[0].outerHTML;
+
+      DataCollector.storeTicket(markup.trimWhitespace());
+      hidePopup();
+      $('.aui-message').remove();
+      AJS.messages.success('#header .global .primary', {
+        title: 'Ticket print',
+        body: 'Ticket is stored! Please navigate to another if you want print one ticket more.'
+      });
+      setTimeout(function () {
+        $('.aui-message').remove();
+      }, 5000);
+    },
+
     showPopup: function () {
-      var DataCollector = xing.jira.DataCollector;
       if ($('#gm-popup')[0]) { return; }
       // register observer
       DataCollector.subscribe(this);
@@ -163,9 +183,7 @@ xing.jira.Application = (function ($) {
         })
         .on('click', '.gm-pick-more', function (event) {
           event.preventDefault();
-          var markup = $('#gm-popup .gm-table:last')[0].outerHTML;
-          DataCollector.storeTicket(markup.trimWhitespace());
-          hidePopup();
+          module.storeTicketHandler();
         })
         .on('click', '.gm-cancel', function (event) {
           event.preventDefault();
@@ -187,7 +205,7 @@ xing.jira.Application = (function ($) {
     },
 
     update: function () {
-      updateHTML(xing.jira.DataCollector.getStoredTickets());
+      updateHTML(DataCollector.getStoredTickets());
     },
 
     init: function (css) {

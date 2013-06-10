@@ -22,9 +22,10 @@ xing.jira.DataCollector = (function ($, undefined) {
 
   var $target = $('#greenhopper-agile-issue-web-panel dd a'),
     hostname = location.hostname,
+    separator = hostname ? '.' : '',
     module = {
-      COLLABORATOR_KEY: hostname + '.collaborators',
-      TICKET_KEY: hostname + 'ticket',
+      COLLABORATOR_KEY: hostname + separator + 'collaborators',
+      TICKET_KEY: hostname + separator + 'ticket',
 
       observers: [],
 
