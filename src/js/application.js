@@ -89,7 +89,7 @@ xing.jira.Application = (function ($) {
 
     storedTickets.forEach(function(markup) {
       if (markup !== currentTicketMarkup) {
-        storedTicketsMarkup += markup;
+        storedTicketsMarkup += '<li>' + markup + '</li>';
       }
     });
 
@@ -99,8 +99,10 @@ xing.jira.Application = (function ($) {
            '<h2 class="aui-popup-heading">Print preview</h2>' +
            '<div class="aui-popup-content">' +
              '<div class="form-body">' +
-               storedTicketsMarkup +
-               currentTicketMarkup +
+               '<ul class="gm-output-list">' +
+                 storedTicketsMarkup +
+                 '<li>' + currentTicketMarkup + '</li>' +
+               '</ul>' +
              '</div>' +
              '<div class="buttons-container form-footer">' +
                '<div class="gm-60 gm-grid-item">' +
