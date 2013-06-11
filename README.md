@@ -19,7 +19,16 @@ It exist 3 bookmarklets that improve your Jira workflow.
 
 ## Release notes
 
-### Version 1.2
+**Version 1.2**
 
 - Make it possible to print out multiple tickets on one time
 - Add a bookmarklet to pick up a ticket - for multiple ticket - without showing the print dialog
+
+**Version 1.1**
+
+- Make it possible to add/edit collaborators on the fly
+- Bookmarklet for toggle additional lists int the backlog view
+
+**Version 1.0**
+
+- Bookmarklet to print formatted Jira ticket
