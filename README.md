@@ -23,8 +23,8 @@ It exist 3 bookmarklets that improve your Jira workflow.
 
 You have to allow to print background colors in your browser print settings
 
-- Firefox: *Print Color Backgrounds*
-- Google Chrome: *Background colors and -images*
+- in Firefox: *Appearance: Print Color Backgrounds*
+- in Google Chrome: *Options: Background colors and -images*
 
 ## Release notes
 
