@@ -9,13 +9,22 @@ It exist 3 bookmarklets that improve your Jira workflow.
 
 ## Installation
 
-### Bookmarklet - Print a single ticket on the ticket view
+### Bookmarklet
 
 1. Pick one of this scripts and copy the content of this script
 2. Create an new bookmark in your browser
 3. Enter a for you understandable name as a title
 4. Paste the script in the Location field and save it
 5. Done!
+
+## FAQ
+
+**Why is the printed ticket black/white and not colored, as in the preview?**
+
+You have to allow to print background colors in your browser print settings
+
+- Firefox: *Print Color Backgrounds*
+- Google Chrome: *Background colors and -images*
 
 ## Release notes
 
