@@ -28,6 +28,10 @@ You have to allow to print background colors in your browser print settings
 
 ## Release notes
 
+**Version 1.2.1**
+
+- Fix broken print layout
+
 **Version 1.2**
 
 - Make it possible to print out multiple tickets on one time

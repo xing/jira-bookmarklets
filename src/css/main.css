@@ -186,7 +186,6 @@
 }
 /* --------------------------------- Jira */
 @media print {
-  .gm-hd { color: #999; }
   html, body { background-color: white; }
   #page,
   .aui-blanket,
@@ -199,10 +198,11 @@
     box-shadow: none !important;
     left: 0;
     margin: 0;
+    max-height: auto;
     padding: 0;
     position: absolute;
     top: 0;
-    max-height: 12.2cm;
+    width: 100%;
   }
   .gm-container .form-body { padding: 0!important; }
 }
