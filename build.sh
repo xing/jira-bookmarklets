@@ -21,7 +21,7 @@ echo -n "xing.jira.versionTimestamp=$timestamp;"                >> bookmarklet.j
 echo -n 'xing.jira.Application.showPopup();'                    >> bookmarklet.js
 echo -n '})();'                                                 >> bookmarklet.js
 
-mv bookmarklet.js jira-ticket-print-bookmarklet.js
+mv bookmarklet.js ticket-print-bookmarklet.js
 #
 #
 # store ticket bookmarklet
@@ -32,7 +32,7 @@ echo -n "xing.jira.versionTimestamp=$timestamp;"       >> bookmarklet.js
 echo -n "xing.jira.Application.storeTicketHandler();"  >> bookmarklet.js
 echo -n '})();'                                        >> bookmarklet.js
 
-mv bookmarklet.js jira-store-ticket-bookmarklet.js
+mv bookmarklet.js add-ticket-bookmarklet.js
 rm compressed.js combined.js compressed.css
 #
 #
