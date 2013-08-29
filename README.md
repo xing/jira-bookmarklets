@@ -3,9 +3,8 @@
 This is a summary of client side script helpers.
 It exist 3 bookmarklets that improve your Jira workflow.
 
-- [Print out your Jira tickets in a Taskboard Format](/xws/jira-helpers/raw/master/jira-ticket-print-bookmarklet.js)
-- [Pick a Jira ticket for print ticket bookmarklet](/xws/jira-helpers/raw/master/jira-store-ticket-print-bookmarklet.js)
-- [toggle all additional lists in the backlog view](/xws/jira-helpers/raw/master/jira-list-toggle-bookmarklet.js)
+- [Print out your Jira tickets in a Taskboard Format](https://source.xing.com/xws/jira-helpers/blob/master/ticket-print-bookmarklet.js)
+- [Pick a Jira ticket for print ticket bookmarklet](https://source.xing.com/xws/jira-helpers/blob/master/add-ticket-bookmarklet.js)
 
 ## Installation
 
@@ -27,6 +26,11 @@ You have to allow to print background colors in your browser print settings
 - in Google Chrome: *Options: Background colors and -images*
 
 ## Release notes
+
+**Version 1.3.0**
+
+- Cleanup ticket layout (drop unnecessary fields)
+- Drop toggle bookmark
 
 **Version 1.2.1**
 
