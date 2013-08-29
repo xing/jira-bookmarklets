@@ -21,6 +21,9 @@
   text-align: left;
   text-transform: uppercase;
 }
+.gm-ltr {
+  text-align: left;
+}
 .h1 { font-size: 3em; }
 .h2 { font-size: 2.4em; }
 .h4 {
@@ -32,6 +35,7 @@
   line-height: 1.4em;
 }
 .gm-snap-left { float: left; }
+.gm-snap-right { float: right; }
 .gm-grid-item { display: inline-block; }
 .gm-10 { width: 10%; }
 .gm-20 { width: 20%; }
@@ -84,6 +88,24 @@
   top: -7px;
   z-index: 1;
 }
+.gm-label {
+  background-color: #999;
+  border-radius: 0.2em;
+  color: white;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1em;
+  padding: 4px 8px 2px;
+}
+.gm-label-danger {
+  background-color: #c00;
+}
+.gm-label-bug {
+  background-color: #c00;
+}
+.gm-label-user-story {
+  background-color: #8CAF68;
+}
 /* -------------------- ticket pagination */
 .gm-ticket-section {
   background-color: #F2F88D;
@@ -125,10 +147,12 @@
 }
 .gm-inner { padding: 2mm 3mm; }
 /* ----------------------------- sections */
-.gm-title .gm-inner,
-.gm-desc .gm-inner {
+.gm-title .gm-inner {
   overflow: hidden;
   padding-bottom: 0;
+}
+.gm-title .gm-inner {
+  height: 6.5cm;
 }
 .gm-number .gm-bd { word-break: break-all; }
 .gm-pairing .gm-inner { overflow: hidden; }
@@ -173,6 +197,9 @@
   font-size: 0.7em;
   text-align: center;
   text-transform: uppercase;
+}
+.gm-date-content .gm-inner {
+  min-height: 1.2cm;
 }
 .gm-container .gm-print { margin: 0 10px 0 0; }
 /* Jira --------------------------------- */

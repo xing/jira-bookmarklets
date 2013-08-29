@@ -34,3 +34,13 @@ String.prototype.trimWhitespace = function () {
 
   return this.replace(/\s+/g, ' ').split(/\n/).join(' ');
 };
+/**
+ * Will trim a string with whitespace and newlines like this:
+ * 'Foo Bar'.trimToCSSSelector(); // output: 'foo-bar'
+ */
+String.prototype.trimToCSSSelector = function () {
+
+  'use strict';
+
+  return this.toLowerCase().replace(/ /g, '-');
+};

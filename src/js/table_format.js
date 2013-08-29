@@ -5,148 +5,96 @@ xing.jira.tableFormat = function (data) {
 
   'use strict';
 
+  var MAX_COLS = 5;
+
   return [
     [
       {
         head: true,
         cell: {
-          options: {cssClass: 'gm-number gm-center gm-20'},
-          body: {
-            text: data.number.replace(/-/, '<br>'),
-            options: {cssClass: 'h1', title: data.number}
-          }
-        }
-      }, {
-        head: true,
-        cell: {
-          options: {colspan: 4, cssClass: 'gm-title'},
-          body: {
-            text: data.title.truncate(74),
-            options: {cssClass: 'h2 gm-hyphen'}
-          }
-        }
-      }
-    ], [
-      {
-        cell: {
           options: {
-            rowspan: 1,
-            cssClass: (data.dueDate ? 'gm-warning' : '')
-          },
-          title: {
-            text: 'Due date'
+            colspan: 2,
+            cssClass: 'gm-number gm-ltr'
           },
           body: {
-            options: {cssClass: 'h4'},
-            text: data.dueDate
+            text: data.number,
+            options: { cssClass: 'h1', title: data.number }
           }
         }
       }, {
         cell: {
-          options: {colspan: 4, cssClass: 'gm-pairing'},
-          title: {
-            text: 'Pairing',
-            options: {cssClass: 'gm-snap-left h5'}
-          },
+          title: { text: 'Type' },
           body: {
-            text: data.collaborators.join(' ') + '<button id="gm-add-collaborator">Add Collaborators</button>',
-            options: {cssClass: 'gm-snap-left h5'}
-          }
-        }
-      }
-    ], [
-      {
-        cell: {
-          title: {
-            text: 'Type'
-          },
-          body: {
+            options: { cssClass: 'gm-label gm-label-' + data.type.trimToCSSSelector() },
             text: data.type
           }
         }
       }, {
         cell: {
-          options: {rowspan: 4, colspan: 4, cssClass: 'gm-desc gm-hyphen'}
+          title: { text: 'Component' },
+          body: { text: data.component }
+        }
+      }, {
+        cell: {
+          title: { text: 'Target' },
+          body: { text: data.target }
         }
       }
     ], [
       {
+        head: true,
         cell: {
-          title: {
-            text: 'Reporter'
-          },
+          options: { colspan: MAX_COLS, cssClass: 'gm-title gm-ltr' },
           body: {
-            text: data.reporter
-          }
-        }
-      }
-    ], [
-      {
-        cell: {
-          title: {
-            text: 'Component'
-          },
-          body: {
-            text: data.component
+            text: data.title.truncate(220),
+            options: { cssClass: 'h2 gm-hyphen' }
           }
         }
       }
     ], [
       {
         cell: {
+          options: {colspan: MAX_COLS, cssClass: 'gm-pairing'},
           title: {
-            text: 'Target'
+            text: 'Pairing',
+            options: { cssClass: 'gm-snap-left h5' }
           },
           body: {
-            text: data.target
+            text: data.collaborators.join(' ') + '<button id="gm-add-collaborator" class="aui-button gm-snap-right"><i>+</i> Add Collaborators</button>',
+            options: { cssClass: 'h5' }
           }
         }
       }
     ], [
       {
         cell: {
-          title: {
-            text: 'Created'
-          },
+          title: { text: 'Created' },
+          body: { text: data.created }
+        }
+      }, {
+        cell: {
+          title: { text: 'Due date' },
           body: {
-            text: data.created
+            options: { cssClass: (data.dueDate ? 'gm-label-danger gm-label' : '') },
+            text: data.dueDate
           }
         }
       }, {
         cell: {
-          options: {cssClass: 'gm-date-content'},
-          title: {
-            text: 'Start Progress'
-          },
-          body: {
-            text: 'Day | Time'
-          }
+          title: { text: 'Reporter' },
+          body:  { text: data.reporter }
         }
       }, {
         cell: {
-          options: {cssClass: 'gm-date-content'},
-          title: {
-            text: 'End date'
-          },
-          body: {
-            text: 'Day | Time'
-          }
+          options: { cssClass: 'gm-date-content gm-20' },
+          title: { text: 'Start Progress' },
+          body: { text: 'Day | Time' }
         }
       }, {
         cell: {
-          options: {cssClass: 'gm-qa'},
-          title: {
-            text: 'QA passed'
-          },
-          body: {
-            text: ''
-          }
-        }
-      }, {
-        cell: {
-          title: {
-            text: 'Release'
-          }
+          options: { cssClass: 'gm-date-content gm-20' },
+          title: { text: 'End date' },
+          body: { text: 'Day | Time' }
         }
       }
     ]
