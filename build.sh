@@ -34,16 +34,3 @@ echo -n '})();'                                        >> bookmarklet.js
 
 mv bookmarklet.js add-ticket-bookmarklet.js
 rm compressed.js combined.js compressed.css
-#
-#
-# toggle list bookmarklet
-cat src/js/list_toggle.js    >> combined.js
-
-java -jar build/yuicompressor-2.4.7.jar combined.js --type js  -o compressed.js
-
-echo -n 'javascript:void(function(){'        >> bookmarklet.js
-cat compressed.js                            >> bookmarklet.js
-echo -n '})();'                              >> bookmarklet.js
-
-mv bookmarklet.js jira-list-toggle-bookmarklet.js
-rm combined.js compressed.js
