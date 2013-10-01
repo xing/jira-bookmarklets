@@ -43,6 +43,7 @@
 .gm-60 { width: 60%; }
 /* ticket pagination -------------------- */
 .gm-tickets-pagination ul {
+  counter-reset: pagination-counter;
   padding: 0;
 }
 .gm-tickets-pagination-label {
@@ -51,7 +52,7 @@
   padding-top: 3px;
 }
 .gm-tickets-pagination li {
-  background-color: #bbb;
+  background-color: white;
   display: block;
   float: left;
   height: 8px;
@@ -76,16 +77,16 @@
 }
 .gm-tickets-pagination li:nth-child(2n+1):after {
   color: black;
-  content: "";
+  counter-increment: pagination-counter;
+  content: counter(pagination-counter);
   display: list-item;
   font-weight: bold;
-  left: 19px;
+  left: -2px;
   list-style-position: outside;
-  list-style-type: decimal;
-  opacity: 0.3;
+  opacity: 0.2;
   pointer-events: none;
   position: relative;
-  top: -7px;
+  top: 0;
   z-index: 1;
 }
 .gm-label {
@@ -108,7 +109,7 @@
 }
 /* -------------------- ticket pagination */
 .gm-ticket-section {
-  background-color: #F2F88D;
+  background-color: #999;
   display: inline-block;
   height: 8px;
   line-height: 0;
@@ -118,7 +119,7 @@
   width: 12px;
 }
 .gm-remove-ticket {
-  background-color: white;
+  background-color: #ccc;
 }
 .gm-remove-ticket:hover {
   background-color: #E94902;
