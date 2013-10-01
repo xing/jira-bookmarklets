@@ -93,9 +93,11 @@ xing.jira.Application = (function ($) {
 
     $('body').append(
       $('<div id="gm-popup">' +
-         '<div class="gm-container aui-popup box-shadow">' +
-           '<h2 class="aui-popup-heading">Print preview</h2>' +
-           '<div class="aui-popup-content">' +
+         '<div class="gm-container jira-dialog box-shadow ">' +
+           '<div class="jira-dialog-heading">' +
+             '<h2>Print preview</h2>' +
+           '</div>' +
+           '<div class="jira-dialog-content">' +
              '<div class="form-body">' +
                '<ul class="gm-output-list">' +
                  storedTicketsMarkup +
@@ -103,10 +105,10 @@ xing.jira.Application = (function ($) {
                '</ul>' +
              '</div>' +
              '<div class="buttons-container form-footer">' +
-               '<div class="gm-60 gm-grid-item">' +
+               '<div class="gm-60 gm-snap-left gm-grid-item">' +
                  pageMarkup +
                '</div>' +
-               '<div class="buttons gm-40 gm-grid-item">' +
+               '<div class="buttons gm-40 gm-snap-left gm-grid-item">' +
                  '<label for="gm-select-ticket">Select another:</label>&nbsp;' +
                  '<button id="gm-select-ticket" class="gm-pick-more aui-button">' +
                    '<i>+</i>' +
