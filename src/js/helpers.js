@@ -1,16 +1,8 @@
-// version 1.0.0
-// ==UserScript==
-// @name        TicketPrint
-// @namespace   http://jira.com
-// @description Gives the possibility to print out your story cards in a proper
-// way
-// @include     http://jira.*.*/jira/browse/*
-// @include     https://jira.*.*/jira/browse/*
-// @version     1
-// ==/UserScript==
-///////////////////////////////////////////////////////////////////////////////
-;String.prototype.truncate = function (maxlength) {
-
+/**
+ * TODO BAD PRATICE! Unbind these string helper form the String object.
+ */
+;
+String.prototype.truncate = function (maxlength) {
   'use strict';
 
   var length = this.length,
@@ -24,23 +16,29 @@
   return result;
 };
 /**
- * Will trim a string with whitespace and newlines like this:
- * '   foo
- *   bar  thut    '.trimWhitespace(); // output: 'foo bar thut'
+ * Return a trimed string with whitespace and newlines to a single line.
+ * @module xing.jira
+ * @class String
+ * @return {String}
+ * @example
+ *   '   foo
+ *     bar  thut    '.trimWhitespace(); // output: 'foo bar thut'
  */
 String.prototype.trimWhitespace = function () {
-
   'use strict';
 
   return this.replace(/\s+/g, ' ').split(/\n/).join(' ');
 };
 /**
- * Will trim a string with whitespace and newlines like this:
- * 'Foo Bar'.trimToCSSSelector(); // output: 'foo-bar'
+ * Return an array
+ * @module xing.jira
+ * @class String
+ * @param {String} A character they used as separator. Detault: ','
+ * @return {Array}
  */
-String.prototype.trimToCSSSelector = function () {
-
+String.prototype.toArray = function (seperator) {
   'use strict';
 
-  return this.toLowerCase().replace(/ /g, '-');
+  seperator = new RegExp(seperator || ',');
+  return this.split(seperator);
 };

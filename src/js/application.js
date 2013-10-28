@@ -1,120 +1,129 @@
 var xing = xing || {};
 xing.jira = xing.jira || {};
+/**
+ * @constructor
+ * @module xing.jira
+ * @class Application
+ * @requires AJS, DataCollector, TableBuilder, TableData, Presenter, I18n,
+ *           jQuery
+ * @type Object
+ */
+xing.jira.Application = function (cssResources) {
+  'use strict';
 
-xing.jira.Application = (function ($) {
+  var scope = this,
+    dataCollector, local, tableBuilder, tableData
+  ;
 
-  'use strict'; // jslint
+  /**
+   * @method initialize
+   */
+  scope.initialze = function (cssResources) {
+    dataCollector = new xing.jira.DataCollector();
+    tableBuilder  = new xing.jira.TableBuilder();
+    tableData     = new xing.jira.TableData();
+    local         = (new xing.jira.I18n()).local();
+    scope.addStyle(cssResources);
+    scope.collectDataFromDom(dataCollector);
+  };
 
-  function clickOutsidePopupHandler(event) {
+  /**
+   * @private
+   * @method _getContainer
+   * @param {jQueryObject} $el
+   * @return {jQueryObject}
+   */
+  scope._getContainer = function ($el) {
+    return $el.hasClass('gm-container') && $el || $el.parents('.gm-container');
+  };
+
+  /**
+   * @private
+   * @method _clickOutsidePopupHandler
+   */
+  scope._clickOutsidePopupHandler = function (event) {
     var $target = $(event.target),
-      $container = $target.hasClass('gm-container') && $target || $target.parents('.gm-container')
+      $container = scope._getContainer($target)
     ;
     // remove popup is mouse clicked outside the popup
     if (!$container[0]) {
-      hidePopup();
+      scope._hidePopup();
     }
-  }
-
-  function hidePopup() {
+  };
+  /**
+   * @private
+   * @method _hidePopup
+   */
+  scope._hidePopup = function () {
     $('#gm-popup').remove();
-    // jQuery 1.7+
-    $(document).unbind('click', clickOutsidePopupHandler);
-    // $(document).off('click', clickOutsidePopupHandler);
-  }
+    $(document).off('click', scope._clickOutsidePopupHandler);
+  };
 
-  function addButton() {
-    if ($('.gm-show-popup')[0]) {
-      return false;
-    }
-
-    var $wrapper = $('<li class="toolbar-item"></li>'),
-      $button = $('<a href="#print" class="gm-show-popup toolbar-trigger">Print Card</a>'),
-      $toolbars = $('.toolbar-group')
-    ;
-
-    $($toolbars[$toolbars.length - 1]).append($wrapper.append($button));
-
-    $button.bind('click', function (event) {
-    // jQuery 1.7+
-    // $toolbars.on('click', '.gm-show-popup', function (event) {
-      event.preventDefault();
-      module.showPopup();
-      // assign event listener after this click
-      setTimeout(function () {
-        $(document).click(clickOutsidePopupHandler);
-        // jQuery 1.7+
-        // $(document).on('click', clickOutsidePopupHandler);
-      }, 1);
-    });
-  }
-
-  function buildPageIcon(markup, isTemporary) {
-    var $fragment = $(markup),
-      ticketNumber = $fragment.find('.gm-number .gm-bd').attr('title'),
-      tempSelector = isTemporary ? '' : ' gm-remove-ticket',
-      actionLabel = isTemporary ? 'New ticket' : 'Delete ticket'
-    ;
-
-    return '' +
-      '<li>' +
-         '<a href="#"' +
-           ' class="gm-ticket-section' + tempSelector + '"' +
-           ' title="' + actionLabel + ': ' + ticketNumber + '">' +
-          '</a>' +
-       '</li>'
-    ;
-  }
-
-  function updateHTML(storedTickets) {
+  /**
+   * @private
+   * @method _updateHTML
+   */
+  scope._updateHTML = function (cachedTickets) {
     $('#gm-popup').remove();
-    var builder = xing.jira.TableBuilder,
-      format = xing.jira.tableFormat(xing.jira.DataCollector.data),
-      storedTicketsMarkup = '',
-      currentTicketMarkup = builder.build(format),
-      pageMarkup = ''
+    var tableStructureData = tableData.get(dataCollector.ticketData),
+      currentTicketMarkup = tableBuilder.render(tableStructureData),
+      cachedTicketsMarkup = '',
+      numberOfTickets = cachedTickets.length + 1,
+      numberOfPages = Math.ceil(numberOfTickets / 2)
     ;
 
-    pageMarkup = '';
-    storedTickets.forEach(function(markup) {
-      if ($(markup).find('.gm-number').text() !== $(currentTicketMarkup).find('.gm-number').text()) {
-        storedTicketsMarkup += '<li>' + markup + '</li>';
-        pageMarkup += buildPageIcon(markup);
+    cachedTickets.forEach(function (markup) {
+      var number = $(markup).find('.gm-number').text(),
+        currentNumber = $(currentTicketMarkup).find('.gm-number').text(),
+        buttonSelecotrs = 'aui-button gm-button-danger js-gm-remove-ticket'
+      ;
+
+      if (number !== currentNumber) {
+        cachedTicketsMarkup += '' +
+          '<li class="gm-output-item">' +
+             markup +
+             '<div class="gm-ticket-action-panel">' +
+               '<button type="button" class="' + buttonSelecotrs + '">' +
+                 local.modal.action.remove +
+               '</button>' +
+             '</div>' +
+           '</li>'
+        ;
       }
     });
-
-    pageMarkup += buildPageIcon(currentTicketMarkup, true);
-
-    pageMarkup = '' +
-      '<div class="gm-tickets-pagination">' +
-        '<span class="gm-tickets-pagination-label">Selected Ticket: </span>' +
-        '<ul>' + pageMarkup + '</ul>' +
-      '</div>'
-    ;
 
     $('body').append(
       $('<div id="gm-popup">' +
          '<div class="gm-container jira-dialog box-shadow ">' +
            '<div class="jira-dialog-heading">' +
-             '<h2>Print preview</h2>' +
+             '<h2>' + local.modal.heading + '</h2>' +
            '</div>' +
            '<div class="jira-dialog-content">' +
+             '<div class="gm-page-counter">' +
+               local.modal.ticketCount + ' ' + numberOfTickets +
+               local.modal.pageCount + ' ' + numberOfPages +
+             '</div>' +
              '<div class="form-body">' +
                '<ul class="gm-output-list">' +
-                 storedTicketsMarkup +
-                 '<li>' + currentTicketMarkup + '</li>' +
+                 cachedTicketsMarkup +
+                 '<li class="gm-output-item">' + currentTicketMarkup + '</li>' +
                '</ul>' +
              '</div>' +
              '<div class="buttons-container form-footer">' +
-               '<div class="gm-60 gm-snap-left gm-grid-item">' +
-                 pageMarkup +
-               '</div>' +
-               '<div class="buttons gm-40 gm-snap-left gm-grid-item">' +
-                 '<label for="gm-select-ticket">Select another:</label>&nbsp;' +
-                 '<button id="gm-select-ticket" class="gm-pick-more aui-button">' +
+               '<div class="buttons">' +
+                 '<label for="gm-select-ticket">' +
+                   local.modal.select +
+                 '</label>&nbsp;' +
+                 '<button id="gm-select-ticket" ' +
+                   'class="gm-pick-more aui-button">' +
                    '<i>+</i>' +
                  '</button>&nbsp;' +
-                 '<button class="gm-print aui-button">Print</button>' +
-                 '<a class="gm-cancel cancel" href="#">Cancel</a>' +
+                 '<button class="gm-print aui-button">' +
+                   local.modal.action.print +
+                '</button>' +
+                '<a class="gm-cancel cancel" href="#">' +
+                   local.modal.action.cancel +
+                '</a>' +
                '</div>' +
              '</div>' +
            '</div>' +
@@ -123,100 +132,123 @@ xing.jira.Application = (function ($) {
        '</div>'
       )
     );
-  }
-
-  var DataCollector = xing.jira.DataCollector,
-  module = {
-
-
-    addStyle: function (css) {
-      var head,
-        style = document.getElementById('gm-style')
-      ;
-
-      head = document.getElementsByTagName('head')[0];
-
-      if (!style) {
-        if (!head) {
-          return;
-        }
-        style = document.createElement('style');
-        style.setAttribute('id', 'gm-style');
-        style.type = 'text/css';
-        style.media = 'screen,print';
-        head.appendChild(style);
-      }
-      style.innerHTML += css + '\n';
-    },
-
-    storeTicketHandler: function () {
-      module.update();
-      var $latestTicket = $('#gm-popup .gm-table:last'),
-        markup = ''
-      ;
-
-      markup = $latestTicket[0].outerHTML;
-
-      DataCollector.storeTicket(markup.trimWhitespace());
-      hidePopup();
-      $('.aui-message').remove();
-      AJS.messages.success('#header .global .primary', {
-        title: 'Ticket print',
-        body: 'Ticket is stored! Please navigate to another if you want print one ticket more.'
-      });
-      setTimeout(function () {
-        $('.aui-message').remove();
-      }, 5000);
-    },
-
-    showPopup: function () {
-      if ($('#gm-popup')[0]) { return; }
-      // register observer
-      DataCollector.subscribe(this);
-
-      updateHTML(DataCollector.getStoredTickets());
-
-      $('body')
-        .on('click', '.gm-print', function (event) {
-          event.preventDefault();
-          window.print();
-          DataCollector.removeStoredTickets();
-          hidePopup();
-        })
-        .on('click', '.gm-pick-more', function (event) {
-          event.preventDefault();
-          module.storeTicketHandler();
-        })
-        .on('click', '.gm-cancel', function (event) {
-          event.preventDefault();
-          hidePopup();
-        })
-        .on('click', '.gm-remove-ticket', function (event) {
-          event.preventDefault();
-          var $target = $(event.target).parent(),
-            index = $target.index($target)
-          ;
-          DataCollector.removeStoredTickets(index);
-          $('#gm-popup .form-body table').eq(index).remove();
-          updateHTML(DataCollector.getStoredTickets());
-        })
-        .on('click', '#gm-add-collaborator', function () {
-          DataCollector.addCollaborators();
-        })
-      ;
-    },
-
-    update: function () {
-      updateHTML(DataCollector.getStoredTickets());
-    },
-
-    init: function (css) {
-      module.addStyle(css);
-      addButton();
-    }
-
   };
 
-  return module;
+  /**
+   * @method addStyle
+   */
+  scope.addStyle = function (resources) {
+    if ($('#gm-style')[0] || !resources) { return; }
 
-}(jQuery));
+    var $style = $('<style id="gm-style" type="text/css"></style>');
+
+    $(document.head).append($style.html(resources));
+  };
+
+  /**
+   * @method cacheTicketHandler
+   */
+  scope.cacheTicketHandler = function () {
+    scope.update();
+    var $latestTicket = $('#gm-popup .gm-table:last'),
+      markup = ''
+    ;
+
+    markup = $latestTicket[0].outerHTML;
+
+    dataCollector.cacheTicket(markup.trimWhitespace());
+    scope._hidePopup();
+    scope._showSuccessMessage();
+  };
+
+  /**
+   * @private
+   * @method _showSuccessMessage
+   */
+  scope._showSuccessMessage = function () {
+    $('.aui-message').remove();
+    AJS.messages.success('.aui-page-header-inner', {
+      title: local.messages.ticketCached.title,
+      body: local.messages.ticketCached.body
+    });
+    setTimeout(function () {
+      $('.aui-message').remove();
+    }, 5000);
+  };
+
+  /**
+   * @method showPopup
+   */
+  scope.showPopup = function () {
+    if ($('#gm-popup')[0]) { return; }
+    // register observer
+    dataCollector.subscribe(this);
+
+    scope._updateHTML(dataCollector.getCachedTickets());
+
+    $('body')
+      .on('click', '.gm-print', function (event) {
+        event.preventDefault();
+        window.print();
+        dataCollector.removeCachedTickets();
+        scope._hidePopup();
+      })
+      .on('click', '.gm-pick-more', function (event) {
+        event.preventDefault();
+        scope.cacheTicketHandler();
+      })
+      .on('click', '.gm-cancel', function (event) {
+        event.preventDefault();
+        scope._hidePopup();
+      })
+      .on('click', '.js-gm-remove-ticket', function (event) {
+        event.preventDefault();
+        var $target = $(event.target).parents('li'),
+          index = $target.index($target)
+        ;
+        dataCollector.removeCachedTickets(index);
+        $('#gm-popup .form-body table').eq(index).remove();
+        scope._updateHTML(dataCollector.getCachedTickets());
+      })
+      .on('click', '#gm-add-collaborator', function () {
+        dataCollector.addCollaborators(local.modal.collaboratorPrompt);
+      })
+    ;
+  };
+
+  /**
+   * @method update
+   */
+  scope.update = function () {
+    scope._updateHTML(dataCollector.getCachedTickets());
+  };
+
+  /**
+   * Collect and formatted data from the DOM
+   * @method collectDataFromDom
+   */
+  scope.collectDataFromDom = function (dataCollector) {
+    var $target = $('#greenhopper-agile-issue-web-panel dd a'),
+      presenter = new xing.jira.Presenter(),
+      type = presenter.getString($('#type-val img').attr('alt')),
+      collaboratorKey = dataCollector.COLLABORATOR_KEY,
+      title = presenter.getString($('#summary-val').text())
+    ;
+
+    dataCollector.update({
+      number:        presenter.getString($('#key-val').text()),
+      description:   presenter.getString($('#description-val').text()),
+      dueDate:       presenter.getDate($('#due-date time').attr('datetime')),
+      collaborators: presenter.getStorageItem(collaboratorKey).join(' '),
+      type:          type,
+      typeSelector:  presenter.dashalizer(type),
+      reporter:      presenter.getString($('#reporter-val span').text()),
+      created:       presenter.getDate($('#create-date time').attr('datetime')),
+      title:         title.truncate(220),
+      component:     presenter.getString($('#components-field').text()),
+      target:        presenter.getElementText($target)
+    });
+  };
+
+  scope.initialze(cssResources);
+};

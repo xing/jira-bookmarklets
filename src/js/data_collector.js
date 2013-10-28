@@ -1,128 +1,135 @@
 var xing = xing || {};
 xing.jira = xing.jira || {};
-
-xing.jira.DataCollector = (function ($, undefined) {
-
+/**
+ * @module xing.jira
+ * @class DataCollector
+ * @requires String
+ */
+xing.jira.DataCollector = function () {
   'use strict';
 
-  // @private
-
-  function normalize(string) {
-    return string.split(/,/);
-  }
-
-  function _getStoredTicketsArray() {
-    var storedTickets = localStorage.getItem(module.TICKET_KEY),
-      tickets = storedTickets && storedTickets[0] ? JSON.parse(storedTickets) : []
-    ;
-    return tickets;
-  }
-
-  // @public
-
-  var $target = $('#greenhopper-agile-issue-web-panel dd a'),
+  var scope = this,
     hostname = location.hostname,
-    separator = hostname ? '.' : '',
-    module = {
-      COLLABORATOR_KEY: hostname + separator + 'collaborators',
-      TICKET_KEY: hostname + separator + 'ticket',
-
-      observers: [],
-
-      data: {},
-
-      subscribe: function (subscriber) {
-        this.observers.push(subscriber);
-      },
-
-      unsubscribe: function (subscriber) {
-        var index = this.observer.indexOf(subscriber);
-        if (index >= 0) {
-          this.observers.splice(index);
-        }
-      },
-
-      update: function (options) {
-        this.data = $.extend(this.data, options || {});
-
-        this.observers.forEach(function (observer) {
-          observer.update();
-        });
-      },
-
-      storeTicket: function (markup) {
-        var storedTickets = _getStoredTicketsArray(),
-          tickets = storedTickets.concat([markup])
-        ;
-        localStorage.setItem(module.TICKET_KEY, JSON.stringify(tickets));
-      },
-
-      getStoredTickets: function () {
-        return _getStoredTicketsArray();
-      },
-
-      removeStoredTickets: function (itemNumber) {
-        if (itemNumber !== undefined) {
-          var storedTickets = _getStoredTicketsArray();
-          if (storedTickets[0]) {
-            storedTickets.splice(itemNumber, 1);
-            localStorage.setItem(module.TICKET_KEY, JSON.stringify(storedTickets));
-          }
-        } else {
-          localStorage.removeItem(module.TICKET_KEY);
-        }
-        return _getStoredTicketsArray();
-      },
-
-      addCollaborators: function () {
-        var collaborators = localStorage.getItem(module.COLLABORATOR_KEY) || '',
-          updatedCollaborators = window.prompt('Please enter your collaborators!\nNote: Separate the names with a comma e.g. "Jeffrey, Walter"', collaborators || '')
-        ;
-        if (!!updatedCollaborators && collaborators !== updatedCollaborators) {
-          localStorage.setItem(this.COLLABORATOR_KEY, updatedCollaborators);
-          this.update({collaborators: normalize(updatedCollaborators)});
-        }
-      },
-
-      getCollaborators: function () {
-        var collaborators = localStorage.getItem(module.COLLABORATOR_KEY) || '';
-        return normalize(collaborators);
-      },
-
-      getDate: function ($time) {
-        var timeString = $time.attr('datetime'),
-          date, m, Y, d, formattedDate
-        ;
-        if (timeString) {
-          date = new Date(timeString);
-          m = date.getMonth() + 1;
-          m = m > 9 ? m : '0' + m;
-          Y = date.getFullYear();
-          d = date.getDate();
-          formattedDate = (Y + '-' + m + '-' + d);
-
-          return formattedDate;
-        }
-
-        return '';
-      }
-
-    }
+    separator = hostname ? '.' : ''
   ;
 
-  module.update({
-    number:        $('#key-val').text() || '',
-    description:   $('#description-val').text() || '',
-    dueDate:       module.getDate($('#due-date time')),
-    collaborators: module.getCollaborators(),
-    type:          $('#type-val img').attr('alt') || '',
-    reporter:      $('#reporter-val span').text() || '',
-    created:       module.getDate($('#create-date time')),
-    title:         $('#summary-val').text() || '',
-    component:     $('#components-field').text() || '',
-    target:        $target[0] ? $target.text().trimWhitespace() : ''
-  });
+  /**
+   * Local storage key for collaborartors caching
+   * @property COLLABORATOR_KEY
+   * @type String
+   * @static
+   * @final
+   */
+  scope.COLLABORATOR_KEY = hostname + separator + 'collaborators';
+  /**
+   * Local storage key for ticket caching
+   * @property TICKET_KEY
+   * @type String
+   * @static
+   * @final
+   */
+  scope.TICKET_KEY = hostname + separator + 'ticket';
 
-  return module;
+  /**
+   * List of subscribed observers
+   * @property observers
+   * @type Array
+   */
+  scope.observers = [];
 
-}(jQuery));
+  /**
+   * @type Object
+   * @property ticketData
+   */
+  scope.ticketData = {};
+
+  /**
+   * @method getCachedTickets
+   * @return {Array} List of cached ticket objects
+   */
+  scope.getCachedTickets = function () {
+    var cachedTickets = localStorage.getItem(scope.TICKET_KEY);
+
+    return cachedTickets && cachedTickets[0] ? JSON.parse(cachedTickets) : [];
+  };
+
+  /**
+   * Register observer objects
+   * @method subscribe
+   * @param {Object} subscriber
+   */
+  scope.subscribe = function (subscriber) {
+    scope.observers.push(subscriber);
+  };
+
+  /**
+   * Remove observer objects from the list
+   * @method unsubscribe
+   * @param {Object} subscriber
+   */
+  scope.unsubscribe = function (subscriber) {
+    var index = scope.observer.indexOf(subscriber);
+    if (index >= 0) {
+      scope.observers.splice(index);
+    }
+  };
+
+  /**
+   * Trigger all observers to make an update
+   * @method update
+   * @param {Object} object
+   */
+  scope.update = function (options) {
+    scope.ticketData = $.extend(scope.ticketData, options || {});
+
+    scope.observers.forEach(function (observer) {
+      observer.update();
+    });
+  };
+
+  /**
+   * @method cacheTicket
+   */
+  scope.cacheTicket = function (markup) {
+    var cachedTickets = scope.getCachedTickets(),
+      tickets = cachedTickets.concat([markup])
+    ;
+    localStorage.setItem(scope.TICKET_KEY, JSON.stringify(tickets));
+  };
+
+  /**
+   * Remove an ticket from the cached ticket list
+   * @method removeCachedTickets
+   * @return {Array} list of updated cached tickets
+   */
+  scope.removeCachedTickets = function (itemNumber) {
+    if (itemNumber !== undefined) {
+      var cachedTickets = scope.getCachedTickets();
+      if (cachedTickets[0]) {
+        cachedTickets.splice(itemNumber, 1);
+        localStorage.setItem(scope.TICKET_KEY, JSON.stringify(cachedTickets));
+      }
+    }
+    else {
+      localStorage.removeItem(scope.TICKET_KEY);
+    }
+    return scope.getCachedTickets();
+  };
+
+  /**
+   * Add/update collaborator list
+   * @param {String} promptText is displayed in the prompt dialog
+   * @method addCollaborators
+   */
+  scope.addCollaborators = function (promptText) {
+    var collaborators = localStorage.getItem(scope.COLLABORATOR_KEY) || '',
+      updatedCollaborators = window.prompt(promptText, collaborators || '')
+    ;
+
+    if (updatedCollaborators !== null) {
+      localStorage.setItem(scope.COLLABORATOR_KEY, updatedCollaborators);
+      this.update({collaborators: updatedCollaborators.toArray()});
+    }
+  };
+
+};

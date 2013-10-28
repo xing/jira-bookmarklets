@@ -1,0 +1,1 @@
+javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"https://source.xing.com/xws/jira-helpers/raw/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket"],f=d[a.env],g=e[a.kit],h=a.path+f+"/output/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}());
