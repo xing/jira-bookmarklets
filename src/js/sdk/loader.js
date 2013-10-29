@@ -3,7 +3,7 @@
   options = options || {};
   options.kit =  options.kit || 0;
   options.env =  options.env || 0;
-  options.path = options.path || 'https://source.xing.com/xws/jira-helpers/raw/';
+  options.path = options.path || '//source.xing.com/xws/jira-helpers/raw/';
   var doc = document,
     scriptTag    = doc.createElement('script'),
     environments = ['master','develop'],
