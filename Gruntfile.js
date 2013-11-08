@@ -52,6 +52,14 @@ module.exports = function (grunt) {
       ],
       options: grunt.file.readJSON('.jshintrc')
     },
+    csslint: {
+      options: {
+        csslintrc: '.csslintrc'
+      },
+      strict: {
+        src: ['src/css/*.css']
+      }
+    },
     css: grunt.file.read('build/main.min.css'),
     uglify: {
       sdk: {

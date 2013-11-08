@@ -1,1 +1,15 @@
---ignore=box-model,ids
+{
+  "adjoining-classes": false,
+  "box-model": false,
+  "box-sizing": false,
+  "compatible-vendor-prefixes": false,
+  "duplicate-background-images": false,
+  "fallback-colors": false,
+  "ids": false,
+  "import": false,
+  "important": false,
+  "known-properties": false,
+  "outline-none": false,
+  "overqualified-elements": false,
+  "text-indent": false
+}

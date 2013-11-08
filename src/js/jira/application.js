@@ -110,7 +110,7 @@ xing.jira.Application = function (cssResources, layoutName) {
              '<h2>' + local.modal.heading + '</h2>' +
            '</div>' +
            '<div class="jira-dialog-content">' +
-             '<div class="gm-page-counter">' +
+             '<div class="gm-page-counter h5">' +
                local.modal.ticketCount + ' ' + numberOfTickets +
                local.modal.pageCount + ' ' + numberOfPages +
              '</div>' +
