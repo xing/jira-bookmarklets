@@ -1,26 +1,58 @@
 module.exports = function (grunt) {
   'use strict';
 
-  grunt.file.mkdir('output');
+  // show elapsed time at the end
+  require('time-grunt')(grunt);
+  // load all grunt tasks
+  require('load-grunt-tasks')(grunt);
+
+  var jiraConfig = {
+    src: [
+      'src/js/vendor/namespace.js',
+      'src/js/core/**/*.js',
+      'src/js/jira/**/*.js'
+    ]
+  };
+
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    cssmin: {
-      combine: {
-        files: {
-          'output/main.min.css': ['src/css/main.css']
+    jasmine: {
+      all: {
+        src: jiraConfig.src,
+        options: {
+          helpers: 'test/spec/*_helper.js',
+          specs: 'test/spec/*_spec.js',
+          vendor: 'src/js/vendor/*.js',
+          title: '<%= pkg.name %>'
         }
       }
     },
     watch: {
       scripts: {
-        files: ['src/js/*.js'],
-        tasks: ['compressCSS', 'compressJS'],
+        files: ['Gruntfile.js', 'src/js/**/*.js', 'test/spec/**/*.js'],
+        tasks: ['jshint', 'jasmine'],
         options: {
           spawn: false,
         }
       }
     },
-    css: grunt.file.read('output/main.min.css'),
+    cssmin: {
+      combine: {
+        files: {
+          'build/main.min.css': ['src/css/main.css']
+        }
+      }
+    },
+    jshint: {
+      files: [
+        'Gruntfile.js',
+        'src/js/core/**/*.js',
+        'src/js/jira/**/*.js',
+        'test/**/*.js'
+      ],
+      options: grunt.file.readJSON('.jshintrc')
+    },
+    css: grunt.file.read('build/main.min.css'),
     uglify: {
       sdk: {
         options: {
@@ -28,13 +60,15 @@ module.exports = function (grunt) {
           footer: '}());',
         },
         files: {
-          'output/sdk-loader.js': ['src/js/sdk/loader.js']
+          'build/sdk-loader.js': ['src/js/sdk/loader.js']
         }
       },
       printBookmarklet: {
         options: {
           banner: 'javascript:void(function(){',
-          footer: "var xingJiraApp = new xing.jira.Application('<%= css %>');" +
+          footer: 'var xingJiraApp = new xing.jira.Application(' +
+                    "'<%= css %>', " +
+                  ');' +
                   'xingJiraApp.versionTimestamp=' +
                     '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
                   'xingJiraApp.version="<%= pkg.version %>";' +
@@ -42,7 +76,24 @@ module.exports = function (grunt) {
                   '})();'
         },
         files: {
-          'output/ticket-print-bookmarklet.js': ['src/js/*.js']
+          'build/ticket-print-bookmarklet.js': jiraConfig.src
+        }
+      },
+      printBookmarkletScrum: {
+        options: {
+          banner: 'javascript:void(function(){',
+          footer: 'var xingJiraApp = new xing.jira.Application(' +
+                    "'<%= css %>', " +
+                    'xing.core.table.layout.SCRUM_LAYOUT' +
+                  ');' +
+                  'xingJiraApp.versionTimestamp=' +
+                    '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
+                  'xingJiraApp.version="<%= pkg.version %>";' +
+                  'xingJiraApp.showPopup();' +
+                  '})();'
+        },
+        files: {
+          'build/ticket-print-lay-scrum-bookmarklet.js': jiraConfig.src
         }
       },
       addBookmarlet: {
@@ -56,18 +107,35 @@ module.exports = function (grunt) {
                   '})();'
         },
         files: {
-          'output/add-ticket-bookmarklet.js': ['src/js/*.js']
+          'build/add-ticket-bookmarklet.js': jiraConfig.src
+        }
+      },
+      addBookmarletScrum: {
+        options: {
+          banner: 'javascript:void(function(){',
+          footer: 'var xingJiraApp = new xing.jira.Application(' +
+                    '"", ' +
+                    'xing.core.table.layout.SCRUM_LAYOUT' +
+                  ');' +
+                  'xingJiraApp.versionTimestamp=' +
+                    '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
+                  'xingJiraApp.version="<%= pkg.version %>";' +
+                  'xingJiraApp.cacheTicketHandler();' +
+                  '})();'
+        },
+        files: {
+          'build/add-ticket-lay-scrum-bookmarklet.js': jiraConfig.src
         }
       }
     }
   });
 
-  grunt.loadNpmTasks('grunt-contrib-cssmin');
-  grunt.loadNpmTasks('grunt-contrib-uglify');
-  grunt.loadNpmTasks('grunt-contrib-watch');
-
   grunt.registerTask('default', ['cssmin', 'uglify']);
-  grunt.registerTask('compressCSS', ['cssmin']);
-  grunt.registerTask('compressJS', ['uglify']);
+  grunt.registerTask('compress', ['cssmin', 'uglify']);
+  grunt.registerTask('compress:css', ['cssmin']);
+  grunt.registerTask('compress:js', ['uglify']);
 
+  grunt.registerTask('test', [
+    'jasmine:all'
+  ]);
 };

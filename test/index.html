@@ -1,4 +1,4 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
@@ -314,95 +314,115 @@
                   <div class="content-container issue-body-content navigator-collapsed">
                     <div class="content-body aui-panel">
                       <div class="aui-group">
-                        <div class="aui-item issue-main-column">
-                          <div class='module toggle-wrap' id='details-module'>
-                            <div id='details-module_heading' class='mod-header'>
-                              <h3 class='toggle-title'>Details</h3>
-                            </div>
-                            <div class='mod-content'>
-                              <ul id="issuedetails" class="property-list two-cols">
-                                <li class="item">
-                                  <div class="wrap">
-                                    <strong class="name">Type:</strong>
-                                    <span id="type-val" class="value">
-                                    <img  alt="User Story" height="16" src="/jira/images/icons/documentation.gif" title="User Story - User stories to be used with GreenHopper" width="16" /> User Story
-                                    </span>
+                        <div class="module toggle-wrap" id="details-module">
+                          <div class="mod-header" id="details-module_heading">
+                            <ul class="ops"></ul>
+                            <h2 class="toggle-title">Details</h2>
+                          </div>
+                          <div class="mod-content">
+                            <ul class="property-list two-cols" id="issuedetails">
+                              <li class="item">
+                                <div class="wrap">
+                                  <strong class="name">Type:</strong>
+                                  <span class="value editable-field inactive" id="type-val" title="Click to edit">
+                                  <img width="16" height="16" title="User Story - User stories to be used with GreenHopper" src="/jira/images/icons/issuetypes/documentation.png" alt="User Story"> User Story
+                                  <span class="overlay-icon icon icon-edit-sml"></span></span>
+                                </div>
+                              </li>
+                              <li class="item item-right">
+                                <div class="wrap">
+                                  <strong class="name">Status:</strong>
+                                  <span class="value" id="status-val">
+                                  <img width="16" height="16" title="In Progress - This issue is being actively worked on at the moment by the assignee." src="/jira/images/icons/statuses/inprogress.png" alt="In Progress"> In Progress
+                                  </span>
+                                  <span class="status-view">(<a title="Agile Workflow w resolved: XAN-1977" class="issueaction-viewworkflow" href="/jira/plugins/servlet/workflow/thumbnail/getThumbnail?workflowName=Agile+Workflow+w+resolved&amp;stepId=2&amp;width=full&amp;height=full">View Workflow</a>)</span>
+                                </div>
+                              </li>
+                              <li class="item">
+                                <div class="wrap">
+                                  <strong class="name">Priority:</strong>
+                                  <span class="value editable-field inactive" id="priority-val" title="Click to edit">
+                                  <img width="16" height="16" title="Undefined - Default Priority. The issue needs to be reviewed and classified." src="/jira/images/icons/priority_undefined.gif" alt="Undefined"> Undefined
+                                  <span class="overlay-icon icon icon-edit-sml"></span></span>
+                                </div>
+                              </li>
+                              <li class="item item-right">
+                                <div class="wrap">
+                                  <strong class="name">Resolution:</strong>
+                                  <span class="value unresolved" id="resolution-val">
+                                  Unresolved
+                                  </span>
+                                </div>
+                              </li>
+                              <li class="item">
+                                <div class="wrap">
+                                  <strong class="name">Affects Version/s:</strong>
+                                  <span class="value editable-field inactive" id="versions-val" title="Click to edit">
+                                  None
+                                  <span class="overlay-icon icon icon-edit-sml"></span></span>
+                                </div>
+                              </li>
+                              <li class="item item-right">
+                                <div class="wrap">
+                                  <strong class="name">Fix Version/s:</strong>
+                                  <span class="value" id="fixfor-val">
+                                  None
+                                  </span>
+                                </div>
+                              </li>
+                              <li class="item">
+                                <div class="wrap">
+                                  <strong class="name">Component/s:</strong>
+                                  <span class="value editable-field inactive" id="components-val" title="Click to edit">
+                                  <span id="components-field" class="shorten" style="height: auto;">
+                                  <a title="iPad " href="/jira/browse/XAN/component/11354">iPad</a>                                                    </span>
+                                  <span class="overlay-icon icon icon-edit-sml"></span></span>
+                                </div>
+                              </li>
+                              <li class="item item-right">
+                                <div class="wrap">
+                                  <strong class="name">Security Level:</strong>
+                                  <span class="value" id="security-val">
+                                  <span class="note">XING</span>
+                                  (XING employees)
+                                  </span>
+                                </div>
+                              </li>
+                              <li class="item full-width">
+                                <div id="wrap-labels" class="wrap">
+                                  <strong class="name">Labels:</strong>
+                                  <div class="labels-wrap value editable-field inactive" title="Click to edit">
+                                    <ul id="labels-72121-value" class="labels">
+                                      <li><a title="ipad" href="/jira/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels+%3D+ipad" class="lozenge"><span>ipad</span></a></li>
+                                      <li><a title="ixd" href="/jira/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels+%3D+ixd" class="lozenge"><span>ixd</span></a></li>
+                                      <li><a title="sb" href="/jira/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels+%3D+sb" class="lozenge"><span>sb</span></a></li>
+                                      <li><a href="/jira/secure/EditLabels!default.jspa?id=72121&amp;noLink=false" id="edit-labels-72121-labels" class="icon jira-icon-edit edit-labels" title="Follow link"><span>Labels</span></a></li>
+                                    </ul>
+                                    <span class="overlay-icon icon icon-edit-sml"></span>
                                   </div>
-                                </li>
-                                <li class="item item-right">
-                                  <div class="wrap">
-                                    <strong class="name">Status:</strong>
-                                    <span id="status-val" class="value">
-                                    <img  alt="In Progress" height="16" src="/jira/images/icons/status_inprogress.gif" title="In Progress - This issue is being actively worked on at the moment by the assignee." width="16" /> In Progress
-                                    </span>
-                                    <span class="status-view">(<a href="/jira/plugins/servlet/workflow/thumbnail/getThumbnail?workflowName=Agile Workflow w resolved&stepId=2&width=full&height=full" class="issueaction-viewworkflow" title="Agile Workflow w resolved: XWS-1561">View Workflow</a>)</span>
-                                  </div>
-                                </li>
-                                <li class="item">
-                                  <div class="wrap">
-                                    <strong class="name">Priority:</strong>
-                                    <span id="priority-val" class="value">
-                                    <img  alt="Undefined" height="16" src="/jira/images/icons/priority_undefined.gif" title="Undefined - Default Priority. The issue needs to be reviewed and classified." width="16" /> Undefined
-                                    </span>
-                                  </div>
-                                </li>
-                                <li class="item item-right">
-                                  <div class="wrap">
-                                    <strong class="name">Resolution:</strong>
-                                    <span id="resolution-val" class="value unresolved" >
-                                    Unresolved
-                                    </span>
-                                  </div>
-                                </li>
-                                <li class="item">
-                                  <div class="wrap">
-                                    <strong class="name">Affects Version/s:</strong>
-                                    <span id="versions-val" class="value">
-                                    None
-                                    </span>
-                                  </div>
-                                </li>
-                                <li class="item item-right">
-                                  <div class="wrap">
-                                    <strong class="name">Fix Version/s:</strong>
-                                    <span id="fixfor-val" class="value">
-                                    None
-                                    </span>
-                                  </div>
-                                </li>
-                                <li class="item">
-                                  <div class="wrap">
-                                    <strong class="name">Component/s:</strong>
-                                    <span id="components-val" class="value">
-                                    <span class="shorten" id="components-field">
-                                    <a href="/jira/browse/XWS/component/10613" title="Calls [Team] Definition and implementation of Calls. XWS Documentation depends on this component.">Calls</a>                                                    </span>
-                                    </span>
-                                  </div>
-                                </li>
-                                <li class="item item-right">
-                                  <div class="wrap">
-                                    <strong class="name">Security Level:</strong>
-                                    <span id="security-val" class="value">
-                                    <span class="note">Project participants</span>
-                                    </span>
-                                  </div>
-                                </li>
-                                <li class="item full-width">
-                                  <div class="wrap" id="wrap-labels">
-                                    <strong class="name">Labels:</strong>
-                                    <div class="labels-wrap value">
-                                      <ul class="labels" id="labels-84118-value">
-                                        <li><a class="lozenge" href="/jira/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels+%3D+activitystream" title="activitystream"><span>activitystream</span></a></li>
-                                        <li><a class="lozenge" href="/jira/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels+%3D+calls" title="calls"><span>calls</span></a></li>
-                                        <li><a class="lozenge" href="/jira/secure/IssueNavigator.jspa?reset=true&amp;jqlQuery=labels+%3D+ok" title="ok"><span>ok</span></a></li>
-                                        <li><a class="icon icon-edit-sml edit-labels" id="edit-labels-84118-labels" href="/jira/secure/EditLabels!default.jspa?id=84118&noLink=false"><span>Labels</span></a></li>
-                                      </ul>
-                                    </div>
-                                  </div>
-                                </li>
-                              </ul>
+                                </div>
+                              </li>
+                            </ul>
+                            <div id="customfieldmodule">
+                              <div id="customfield-tabs" class="aui-tabs horizontal-tabs">
+                                <div class="tabs-pane active-pane" id="customfield-panel-1">
+                                  <ul class="property-list">
+                                    <li class="item" id="rowForcustomfield_10080">
+                                      <div class="wrap">
+                                        <strong class="name" title="Story Points">Story Points:</strong>
+                                        <div data-fieldtypecompletekey="com.atlassian.jira.plugin.system.customfieldtypes:float" data-fieldtype="float" class="value type-float editable-field inactive" id="customfield_10080-val" title="Click to edit">
+                                          13
+                                          <span class="overlay-icon icon icon-edit-sml"></span>
+                                        </div>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </div>
                             </div>
                           </div>
+                        </div>
+                        <div class="aui-item issue-main-column">
                           <div class='module toggle-wrap' id='descriptionmodule'>
                             <div id='descriptionmodule_heading' class='mod-header'>
                               <h3 class='toggle-title'>Description</h3>
@@ -803,17 +823,17 @@
         </footer>
       </div>
 
-
     </div>
-    <!-- <script src="http://code.jquery.com/qunit/qunit-1.11.0.js"></script> -->
-    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="../src/js/helpers.js"></script>
-    <script src="../src/js/i18n.js"></script>
-    <script src="../src/js/presenter.js"></script>
-    <script src="../src/js/data_collector.js"></script>
-    <script src="../src/js/table_data.js"></script>
-    <script src="../src/js/table_builder.js"></script>
-    <script src="../src/js/application.js"></script>
+    <script src="../src/js/vendor/jquery.js"></script>
+    <script src="../src/js/vendor/namespace.js"></script>
+    <script src="../src/js/core/helpers.js"></script>
+    <script src="../src/js/core/data_collector.js"></script>
+    <script src="../src/js/core/i18n.js"></script>
+    <script src="../src/js/core/presenter.js"></script>
+    <script src="../src/js/core/table/map.js"></script>
+    <script src="../src/js/core/table/builder.js"></script>
+    <script src="../src/js/jira/table_map_cell.js"></script>
+    <script src="../src/js/jira/application.js"></script>
     <script src="application-test.js"></script>
   </body>
 </html>

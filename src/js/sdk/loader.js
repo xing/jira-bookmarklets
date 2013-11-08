@@ -7,10 +7,15 @@
   var doc = document,
     scriptTag    = doc.createElement('script'),
     environments = ['master','develop'],
-    kits         = ['ticket-print', 'add-ticket'],
+    kits         = [
+      'ticket-print',
+      'add-ticket',
+      'ticket-print-lay-scrum',
+      'add-ticket-lay-scrum'
+    ],
     environment  = environments[options.env],
     kit          = kits[options.kit],
-    url          = options.path + environment + '/output/' + kit +'-bookmarklet.js'
+    url          = options.path + environment + '/build/' + kit + '-bookmarklet.js'
   ;
   scriptTag.setAttribute('src', url);
   doc.head.appendChild(scriptTag);

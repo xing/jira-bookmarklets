@@ -1,12 +1,11 @@
-var xing = xing || {};
-xing.jira = xing.jira || {};
+Namespace.create('xing.core');
 
 /**
  * @module xing.jira
  * @class Presenter
  * @requires String
  */
-xing.jira.Presenter = function () {
+xing.core.Presenter = function () {
   'use strict';
 
   var scope = this;
@@ -27,7 +26,7 @@ xing.jira.Presenter = function () {
    * @return {String} Promise get always a string
    */
   scope.getString = function (string) {
-    return string || '';
+    return (string || '').trimWhitespace();
   };
 
   /**

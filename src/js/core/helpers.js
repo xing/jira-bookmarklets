@@ -1,7 +1,6 @@
 /**
  * TODO BAD PRATICE! Unbind these string helper form the String object.
  */
-;
 String.prototype.truncate = function (maxlength) {
   'use strict';
 

@@ -1,7 +1,6 @@
-var xing = xing || {};
-xing.jira = xing.jira || {};
+Namespace.create('xing.core');
 
-xing.jira.I18n = function () {
+xing.core.I18n = function () {
   'use strict';
 
   this.en = {
@@ -28,7 +27,7 @@ xing.jira.I18n = function () {
     },
     ticket: {
       collaborator: {
-        title:  'Pairing',
+        title:  'Pairing partner',
         action: '<button id="gm-add-collaborator" class="aui-button gm-snap-right"><i>+</i> Add Collaborators</button>'
       },
       component: { title: 'Component' },
@@ -36,11 +35,12 @@ xing.jira.I18n = function () {
         title: 'End date',
         body:  'Day | Time'
       },
-      created:   { title: 'Created' },
-      dueDate:   { title: 'Due date' },
-      reporter:  { title: 'Reporter' },
-      target:    { title: 'Target' },
-      type:      { title: 'Type' },
+      created:     { title: 'Created' },
+      storyPoints: { title: 'Story Points' },
+      dueDate:     { title: 'Due date' },
+      reporter:    { title: 'Reporter' },
+      target:      { title: 'Target' },
+      type:        { title: 'Type' },
       start:    {
         title: 'Start Progress',
         body:  'Day | Time'

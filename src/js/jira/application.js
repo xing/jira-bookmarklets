@@ -1,28 +1,38 @@
-var xing = xing || {};
-xing.jira = xing.jira || {};
+Namespace.create('xing.jira');
+
 /**
  * @constructor
  * @module xing.jira
  * @class Application
- * @requires AJS, DataCollector, TableBuilder, TableData, Presenter, I18n,
- *           jQuery
+ * @requires AJS
+ * @requires jQuery
+ * @requires xing.core.table
+ * @requires xing.core.Presenter
+ * @requires xing.core.I18n
+ * @requires xing.core.DataCollector
+ * @requires xing.jira.TableMapCell
  * @type Object
+ * @param {String} cssResources A string of CSS definitions. e.g. 'body { color: red; }'
+ * @param {String} [layout] Type name of ticket layout. default: 'default'
  */
-xing.jira.Application = function (cssResources) {
+xing.jira.Application = function (cssResources, layoutName) {
   'use strict';
 
   var scope = this,
-    dataCollector, local, tableBuilder, tableData
+      nsXC = xing.core,
+      dataCollector,
+      local,
+      tableBuilder
   ;
 
   /**
    * @method initialize
    */
   scope.initialze = function (cssResources) {
-    dataCollector = new xing.jira.DataCollector();
-    tableBuilder  = new xing.jira.TableBuilder();
-    tableData     = new xing.jira.TableData();
-    local         = (new xing.jira.I18n()).local();
+    dataCollector  = new nsXC.DataCollector();
+    tableBuilder   = new nsXC.table.Builder();
+    scope.tableMap = new nsXC.table.Map(new xing.jira.TableMapCell(), layoutName);
+    local          = (new nsXC.I18n()).local();
     scope.addStyle(cssResources);
     scope.collectDataFromDom(dataCollector);
   };
@@ -43,7 +53,7 @@ xing.jira.Application = function (cssResources) {
    */
   scope._clickOutsidePopupHandler = function (event) {
     var $target = $(event.target),
-      $container = scope._getContainer($target)
+        $container = scope._getContainer($target)
     ;
     // remove popup is mouse clicked outside the popup
     if (!$container[0]) {
@@ -65,17 +75,18 @@ xing.jira.Application = function (cssResources) {
    */
   scope._updateHTML = function (cachedTickets) {
     $('#gm-popup').remove();
-    var tableStructureData = tableData.get(dataCollector.ticketData),
-      currentTicketMarkup = tableBuilder.render(tableStructureData),
-      cachedTicketsMarkup = '',
-      numberOfTickets = cachedTickets.length + 1,
-      numberOfPages = Math.ceil(numberOfTickets / 2)
+
+    var map = scope.tableMap.build(dataCollector.ticketData),
+        currentTicketMarkup = tableBuilder.render(map),
+        cachedTicketsMarkup = '',
+        numberOfTickets = cachedTickets.length + 1,
+        numberOfPages = Math.ceil(numberOfTickets / 2)
     ;
 
     cachedTickets.forEach(function (markup) {
       var number = $(markup).find('.gm-number').text(),
-        currentNumber = $(currentTicketMarkup).find('.gm-number').text(),
-        buttonSelecotrs = 'aui-button gm-button-danger js-gm-remove-ticket'
+          currentNumber = $(currentTicketMarkup).find('.gm-number').text(),
+          buttonSelecotrs = 'aui-button gm-button-danger js-gm-remove-ticket'
       ;
 
       if (number !== currentNumber) {
@@ -151,7 +162,7 @@ xing.jira.Application = function (cssResources) {
   scope.cacheTicketHandler = function () {
     scope.update();
     var $latestTicket = $('#gm-popup .gm-table:last'),
-      markup = ''
+        markup = ''
     ;
 
     markup = $latestTicket[0].outerHTML;
@@ -229,15 +240,16 @@ xing.jira.Application = function (cssResources) {
    */
   scope.collectDataFromDom = function (dataCollector) {
     var $target = $('#greenhopper-agile-issue-web-panel dd a'),
-      presenter = new xing.jira.Presenter(),
-      type = presenter.getString($('#type-val img').attr('alt')),
-      collaboratorKey = dataCollector.COLLABORATOR_KEY,
-      title = presenter.getString($('#summary-val').text())
+        presenter = new nsXC.Presenter(),
+        type = presenter.getString($('#type-val img').attr('alt')),
+        collaboratorKey = dataCollector.COLLABORATOR_KEY,
+        title = presenter.getString($('#summary-val').text())
     ;
 
     dataCollector.update({
       number:        presenter.getString($('#key-val').text()),
       description:   presenter.getString($('#description-val').text()),
+      storyPoints:   presenter.getString($('#customfield_10080-val').text()),
       dueDate:       presenter.getDate($('#due-date time').attr('datetime')),
       collaborators: presenter.getStorageItem(collaboratorKey).join(' '),
       type:          type,

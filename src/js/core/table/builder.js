@@ -1,13 +1,12 @@
-var xing = xing || {};
-xing.jira = xing.jira || {};
+Namespace.create('xing.core.table');
 
 /**
- * @module xing.jira
- * @class TableBuilder
+ * @module xing.core.table
+ * @class Builder
+ * @type function
  * @requires jQuery
- * @type Object
  */
-xing.jira.TableBuilder = function () {
+xing.core.table.Builder = function () {
   'use strict';
 
   var scope = this;
@@ -24,15 +23,15 @@ xing.jira.TableBuilder = function () {
 
   /**
    * @private
-   * @method _addOptions
+   * @method _addCssClass
    */
-  scope._addOptions = function (tag, additionalClass) {
+  scope._addCssClass = function (tag, additionalClass) {
     additionalClass = ' ' + (additionalClass || '');
 
     var options = tag['options'] || {},
-      cssClass = 'cssClass' in options ? options.cssClass : '',
-      attrs = '',
-      option
+        cssClass = 'cssClass' in options ? options.cssClass : '',
+        attrs = '',
+        option
     ;
 
     $.extend(options, {cssClass: cssClass + additionalClass});
@@ -54,6 +53,8 @@ xing.jira.TableBuilder = function () {
 
   /**
    * @method row
+   * @param {Array} rowData e.g. [{cell:{}}]
+   * @return {String} table row tag
    */
   scope.row = function (rowData) {
     var result = '';
@@ -62,35 +63,38 @@ xing.jira.TableBuilder = function () {
       result += scope.cell(cellData);
     });
 
-    return '<tr' + scope._addOptions(rowData) + '>' + result + '</tr>';
+    return '<tr>' + result + '</tr>';
   };
 
   /**
    * @method cell
+   * @param {Object} cellData e. g. {cell:{}}
+   * @return {String} table cell tag
    */
   scope.cell = function (cellData) {
     var cell = cellData.cell,
-      result = '',
-      tag = cellData.head ? 'th' : 'td'
+        result = '',
+        tag = cellData.head ? 'th' : 'td'
     ;
-    result += scope.cellTitle(cell);
-    result += scope.cellBody(cell);
+    result += scope._cellTitle(cell);
+    result += scope._cellBody(cell);
 
-    return '<' + tag + scope._addOptions(cell) + '>' +
+    return '<' + tag + scope._addCssClass(cell) + '>' +
              '<div class="gm-inner">' + result + '</div>' +
            '</' + tag + '>';
   };
 
   /**
-   * @method cellBody
+   * @private
+   * @method _cellBody
    */
-  scope.cellBody = function (cell) {
+  scope._cellBody = function (cell) {
     var result = '';
 
     if ('body' in cell) {
       var body = cell.body;
 
-      result += '<div' + scope._addOptions(body, 'gm-bd') + '>' +
+      result += '<div' + scope._addCssClass(body, 'gm-bd') + '>' +
                   scope._text(body) +
                 '</div>';
     }
@@ -98,14 +102,15 @@ xing.jira.TableBuilder = function () {
   };
 
   /**
-   * @method cellTitle
+   * @private
+   * @method _cellTitle
    */
-  scope.cellTitle = function (cell) {
+  scope._cellTitle = function (cell) {
     var result = '';
 
     if ('title' in cell) {
       var title = cell.title;
-      result += '<div' + scope._addOptions(title, 'gm-hd') + '>' +
+      result += '<div' + scope._addCssClass(title, 'gm-hd') + '>' +
                   scope._text(title) +
                 '</div>';
     }
@@ -114,6 +119,7 @@ xing.jira.TableBuilder = function () {
 
   /**
    * @method render
+   * @param {xing.jira.table.Map} tableData
    */
   scope.render = function (tableData) {
     var result = '';

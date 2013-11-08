@@ -1,11 +1,11 @@
-var xing = xing || {};
-xing.jira = xing.jira || {};
+Namespace.create('xing.core');
+
 /**
- * @module xing.jira
+ * @module xing.core
  * @class DataCollector
  * @requires String
  */
-xing.jira.DataCollector = function () {
+xing.core.DataCollector = function () {
   'use strict';
 
   var scope = this,
