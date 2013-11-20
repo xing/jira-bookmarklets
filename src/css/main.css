@@ -212,9 +212,7 @@
     height: 460px;
     padding: 2mm !important;
   }
-  /**
-   * Page separation counter
-   */
+  /* Page separation counter ------------ */
   .gm-output-list {
     counter-reset: page-counter;
   }
@@ -239,9 +237,14 @@
     content: "End of page " counter(page-counter);
     margin-top: 1em;
   }
-  /**
-   * Delete button
-   */
+  .gm-page-counter {
+    color: #999;
+    position: absolute;
+    right: 2em;
+    top: 2.2em;
+  }
+  /* ------------ Page separation counter */
+  /* Delete button ---------------------- */
   .gm-ticket-action-panel {
     align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
@@ -272,10 +275,5 @@
   .aui-button.gm-pick-more:hover {
     border-color: #8CAF68;
   }
-  .gm-page-counter {
-    color: #999;
-    position: absolute;
-    right: 2em;
-    top: 2.2em;
-  }
+  /* ---------------------- Delete button */
 }

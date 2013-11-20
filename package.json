@@ -1,6 +1,10 @@
 {
   "name": "jira-helpers",
   "version": "2.1.0",
+  "homepage": "http://dev.xing.com",
+  "scripts": {
+    "test": "grunt test"
+  },
   "repository": {
     "type": "git",
     "url": "https://source.github.com/xws/jira-helpers.git"
@@ -16,6 +20,10 @@
     "time-grunt": "~0.1.1",
     "grunt-notify": "~0.2.14",
     "grunt-contrib-jshint": "~0.7.1",
-    "grunt-contrib-csslint": "~0.1.2"
-  }
+    "grunt-contrib-csslint": "~0.1.2",
+    "grunt-contrib-yuidoc": "~0.5.0"
+  },
+  "author": "XING AG",
+  "license": "MIT",
+  "readmeFilename": "README.md"
 }

@@ -60,6 +60,18 @@ module.exports = function (grunt) {
         src: ['src/css/*.css']
       }
     },
+    yuidoc: {
+      compile: {
+        name: '<%= pkg.name %>',
+        description: '<%= pkg.description %>',
+        version: '<%= pkg.version %>',
+        url: '<%= pkg.homepage %>',
+        options: {
+          paths: 'src/js/',
+          outdir: 'docs/'
+        }
+      }
+    },
     css: grunt.file.read('build/main.min.css'),
     uglify: {
       sdk: {
