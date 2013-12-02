@@ -1,0 +1,67 @@
+// abstract
+%text-left {
+  text-align: left;
+}
+%text-right {
+  text-align: right;
+}
+%text-center {
+  text-align: center;
+}
+
+%snap-left {
+  float: left;
+}
+%snap-right {
+  float: right;
+}
+
+%hyphen {
+         hyphens: auto;
+      -o-hyphens: auto;
+     -ms-hyphens: auto;
+    -moz-hyphens: auto;
+  -wekit-hyphens: auto;
+}
+
+// classes
+.gm-center {
+  @extend %text-center;
+}
+.gm-left {
+  @extend %text-left;
+}
+.gm-ltr {
+  @extend %text-left;
+}
+.gm-snap-left {
+  @extend %snap-left;
+}
+.gm-snap-right {
+  @extend %snap-right;
+}
+
+.gm-grid-item { display: inline-block; }
+@each $size in .1, .2, .4, .6 {
+  .gm-#{$size * 100} {
+    width: percentage($size);
+  }
+}
+
+.h1 { font-size: 3em; }
+.h2 { font-size: 2.4em; }
+.h3 { font-size: 2em; }
+.h4 {
+  font-size: 1.4em;
+  line-height: 1.5em;
+}
+.h5 {
+  font-size: .8em;
+  line-height: 1.4em;
+}
+
+@media print {
+  .gm-print-hidden {
+    display: none;
+  }
+}

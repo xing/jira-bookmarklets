@@ -78,7 +78,6 @@ xing.core.table.Builder = function () {
     ;
     result += scope._cellTitle(cell);
     result += scope._cellBody(cell);
-
     return '<' + tag + scope._addCssClass(cell) + '>' +
              '<div class="gm-inner">' + result + '</div>' +
            '</' + tag + '>';
@@ -108,7 +107,7 @@ xing.core.table.Builder = function () {
   scope._cellTitle = function (cell) {
     var result = '';
 
-    if ('title' in cell) {
+    if (cell.title) {
       var title = cell.title;
       result += '<div' + scope._addCssClass(title, 'gm-hd') + '>' +
                   scope._text(title) +
@@ -123,7 +122,6 @@ xing.core.table.Builder = function () {
    */
   scope.render = function (tableData) {
     var result = '';
-
     tableData.forEach(function (rowData) {
       result += scope.row(rowData);
     });

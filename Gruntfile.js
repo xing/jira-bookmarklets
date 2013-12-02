@@ -29,17 +29,27 @@ module.exports = function (grunt) {
     },
     watch: {
       scripts: {
-        files: ['Gruntfile.js', 'src/js/**/*.js', 'test/spec/**/*.js'],
-        tasks: ['jshint', 'jasmine'],
+        files: ['Grundfile.js', 'src/js/**/*.js', 'test/spec/**/*.js', 'src/scss/*.scss'],
+        tasks: ['jshint', 'jasmine', 'sass'],
         options: {
-          spawn: false,
+          spawn: false
+        }
+      }
+    },
+    sass: {
+      dist: {
+        options: {
+          style: 'expanded'
+        },
+        files: {
+          'build/main.css': 'src/scss/main.scss'
         }
       }
     },
     cssmin: {
       combine: {
         files: {
-          'build/main.min.css': ['src/css/main.css']
+          'build/main.min.css': ['build/main.css']
         }
       }
     },
@@ -86,9 +96,7 @@ module.exports = function (grunt) {
       printBookmarklet: {
         options: {
           banner: 'javascript:void(function(){',
-          footer: 'var xingJiraApp = new xing.jira.Application(' +
-                    "'<%= css %>', " +
-                  ');' +
+          footer: "var xingJiraApp = new xing.jira.Application('<%= css %>')" +
                   'xingJiraApp.versionTimestamp=' +
                     '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
                   'xingJiraApp.version="<%= pkg.version %>";' +
@@ -102,10 +110,7 @@ module.exports = function (grunt) {
       printBookmarkletScrum: {
         options: {
           banner: 'javascript:void(function(){',
-          footer: 'var xingJiraApp = new xing.jira.Application(' +
-                    "'<%= css %>', " +
-                    'xing.core.table.layout.SCRUM_LAYOUT' +
-                  ');' +
+          footer: "var xingJiraApp = new xing.jira.Application(<%= css %>', xing.core.table.layout.SCRUM_LAYOUT);" +
                   'xingJiraApp.versionTimestamp=' +
                     '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
                   'xingJiraApp.version="<%= pkg.version %>";' +
@@ -150,12 +155,10 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('default', ['cssmin', 'uglify']);
-  grunt.registerTask('compress', ['cssmin', 'uglify']);
+  grunt.registerTask('default',      ['cssmin', 'uglify']);
+  grunt.registerTask('compress',     ['cssmin', 'uglify']);
   grunt.registerTask('compress:css', ['cssmin']);
-  grunt.registerTask('compress:js', ['uglify']);
-
-  grunt.registerTask('test', [
-    'jasmine:all'
-  ]);
+  grunt.registerTask('compress:js',  ['uglify']);
+  grunt.registerTask('css',          ['sass']);
+  grunt.registerTask('test',         ['jasmine:all']);
 };

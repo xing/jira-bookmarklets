@@ -1,0 +1,76 @@
+@charset "UTF-8";
+
+.gm-hd {
+  @extend .h5;
+  color: $grey-dark;
+  text-align: left;
+  text-transform: uppercase;
+}
+/* -------------------- ticket pagination */
+.gm-ticket-section {
+  background-color: $grey-dark;
+  display: inline-block;
+  height: 8px;
+  line-height: 0;
+  overflow: hidden;
+  position: relative;
+  text-indent: -99em;
+  width: 12px;
+}
+.gm-remove-ticket {
+  background-color: $grey;
+  &:hover {
+    background-color: $red-light;
+    &:after {
+      color: white;
+      content: "✖";
+      display: inline-block;
+      height: 100%;
+      left: 0;
+      line-height: 0.5em;
+      position: absolute;
+      text-align: center;
+      text-indent: 10%;
+      top: 0;
+      width: 100%;
+    }
+  }
+}
+
+.gm-warning {
+  background-color: $red-light;
+  color: white;
+  .gm-hd {
+    color: white;
+  }
+}
+
+.gm-button-danger {
+  color: $red;
+}
+%label {
+  background-color: $grey-dark;
+  border-radius: 0.2em;
+  color: white;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 1em;
+  padding: 4px 8px 2px;
+}
+.gm-label-danger {
+  @extend %label;
+  background-color: $red;
+}
+.gm-label-bug {
+  @extend .gm-label-danger;
+}
+.gm-label-user-story {
+  background-color: $green;
+}
+.gm-pick-more i {
+  font-size: 1.4em;
+  font-style: normal;
+  font-weight: bold;
+  line-height: 0;
+}
+.gm-container .gm-print { margin: 0 10px 0 0; }

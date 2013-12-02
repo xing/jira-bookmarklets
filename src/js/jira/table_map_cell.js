@@ -19,6 +19,7 @@ xing.jira.TableMapCell = function () {
   scope._titleBody = function (options, item) {
     return {
       cell: {
+        options: { cssClass: 'gm-jira-' + item },
         title: { text: options.local[item].title },
         body:  { text: options.data[item] }
       }
@@ -37,7 +38,7 @@ xing.jira.TableMapCell = function () {
       cell: {
         options: {
           colspan: 2,
-          cssClass: 'gm-number gm-ltr'
+          cssClass: 'gm-jira-number'
         },
         body: {
           text: options.data.number,
@@ -57,7 +58,7 @@ xing.jira.TableMapCell = function () {
         title: { text: options.local.type.title },
         body: {
           options: {
-            cssClass: 'gm-label gm-label-' + options.data.typeSelector
+            cssClass: 'gm-label-' + options.data.typeSelector
           },
           text: options.data.type
         }
@@ -89,11 +90,8 @@ xing.jira.TableMapCell = function () {
     return {
       head: true,
       cell: {
-        options: { colspan: MAX_COLS, cssClass: 'gm-title gm-ltr' },
-        body: {
-          text: options.data.title,
-          options: { cssClass: 'h2 gm-hyphen' }
-        }
+        options: { colspan: MAX_COLS, cssClass: 'gm-jira-title' },
+        body: { text: options.data.title }
       }
     };
   };

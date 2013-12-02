@@ -1,0 +1,101 @@
+@charset "UTF-8";
+@import "settings"
+      , "helper"
+      , "table"
+      , "scaffold"
+      , "output"
+      , "themes/default"
+;
+
+/* Jira --------------------------------- */
+.global .aui-message {
+  left: 50%;
+  margin-left: -220px;
+  position: absolute;
+  top: 20px;
+  z-index: 101;
+}
+/* --------------------------------- Jira */
+@media print {
+  html, body {
+    background-color: white;
+  }
+  #page,
+  .aui-blanket,
+  #gm-add-collaborator {
+    display: none;
+  }
+  .gm-container.jira-dialog {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
+  .gm-container {
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    left: 0;
+    margin: 0;
+    max-height: none;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+  }
+  .gm-container .form-body {
+    padding: 0 !important;
+  }
+}
+@media screen {
+  .gm-container {
+    left: 50%;
+    margin-left: -9cm;
+    margin-top: 5%;
+    top: 0;
+    width: 18.9cm;
+  }
+  .gm-container .form-body {
+    height: 460px;
+    padding: 2mm !important;
+  }
+  /* Page separation counter ------------ */
+  .gm-page-counter {
+    @extend .h5;
+    color: $grey-dark;
+    position: absolute;
+    right: 2em;
+    top: 2.2em;
+  }
+  /* ------------ Page separation counter */
+  /* Delete button ---------------------- */
+  .gm-ticket-action-panel {
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    bottom: 8.5em;
+    display: -webkit-box;
+    display:     -ms-flexbox;
+    display: -webkit-flex;
+    display:         flex;
+    justify-content: center;
+    left: 0;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    top: 6.2em;
+    transition: 0.4s;
+    opacity: 0;
+  }
+  .gm-output-item:hover .gm-ticket-action-panel {
+    opacity: 1;
+  }
+  .gm-output-item:nth-child(even) .gm-ticket-action-panel {
+    bottom: 2.3em;
+    top: 0;
+  }
+  .aui-button.gm-button-danger:hover {
+    border-color: $red-dark
+  }
+  .aui-button.gm-pick-more:hover {
+    border-color: $green;
+  }
+  /* ---------------------- Delete button */
+}

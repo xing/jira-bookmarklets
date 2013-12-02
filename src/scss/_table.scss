@@ -1,0 +1,19 @@
+.gm-table {
+  border-collapse: collapse;
+  font: 10pt helvetica, arial, sans-serif;
+  padding-bottom: 2mm;
+  width: 100%;
+}
+%table-cell {
+  border: 1px solid $grey-light;
+}
+.gm-table {
+  @extend %table-cell;
+}
+.gm-table th {
+  @extend %table-cell;
+}
+.gm-table td {
+  @extend %table-cell;
+}
+.gm-table td { vertical-align: top; }

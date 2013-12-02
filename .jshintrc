@@ -6,7 +6,6 @@
   "indent"        : 2,
   "noarg"         : true,
   "noempty"       : true,
-  "quotmark"      : "single",
   "maxdepth"      : 2,
   "validthis"     : true,
   "strict"        : true,

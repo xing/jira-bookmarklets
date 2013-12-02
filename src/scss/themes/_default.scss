@@ -1,0 +1,61 @@
+.gm-inner {
+  padding: 2mm 3mm;
+}
+
+.gm-jira-number {
+  @extend %text-left;
+  .gm-bd {
+    word-break: break-all;
+  }
+}
+
+.gm-jira-title {
+  @extend %text-left;
+  .gm-bd {
+    @extend .h2;
+    @extend %hyphen;
+  }
+  .gm-inner {
+    overflow: hidden;
+    padding-bottom: 0;
+    height: 6.5cm;
+  }
+}
+
+.gm-jira-pairing {
+  .gm-inner {
+    overflow: hidden;
+  }
+  .gm-hd {
+    padding-right: 3mm;
+  }
+  .gm-bd {
+    overflow: hidden;
+  }
+}
+
+.gm-jira-qa {
+  .gm-bd {
+    border-radius: 2em;
+    border: 1px solid $grey-light;
+    height: 40px;
+    margin: auto;
+    width: 40px;
+  }
+}
+
+.gm-date-content {
+  .gm-hd {
+    padding: 0 0 1px;
+    text-align: center;
+  }
+  .gm-bd {
+    color: $grey-light;
+    font-size: 0.8em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .gm-inner {
+    min-height: 1.2cm;
+  }
+}

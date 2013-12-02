@@ -17,7 +17,7 @@ describe('TableData', function () {
 
     it('return a proper table map', function () {
       actual = subject.build(data, xing.core.table.layout.get(layoutNameSpy));
-      expected = [ [ { head : true, cell : { options : { colspan : 2, cssClass : 'gm-number gm-ltr' }, body : { text : 'x-1', options : { cssClass : 'h1', title : 'x-1' } } } } ], [ { head : true, cell : { options : { colspan : 5, cssClass : 'gm-title gm-ltr' }, body : { text : 'bam', options : { cssClass : 'h2 gm-hyphen' } } } }, { cell : { title : { text : 'Reporter' }, body : { text : 'tim' } } } ] ];
+      expected = [ [ { head : true, cell : { options : { colspan : 2, cssClass : 'gm-jira-number' }, body : { text : 'x-1', options : { cssClass : 'h1', title : 'x-1' } } } } ], [ { head : true, cell : { options : { colspan : 5, cssClass : 'gm-jira-title' }, body : { text : 'bam' } } }, { cell : { options : { cssClass : 'gm-jira-reporter' }, title : { text : 'Reporter' }, body : { text : 'tim' } } } ] ];
 
       expect(actual).toEqual(expected);
     });

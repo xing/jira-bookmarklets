@@ -73,26 +73,26 @@ xing.jira.Application = function (cssResources, layoutName) {
    * @private
    * @method _updateHTML
    */
-  scope._updateHTML = function (cachedTickets) {
+  scope._updateHTML = function (cachedTicketMaps) {
     $('#gm-popup').remove();
 
     var map = scope.tableMap.build(dataCollector.ticketData),
         currentTicketMarkup = tableBuilder.render(map),
         cachedTicketsMarkup = '',
-        numberOfTickets = cachedTickets.length + 1,
+        numberOfTickets = cachedTicketMaps.length + 1,
         numberOfPages = Math.ceil(numberOfTickets / 2)
     ;
 
-    cachedTickets.forEach(function (markup) {
-      var number = $(markup).find('.gm-number').text(),
-          currentNumber = $(currentTicketMarkup).find('.gm-number').text(),
+    cachedTicketMaps.forEach(function (cachedTicketMap) {
+      var number = cachedTicketMap.number,
+          currentNumber = map.number,
           buttonSelecotrs = 'aui-button gm-button-danger js-gm-remove-ticket'
       ;
 
       if (number !== currentNumber) {
         cachedTicketsMarkup += '' +
           '<li class="gm-output-item">' +
-             markup +
+             tableBuilder.render(scope.tableMap.build(cachedTicketMap)) +
              '<div class="gm-ticket-action-panel">' +
                '<button type="button" class="' + buttonSelecotrs + '">' +
                  local.modal.action.remove +
@@ -105,7 +105,7 @@ xing.jira.Application = function (cssResources, layoutName) {
 
     $('body').append(
       $('<div id="gm-popup">' +
-         '<div class="gm-container jira-dialog box-shadow ">' +
+         '<div class="gm-container jira-dialog box-shadow">' +
            '<div class="jira-dialog-heading">' +
              '<h2>' + local.modal.heading + '</h2>' +
            '</div>' +
@@ -161,13 +161,9 @@ xing.jira.Application = function (cssResources, layoutName) {
    */
   scope.cacheTicketHandler = function () {
     scope.update();
-    var $latestTicket = $('#gm-popup .gm-table:last'),
-        markup = ''
-    ;
+    var map = dataCollector.lastTicketData;
 
-    markup = $latestTicket[0].outerHTML;
-
-    dataCollector.cacheTicket(markup.trimWhitespace());
+    dataCollector.cacheTicket(map);
     scope._hidePopup();
     scope._showSuccessMessage();
   };
@@ -178,10 +174,12 @@ xing.jira.Application = function (cssResources, layoutName) {
    */
   scope._showSuccessMessage = function () {
     $('.aui-message').remove();
-    AJS.messages.success('.aui-page-header-inner', {
-      title: local.messages.ticketCached.title,
-      body: local.messages.ticketCached.body
-    });
+    if (window.AJS) {
+      AJS.messages.success('.aui-page-header-inner', {
+        title: local.messages.ticketCached.title,
+        body: local.messages.ticketCached.body
+      });
+    }
     setTimeout(function () {
       $('.aui-message').remove();
     }, 5000);
