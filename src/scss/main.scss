@@ -15,6 +15,15 @@
   top: 20px;
   z-index: 101;
 }
+/* Page separation counter ------------ */
+.gm-page-counter {
+  @extend .h5;
+  color: $grey-dark;
+  position: absolute;
+  right: 2em;
+  top: 2.2em;
+}
+/* ------------ Page separation counter */
 /* --------------------------------- Jira */
 @media print {
   html, body {
@@ -57,15 +66,6 @@
     height: 460px;
     padding: 2mm !important;
   }
-  /* Page separation counter ------------ */
-  .gm-page-counter {
-    @extend .h5;
-    color: $grey-dark;
-    position: absolute;
-    right: 2em;
-    top: 2.2em;
-  }
-  /* ------------ Page separation counter */
   /* Delete button ---------------------- */
   .gm-ticket-action-panel {
     align-items: center;

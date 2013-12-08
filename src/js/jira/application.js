@@ -21,6 +21,7 @@ xing.jira.Application = function (cssResources, layoutName) {
   var scope = this,
       nsXC = xing.core,
       dataCollector,
+      ticketCache,
       local,
       tableBuilder
   ;
@@ -30,11 +31,12 @@ xing.jira.Application = function (cssResources, layoutName) {
    */
   scope.initialze = function (cssResources) {
     dataCollector  = new nsXC.DataCollector();
+    ticketCache    = new nsXC.TicketCache();
     tableBuilder   = new nsXC.table.Builder();
     scope.tableMap = new nsXC.table.Map(new xing.jira.TableMapCell(), layoutName);
     local          = (new nsXC.I18n()).local();
     scope.addStyle(cssResources);
-    scope.collectDataFromDom(dataCollector);
+    scope.collectDataFromDom();
   };
 
   /**
@@ -76,7 +78,7 @@ xing.jira.Application = function (cssResources, layoutName) {
   scope._updateHTML = function (cachedTicketMaps) {
     $('#gm-popup').remove();
 
-    var map = scope.tableMap.build(dataCollector.ticketData),
+    var map = scope.tableMap.build(ticketCache.latest),
         currentTicketMarkup = tableBuilder.render(map),
         cachedTicketsMarkup = '',
         numberOfTickets = cachedTicketMaps.length + 1,
@@ -161,9 +163,9 @@ xing.jira.Application = function (cssResources, layoutName) {
    */
   scope.cacheTicketHandler = function () {
     scope.update();
-    var map = dataCollector.lastTicketData;
+    var map = ticketCache.latest;
 
-    dataCollector.cacheTicket(map);
+    ticketCache.add(map);
     scope._hidePopup();
     scope._showSuccessMessage();
   };
@@ -192,14 +194,15 @@ xing.jira.Application = function (cssResources, layoutName) {
     if ($('#gm-popup')[0]) { return; }
     // register observer
     dataCollector.subscribe(this);
+    dataCollector.subscribe(ticketCache);
 
-    scope._updateHTML(dataCollector.getCachedTickets());
+    scope.update(ticketCache.get());
 
     $('body')
       .on('click', '.gm-print', function (event) {
         event.preventDefault();
         window.print();
-        dataCollector.removeCachedTickets();
+        ticketCache.remove();
         scope._hidePopup();
       })
       .on('click', '.gm-pick-more', function (event) {
@@ -215,9 +218,9 @@ xing.jira.Application = function (cssResources, layoutName) {
         var $target = $(event.target).parents('li'),
           index = $target.index($target)
         ;
-        dataCollector.removeCachedTickets(index);
+        ticketCache.remove(index);
         $('#gm-popup .form-body table').eq(index).remove();
-        scope._updateHTML(dataCollector.getCachedTickets());
+        scope.update(ticketCache.get());
       })
       .on('click', '#gm-add-collaborator', function () {
         dataCollector.addCollaborators(local.modal.collaboratorPrompt);
@@ -229,14 +232,14 @@ xing.jira.Application = function (cssResources, layoutName) {
    * @method update
    */
   scope.update = function () {
-    scope._updateHTML(dataCollector.getCachedTickets());
+    scope._updateHTML(ticketCache.get());
   };
 
   /**
    * Collect and formatted data from the DOM
    * @method collectDataFromDom
    */
-  scope.collectDataFromDom = function (dataCollector) {
+  scope.collectDataFromDom = function () {
     var $target = $('#greenhopper-agile-issue-web-panel dd a'),
         presenter = new nsXC.Presenter(),
         type = presenter.getString($('#type-val img').attr('alt')),
@@ -244,7 +247,7 @@ xing.jira.Application = function (cssResources, layoutName) {
         title = presenter.getString($('#summary-val').text())
     ;
 
-    dataCollector.update({
+    ticketCache.latest = {
       number:        presenter.getString($('#key-val').text()),
       description:   presenter.getString($('#description-val').text()),
       storyPoints:   presenter.getString($('#customfield_10080-val').text()),
@@ -257,7 +260,8 @@ xing.jira.Application = function (cssResources, layoutName) {
       title:         title.truncate(220),
       component:     presenter.getString($('#components-field').text()),
       target:        presenter.getElementText($target)
-    });
+    };
+    dataCollector.update();
   };
 
   scope.initialze(cssResources);

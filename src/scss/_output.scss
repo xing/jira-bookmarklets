@@ -19,26 +19,32 @@
   font-size: 0.8em;
   text-align: center;
 }
-@media screen {
-  .gm-output-list {
-    counter-reset: page-counter;
-  }
-  .gm-output-item {
-    &:nth-child(odd) {
-      counter-increment: page-counter;
-      &:before {
-        @extend %output-page-count-label;
-        content: "Begin of page " counter(page-counter);
-        margin-bottom: 1em;
-      }
+.gm-output-list {
+  counter-reset: page-counter;
+}
+.gm-output-item {
+  &:nth-child(odd) {
+    counter-increment: page-counter;
+    &:before {
+      @extend %output-page-count-label;
+      content: "Begin of page " counter(page-counter);
+      margin-bottom: 1em;
     }
-    &:nth-child(even) {
-      border-bottom: 2px dashed $grey-light;
-      &:after {
-        @extend %output-page-count-label;
-        content: "End of page " counter(page-counter);
-        margin-top: 1em;
-      }
+  }
+  &:nth-child(even) {
+    border-bottom: 2px dashed $grey-light;
+    &:after {
+      @extend %output-page-count-label;
+      content: "End of page " counter(page-counter);
+      margin-top: 1em;
+    }
+  }
+}
+@media print {
+  .gm-output-item {
+    &:before,
+    &:after {
+      display: none;
     }
   }
 }

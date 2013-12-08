@@ -17,7 +17,7 @@ xing.core.I18n = function () {
       heading: 'Print preview',
       select: 'Select another:',
       action: {
-        addCollaborator: 'Add Collaborators',
+        addCollaborator: 'Collaborators',
         remove: 'Remove ticket form the list',
         print: 'Print',
         cancel: 'Cancel'
@@ -28,7 +28,7 @@ xing.core.I18n = function () {
     ticket: {
       collaborator: {
         title:  'Pairing partner',
-        action: '<button id="gm-add-collaborator" class="aui-button gm-snap-right"><i>+</i> Add Collaborators</button>'
+        action: '<button id="gm-add-collaborator" class="aui-button gm-snap-right">Collaborators</button>'
       },
       component: { title: 'Component' },
       closed: {

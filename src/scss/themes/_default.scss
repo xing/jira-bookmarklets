@@ -5,6 +5,7 @@
 .gm-jira-number {
   @extend %text-left;
   .gm-bd {
+    @extend .h1;
     word-break: break-all;
   }
 }
@@ -27,10 +28,22 @@
     overflow: hidden;
   }
   .gm-hd {
+    @extend .h5;
+    @extend %snap-left;
     padding-right: 3mm;
   }
   .gm-bd {
+    @extend .h5;
     overflow: hidden;
+  }
+}
+.gm-jira-story {
+  .gm-hd {
+    @extend %text-center;
+  }
+  .gm-bd {
+    @extend %text-center;
+    @extend .h3;
   }
 }
 

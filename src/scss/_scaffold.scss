@@ -65,6 +65,7 @@
   @extend .gm-label-danger;
 }
 .gm-label-user-story {
+  @extend %label;
   background-color: $green;
 }
 .gm-pick-more i {

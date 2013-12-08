@@ -1,0 +1,47 @@
+.vcard {
+     position: relative;
+}
+
+a.hc-status {
+     border: 0px none;
+     display: block;
+     height: 16px;
+     position: absolute;
+     right: 4px;
+     top: 7px;
+     width: 16px;
+}
+
+a.hc-status.available {
+     background-image: url("/jira/s/en_USybmm9-1988229788/6102/47/1.1.14/_/download/resources/com.atlassian.labs.hipchat.hipchat-for-jira-plugin:resources/images/available.png");
+     background-repeat: no-repeat;
+}
+
+a.hc-status.away {
+     background-image: url("/jira/s/en_USybmm9-1988229788/6102/47/1.1.14/_/download/resources/com.atlassian.labs.hipchat.hipchat-for-jira-plugin:resources/images/away.png");
+     background-repeat: no-repeat;
+}
+
+a.hc-status.dnd {
+     background-image: url("/jira/s/en_USybmm9-1988229788/6102/47/1.1.14/_/download/resources/com.atlassian.labs.hipchat.hipchat-for-jira-plugin:resources/images/dnd.png");
+     background-repeat: no-repeat;
+}
+
+a.hc-status.offline {
+     background-image: url("/jira/s/en_USybmm9-1988229788/6102/47/1.1.14/_/download/resources/com.atlassian.labs.hipchat.hipchat-for-jira-plugin:resources/images/offline.png");
+     background-repeat: no-repeat;
+}
+
+a.hc-status.iphone {
+     background-image: url("/jira/s/en_USybmm9-1988229788/6102/47/1.1.14/_/download/resources/com.atlassian.labs.hipchat.hipchat-for-jira-plugin:resources/images/iphone.png");
+     background-repeat: no-repeat;
+}
+
+a.hc-status.android {
+     background-image: url("/jira/s/en_USybmm9-1988229788/6102/47/1.1.14/_/download/resources/com.atlassian.labs.hipchat.hipchat-for-jira-plugin:resources/images/android.png");
+     background-repeat: no-repeat;
+}
+
+a.hc-status span {
+     display: none;
+}

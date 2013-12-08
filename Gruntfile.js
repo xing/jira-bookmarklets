@@ -96,7 +96,7 @@ module.exports = function (grunt) {
       printBookmarklet: {
         options: {
           banner: 'javascript:void(function(){',
-          footer: "var xingJiraApp = new xing.jira.Application('<%= css %>')" +
+          footer: "var xingJiraApp = new xing.jira.Application('<%= css %>');" +
                   'xingJiraApp.versionTimestamp=' +
                     '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
                   'xingJiraApp.version="<%= pkg.version %>";' +

@@ -42,7 +42,7 @@ xing.jira.TableMapCell = function () {
         },
         body: {
           text: options.data.number,
-          options: { cssClass: 'h1', title: options.data.number }
+          options: { title: options.data.number }
         }
       }
     };
@@ -55,6 +55,7 @@ xing.jira.TableMapCell = function () {
   scope.type = function (options) {
     return {
       cell: {
+        options: { cssClass: 'gm-jira-type' },
         title: { text: options.local.type.title },
         body: {
           options: {
@@ -103,14 +104,12 @@ xing.jira.TableMapCell = function () {
   scope.collobarators = function (options) {
     return {
       cell: {
-        options: {colspan: MAX_COLS, cssClass: 'gm-pairing'},
+        options: {colspan: MAX_COLS, cssClass: 'gm-jira-pairing'},
         title: {
-          text: options.local.collaborator.title,
-          options: { cssClass: 'gm-snap-left h5' }
+          text: options.local.collaborator.title
         },
         body: {
-          text: options.data.collaborators + options.local.collaborator.action,
-          options: { cssClass: 'h5' }
+          text: options.data.collaborators + options.local.collaborator.action
         }
       }
     };
@@ -134,7 +133,7 @@ xing.jira.TableMapCell = function () {
         title: { text: options.local.dueDate.title },
         body: {
           options: {
-            cssClass: (options.data.dueDate ? 'gm-label-danger gm-label' : '')
+            cssClass: (options.data.dueDate ? 'gm-label-danger' : '')
           },
           text: options.data.dueDate
         }
@@ -157,12 +156,11 @@ xing.jira.TableMapCell = function () {
   scope.storyPoints = function (options) {
     return {
       cell: {
+        options: { cssClass: 'gm-jira-story' },
         title: {
-          options: { cssClass: 'gm-center' },
           text: options.local.storyPoints.title
         },
         body:  {
-          options: { cssClass: 'gm-center h3'},
           text: options.data.storyPoints
         }
       }
