@@ -11,11 +11,17 @@ module.exports = function (grunt) {
       'src/js/vendor/namespace.js',
       'src/js/core/**/*.js',
       'src/js/jira/**/*.js'
-    ]
+    ],
+    cssMin: {
+      src: '',
+      path: 'build/main.min.css',
+      delay: 1000
+    }
   };
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
+    jiraConfig: jiraConfig,
     jasmine: {
       all: {
         src: jiraConfig.src,
@@ -37,19 +43,20 @@ module.exports = function (grunt) {
       }
     },
     sass: {
-      dist: {
+      dev: {
         options: {
           style: 'expanded'
         },
         files: {
           'build/main.css': 'src/scss/main.scss'
         }
-      }
-    },
-    cssmin: {
-      combine: {
+      },
+      dist: {
+        options: {
+          style: 'compressed'
+        },
         files: {
-          'build/main.min.css': ['build/main.css']
+          'build/main.min.css': 'src/scss/main.scss'
         }
       }
     },
@@ -82,7 +89,6 @@ module.exports = function (grunt) {
         }
       }
     },
-    css: grunt.file.read('build/main.min.css'),
     uglify: {
       sdk: {
         options: {
@@ -96,7 +102,7 @@ module.exports = function (grunt) {
       printBookmarklet: {
         options: {
           banner: 'javascript:void(function(){',
-          footer: "var xingJiraApp = new xing.jira.Application('<%= css %>');" +
+          footer: "var xingJiraApp = new xing.jira.Application('<%= jiraConfig.cssMin.src %>');" +
                   'xingJiraApp.versionTimestamp=' +
                     '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
                   'xingJiraApp.version="<%= pkg.version %>";' +
@@ -110,7 +116,10 @@ module.exports = function (grunt) {
       printBookmarkletScrum: {
         options: {
           banner: 'javascript:void(function(){',
-          footer: "var xingJiraApp = new xing.jira.Application(<%= css %>', xing.core.table.layout.SCRUM_LAYOUT);" +
+          footer: "var xingJiraApp = new xing.jira.Application(" +
+                    "'<%= jiraConfig.cssMin.src %>', " +
+                    "xing.core.table.layout.SCRUM_LAYOUT" +
+                  ");" +
                   'xingJiraApp.versionTimestamp=' +
                     '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
                   'xingJiraApp.version="<%= pkg.version %>";' +
@@ -155,10 +164,18 @@ module.exports = function (grunt) {
     }
   });
 
-  grunt.registerTask('default',      ['cssmin', 'uglify']);
-  grunt.registerTask('compress',     ['cssmin', 'uglify']);
-  grunt.registerTask('compress:css', ['cssmin']);
-  grunt.registerTask('compress:js',  ['uglify']);
-  grunt.registerTask('css',          ['sass']);
-  grunt.registerTask('test',         ['jasmine:all']);
+  grunt.registerTask('cssmin', 'Read CSS file async and cache the content', function () {
+    var done = this.async(),
+        config = jiraConfig.cssMin
+    ;
+    grunt.task.requires('sass:dist');
+    setTimeout(function () {
+      config.src = grunt.file.read(config.path).replace(/\n/g, '');
+      done();
+    }, config.delay);
+  });
+
+  grunt.registerTask('default', ['sass:dist', 'cssmin', 'uglify']);
+  grunt.registerTask('test',    ['jasmine:all']);
+
 };
