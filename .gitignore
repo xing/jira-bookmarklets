@@ -1,4 +1,4 @@
-node_modules/*
-_SpecRunner.html
+node_modules/
+_SpecRunner.tml
 docs/
 .sass-cache

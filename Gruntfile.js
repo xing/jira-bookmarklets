@@ -1,12 +1,13 @@
+'use strict';
+
 module.exports = function (grunt) {
-  'use strict';
 
   // show elapsed time at the end
   require('time-grunt')(grunt);
   // load all grunt tasks
   require('load-grunt-tasks')(grunt);
 
-  var jiraConfig = {
+  var appConfig = {
     src: [
       'src/js/vendor/namespace.js',
       'src/js/core/**/*.js',
@@ -21,10 +22,10 @@ module.exports = function (grunt) {
 
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
-    jiraConfig: jiraConfig,
+    appConfig: appConfig,
     jasmine: {
       all: {
-        src: jiraConfig.src,
+        src: appConfig.src,
         options: {
           helpers: 'test/spec/*_helper.js',
           specs: 'test/spec/*_spec.js',
@@ -102,7 +103,7 @@ module.exports = function (grunt) {
       printBookmarklet: {
         options: {
           banner: 'javascript:void(function(){',
-          footer: "var xingJiraApp = new xing.jira.Application('<%= jiraConfig.cssMin.src %>');" +
+          footer: "var xingJiraApp = new xing.jira.Application('<%= appConfig.cssMin.src %>');" +
                   'xingJiraApp.versionTimestamp=' +
                     '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
                   'xingJiraApp.version="<%= pkg.version %>";' +
@@ -110,14 +111,14 @@ module.exports = function (grunt) {
                   '})();'
         },
         files: {
-          'build/ticket-print-bookmarklet.js': jiraConfig.src
+          'build/ticket-print-bookmarklet.js': appConfig.src
         }
       },
       printBookmarkletScrum: {
         options: {
           banner: 'javascript:void(function(){',
           footer: "var xingJiraApp = new xing.jira.Application(" +
-                    "'<%= jiraConfig.cssMin.src %>', " +
+                    "'<%= appConfig.cssMin.src %>', " +
                     "xing.core.table.layout.SCRUM_LAYOUT" +
                   ");" +
                   'xingJiraApp.versionTimestamp=' +
@@ -127,7 +128,7 @@ module.exports = function (grunt) {
                   '})();'
         },
         files: {
-          'build/ticket-print-lay-scrum-bookmarklet.js': jiraConfig.src
+          'build/ticket-print-lay-scrum-bookmarklet.js': appConfig.src
         }
       },
       addBookmarlet: {
@@ -141,7 +142,7 @@ module.exports = function (grunt) {
                   '})();'
         },
         files: {
-          'build/add-ticket-bookmarklet.js': jiraConfig.src
+          'build/add-ticket-bookmarklet.js': appConfig.src
         }
       },
       addBookmarletScrum: {
@@ -158,7 +159,7 @@ module.exports = function (grunt) {
                   '})();'
         },
         files: {
-          'build/add-ticket-lay-scrum-bookmarklet.js': jiraConfig.src
+          'build/add-ticket-lay-scrum-bookmarklet.js': appConfig.src
         }
       }
     }
@@ -166,7 +167,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('cssmin', 'Read CSS file async and cache the content', function () {
     var done = this.async(),
-        config = jiraConfig.cssMin
+        config = appConfig.cssMin
     ;
     grunt.task.requires('sass:dist');
     setTimeout(function () {
