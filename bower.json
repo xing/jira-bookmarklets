@@ -1,0 +1,25 @@
+{
+  "name": "jira-helpers",
+  "version": "2.1.0",
+  "authors": [
+    "Christian Angermann <christian.angermann@xing.com>"
+  ],
+  "description": "A bookmarklet that helps you to print your jira tickets for your daily work on your physical task board.",
+  "keywords": [
+    "bookmarklet",
+    "jira"
+  ],
+  "license": "MIT",
+  "homepage": "http://dev.xing.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "namespace-js": "~1.0.1",
+    "jquery": "~2.1.0"
+  }
+}

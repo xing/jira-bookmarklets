@@ -2,3 +2,4 @@ node_modules/
 _SpecRunner.tml
 docs/
 .sass-cache
+bower_components

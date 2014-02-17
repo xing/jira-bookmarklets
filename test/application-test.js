@@ -1,7 +1,7 @@
 'use strict';
 
 var xingJiraApp;
-$.get('../output/main.min.css')
+$.get('../build/main.min.css')
   .success(function (cssResources) {
     run(cssResources);
   }).complete(function () {

@@ -1,6 +1,5 @@
-'use strict';
-
 module.exports = function (grunt) {
+  'use strict';
 
   // show elapsed time at the end
   require('time-grunt')(grunt);
@@ -34,15 +33,18 @@ module.exports = function (grunt) {
         }
       }
     },
+
     watch: {
-      scripts: {
-        files: ['Grundfile.js', 'src/js/**/*.js', 'test/spec/**/*.js', 'src/scss/*.scss'],
-        tasks: ['jshint', 'jasmine', 'sass'],
-        options: {
-          spawn: false
-        }
+      options: {
+        spawn: false
+      },
+      grunt: { files: ['Gruntfile.js'] },
+      js: {
+        files: ['src/js/**/*.js', 'test/spec/**/*.js'],
+        tasks: ['jasmine']
       }
     },
+
     sass: {
       dev: {
         options: {
