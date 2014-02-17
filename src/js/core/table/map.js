@@ -35,6 +35,7 @@ xing.core.table.layout = {
     scrum: [
       ['number', 'type', 'component', 'target'],
       ['title'],
+      ['description'],
       ['collobarators'],
       ['created', 'dueDate', 'start', 'closed', 'storyPoints']
     ]

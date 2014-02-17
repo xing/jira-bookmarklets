@@ -11,8 +11,8 @@
 }
 
 .gm-jira-title {
-  @extend %text-left;
   .gm-bd {
+    @extend %text-left;
     @extend .h2;
     @extend %hyphen;
   }
@@ -20,6 +20,23 @@
     overflow: hidden;
     padding-bottom: 0;
     height: 6.5cm;
+  }
+}
+.gm-jira-scrum-layout {
+  .gm-jira-title {
+    .gm-inner {
+      overflow: hidden;
+      padding-bottom: 0;
+      height: 3.5cm;
+    }
+  }
+}
+
+.gm-jira-description {
+  .gm-bd {
+    @extend %text-left;
+    @extend .h5;
+    @extend %hyphen;
   }
 }
 

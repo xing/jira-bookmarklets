@@ -10,6 +10,7 @@ xing.jira.TableMapCell = function () {
   var scope = this,
       MAX_COLS = 5
   ;
+  scope.PREFIX = 'gm-jira-';
 
   /**
    * @private
@@ -19,7 +20,7 @@ xing.jira.TableMapCell = function () {
   scope._titleBody = function (options, item) {
     return {
       cell: {
-        options: { cssClass: 'gm-jira-' + item },
+        options: { cssClass: scope.PREFIX + item },
         title: { text: options.local[item].title },
         body:  { text: options.data[item] }
       }
@@ -38,7 +39,7 @@ xing.jira.TableMapCell = function () {
       cell: {
         options: {
           colspan: 2,
-          cssClass: 'gm-jira-number'
+          cssClass: scope.PREFIX + 'number'
         },
         body: {
           text: options.data.number,
@@ -55,7 +56,7 @@ xing.jira.TableMapCell = function () {
   scope.type = function (options) {
     return {
       cell: {
-        options: { cssClass: 'gm-jira-type' },
+        options: { cssClass: scope.PREFIX + 'type' },
         title: { text: options.local.type.title },
         body: {
           options: {
@@ -63,6 +64,20 @@ xing.jira.TableMapCell = function () {
           },
           text: options.data.type
         }
+      }
+    };
+  };
+
+  /**
+   * @method description
+   * @see number
+   */
+  scope.description = function (options) {
+    return {
+      head: true,
+      cell: {
+        options: { colspan: MAX_COLS, cssClass: scope.PREFIX + 'description' },
+        body: { text: options.data.description }
       }
     };
   };
@@ -91,7 +106,7 @@ xing.jira.TableMapCell = function () {
     return {
       head: true,
       cell: {
-        options: { colspan: MAX_COLS, cssClass: 'gm-jira-title' },
+        options: { colspan: MAX_COLS, cssClass: scope.PREFIX + 'title' },
         body: { text: options.data.title }
       }
     };
@@ -104,7 +119,7 @@ xing.jira.TableMapCell = function () {
   scope.collobarators = function (options) {
     return {
       cell: {
-        options: {colspan: MAX_COLS, cssClass: 'gm-jira-pairing'},
+        options: {colspan: MAX_COLS, cssClass: scope.PREFIX + 'pairing'},
         title: {
           text: options.local.collaborator.title
         },
@@ -124,7 +139,7 @@ xing.jira.TableMapCell = function () {
   };
 
   /**
-   * @method deuDate
+   * @method dueDate
    * @see number
    */
   scope.dueDate = function (options) {
@@ -156,7 +171,7 @@ xing.jira.TableMapCell = function () {
   scope.storyPoints = function (options) {
     return {
       cell: {
-        options: { cssClass: 'gm-jira-story' },
+        options: { cssClass: scope.PREFIX + 'story' },
         title: {
           text: options.local.storyPoints.title
         },

@@ -36,9 +36,10 @@ xing.core.I18n = function () {
         body:  'Day | Time'
       },
       created:     { title: 'Created' },
-      storyPoints: { title: 'Story Points' },
+      description: { title: 'Description' },
       dueDate:     { title: 'Due date' },
       reporter:    { title: 'Reporter' },
+      storyPoints: { title: 'Story Points' },
       target:      { title: 'Target' },
       type:        { title: 'Type' },
       start:    {
