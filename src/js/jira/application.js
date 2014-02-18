@@ -33,8 +33,8 @@ xing.jira.Application = function (cssResources, layoutName) {
     dataCollector  = new nsXC.DataCollector();
     ticketCache    = new nsXC.TicketCache();
     tableBuilder   = new nsXC.table.Builder();
-    scope.tableMap = new nsXC.table.Map(new xing.jira.TableMapCell(), layoutName);
     local          = (new nsXC.I18n()).local();
+    scope.tableMap = new nsXC.table.Map(new xing.jira.TableMapCell(), local, layoutName);
     scope.addStyle(cssResources);
     scope.collectDataFromDom();
   };

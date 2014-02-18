@@ -1,7 +1,9 @@
-Namespace.create('Test');
+var Test = {
 
-Test.inspect = function (obj) {
-  'use strict';
+  inspect: function (obj) {
+    'use strict';
 
-  return JSON.stringify(obj);
+    return JSON.stringify(obj);
+  }
+
 };

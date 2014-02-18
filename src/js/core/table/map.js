@@ -34,8 +34,8 @@ xing.core.table.layout = {
     ],
     scrum: [
       ['number', 'type', 'component', 'target'],
-      ['title'],
-      ['description'],
+      [ { 'title': { maxLength: 140 } } ],
+      [ { 'description': { maxLength: 200 } } ],
       ['collobarators'],
       ['created', 'dueDate', 'start', 'closed', 'storyPoints']
     ]
@@ -60,15 +60,15 @@ xing.core.table.layout = {
  * @module xing.jira.table
  * @class Map
  * @type function
- * @requires xing.core.I18n
- * @param {function} tableCell
+ * @requires xing.core.table.layout
+ * @param {xing.jira.TableMapCell} tableCell
+ * @param {xing.core.I18n} local
  * @param {String} [layoutName]
  */
-xing.core.table.Map = function (tableCell, layoutName) {
+xing.core.table.Map = function (tableCell, local, layoutName) {
   'use strict';
 
   var scope = this,
-      local = (new xing.core.I18n()).local().ticket,
       layout = xing.core.table.layout
   ;
 
@@ -87,15 +87,22 @@ xing.core.table.Map = function (tableCell, layoutName) {
     ;
 
     for (; index < length; index++) {
-      var item = map[index];
+      var item = map[index], result;
 
       if (typeof item === 'string') {
-        local = local;
-        cellMap[index] = tableCell[item]({data: data, local: local});
+        result = tableCell[item]({data: data, local: local.ticket});
+      }
+      else if (xing.core.helpers.isObject(item)) {
+        var itemName = Object.keys(item)[0];
+        if (item[itemName].maxLength) {
+          data[itemName] = data[itemName].truncate(item[itemName].maxLength);
+        }
+        result = tableCell[itemName]({data: data, local: local.ticket});
       }
       else {
-        cellMap[index] = scope.build(data, item);
+        result = scope.build(data, item);
       }
+      cellMap[index] = result;
     }
 
     return cellMap;

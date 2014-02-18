@@ -41,3 +41,16 @@ String.prototype.toArray = function (seperator) {
   seperator = new RegExp(seperator || ',');
   return this.split(seperator);
 };
+
+/**
+ * Specific helpers
+ */
+Namespace.create('xing.core.helpers');
+
+xing.core.helpers.isArray =  function (obj) {
+  return Object.prototype.toString.call(obj) === '[object Array]';
+};
+
+xing.core.helpers.isObject =  function (obj) {
+  return Object.prototype.toString.call(obj) === '[object Object]';
+};

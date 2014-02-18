@@ -8,7 +8,8 @@ module.exports = function (grunt) {
 
   var appConfig = {
     src: [
-      'src/js/vendor/namespace.js',
+      'bower_components/jquery/dist/jquery.min.js',
+      'bower_components/namespace-js/src/namespace.js',
       'src/js/core/**/*.js',
       'src/js/jira/**/*.js'
     ],
@@ -27,8 +28,7 @@ module.exports = function (grunt) {
         src: appConfig.src,
         options: {
           helpers: 'test/spec/*_helper.js',
-          specs: 'test/spec/*_spec.js',
-          vendor: 'src/js/vendor/*.js',
+          specs: 'test/spec/**/*_spec.js',
           title: '<%= pkg.name %>'
         }
       }
