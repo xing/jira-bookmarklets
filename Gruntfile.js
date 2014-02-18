@@ -121,7 +121,7 @@ module.exports = function (grunt) {
           banner: 'javascript:void(function(){',
           footer: "var xingJiraApp = new xing.jira.Application(" +
                     "'<%= appConfig.cssMin.src %>', " +
-                    "xing.core.table.layout.SCRUM_LAYOUT" +
+                    '{ layoutName: xing.core.table.layout.SCRUM_LAYOUT }' +
                   ");" +
                   'xingJiraApp.versionTimestamp=' +
                     '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
@@ -152,7 +152,7 @@ module.exports = function (grunt) {
           banner: 'javascript:void(function(){',
           footer: 'var xingJiraApp = new xing.jira.Application(' +
                     '"", ' +
-                    'xing.core.table.layout.SCRUM_LAYOUT' +
+                    '{ layoutName: xing.core.table.layout.SCRUM_LAYOUT }' +
                   ');' +
                   'xingJiraApp.versionTimestamp=' +
                     '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +

@@ -13,9 +13,10 @@ Namespace.create('xing.jira');
  * @requires xing.jira.TableMapCell
  * @type Object
  * @param {String} cssResources A string of CSS definitions. e.g. 'body { color: red; }'
- * @param {String} [layout] Type name of ticket layout. default: 'default'
+ * @param {Object} options Hash of optional parameters
+ *   @param {Object} [options.layoutName] Layout class selector necessary for specific themes
  */
-xing.jira.Application = function (cssResources, layoutName) {
+xing.jira.Application = function (cssResources, options) {
   'use strict';
 
   var scope = this,
@@ -28,13 +29,15 @@ xing.jira.Application = function (cssResources, layoutName) {
 
   /**
    * @method initialize
+   * @see xing.jira.Application
    */
-  scope.initialze = function (cssResources) {
+  scope.initialze = function (cssResources, options) {
+    scope.layoutName = options && options.layoutName || '';
     dataCollector  = new nsXC.DataCollector();
     ticketCache    = new nsXC.TicketCache();
     tableBuilder   = new nsXC.table.Builder();
     local          = (new nsXC.I18n()).local();
-    scope.tableMap = new nsXC.table.Map(new xing.jira.TableMapCell(), local, layoutName);
+    scope.tableMap = new nsXC.table.Map(new xing.jira.TableMapCell(), local, scope.layoutName);
     scope.addStyle(cssResources);
     scope.collectDataFromDom();
   };
@@ -78,8 +81,10 @@ xing.jira.Application = function (cssResources, layoutName) {
   scope._updateHTML = function (cachedTicketMaps) {
     $('#gm-popup').remove();
 
+
     var map = scope.tableMap.build(ticketCache.latest),
-        currentTicketMarkup = tableBuilder.render(map),
+        builderRenderOptions = {layoutName: scope.layoutName},
+        currentTicketMarkup = tableBuilder.render(map, builderRenderOptions),
         cachedTicketsMarkup = '',
         numberOfTickets = cachedTicketMaps.length + 1,
         numberOfPages = Math.ceil(numberOfTickets / 2)
@@ -94,7 +99,7 @@ xing.jira.Application = function (cssResources, layoutName) {
       if (number !== currentNumber) {
         cachedTicketsMarkup += '' +
           '<li class="gm-output-item">' +
-             tableBuilder.render(scope.tableMap.build(cachedTicketMap)) +
+             tableBuilder.render(scope.tableMap.build(cachedTicketMap), builderRenderOptions) +
              '<div class="gm-ticket-action-panel">' +
                '<button type="button" class="' + buttonSelecotrs + '">' +
                  local.modal.action.remove +
@@ -264,5 +269,5 @@ xing.jira.Application = function (cssResources, layoutName) {
     dataCollector.update();
   };
 
-  scope.initialze(cssResources);
+  scope.initialze(cssResources, options);
 };

@@ -119,14 +119,18 @@ xing.core.table.Builder = function () {
   /**
    * @method render
    * @param {xing.jira.table.Map} tableData
+   * @param {Object} options Hash of optional parameters
+   *   @param {Object} [options.layoutName] Layout class selector necessary for specific themes
    */
-  scope.render = function (tableData) {
-    var result = '';
+  scope.render = function (tableData, options) {
+    var result = '',
+        cssClass = options && options.layoutName ? ' gm-' + options.layoutName + '-layout' : ''
+    ;
     tableData.forEach(function (rowData) {
       result += scope.row(rowData);
     });
 
-    return '<table class="gm-table">' + result + '</table>';
+    return '<table class="gm-table' + cssClass + '">' + result + '</table>';
   };
 
 };

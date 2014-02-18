@@ -22,12 +22,15 @@
     height: 6.5cm;
   }
 }
-.gm-jira-scrum-layout {
+.gm-scrum-layout {
   .gm-jira-title {
     .gm-inner {
-      overflow: hidden;
-      padding-bottom: 0;
       height: 3.5cm;
+    }
+  }
+  .gm-jira-description {
+    .gm-inner {
+      height: 2.6cm;
     }
   }
 }

@@ -114,4 +114,28 @@ describe('table.Builder', function () {
 
   });
 
+  describe('render()', function () {
+
+    it('returns a plain table wrapper by default', function () {
+      var tableDataStub = [];
+
+      actual = subject.render(tableDataStub);
+      expected = '<table class="gm-table"></table>';
+
+      expect(actual).toEqual(expected);
+    });
+
+    it('returns a table wrapper with a specific class selector when given', function () {
+      var tableDataStub = [],
+          className = 'test-class',
+          options = {layoutName: className}
+      ;
+      actual = subject.render(tableDataStub, options);
+      expected = '<table class="gm-table gm-' + className + '-layout"></table>';
+
+      expect(actual).toEqual(expected);
+    });
+
+  });
+
 });
