@@ -14,9 +14,8 @@
   position: relative;
 }
 %output-page-count-label {
-  color: $grey-dark;
+  color: $grey-light;
   display: block;
-  font-size: 0.8em;
   text-align: center;
 }
 .gm-output-list {
@@ -42,9 +41,12 @@
 }
 @media print {
   .gm-output-item {
+    &:nth-child(even) {
+      border-bottom: none;
+    }
     &:before,
     &:after {
-      display: none;
+      display: none!important;
     }
   }
 }

@@ -5,7 +5,7 @@
 .gm-jira-number {
   @extend %text-left;
   .gm-bd {
-    @extend .h1;
+    @extend %h1;
     word-break: break-all;
   }
 }
@@ -13,8 +13,9 @@
 .gm-jira-title {
   .gm-bd {
     @extend %text-left;
-    @extend .h2;
+    @extend %h2;
     @extend %hyphen;
+    line-height: 1em;
   }
   .gm-inner {
     overflow: hidden;
@@ -22,24 +23,17 @@
     height: 6.5cm;
   }
 }
-.gm-scrum-layout {
-  .gm-jira-title {
-    .gm-inner {
-      height: 3.5cm;
-    }
-  }
-  .gm-jira-description {
-    .gm-inner {
-      height: 2.6cm;
-    }
-  }
-}
 
 .gm-jira-description {
+  .gm-inner {
+    height: 2.7cm;
+  }
   .gm-bd {
-    @extend %text-left;
-    @extend .h5;
+    @extend %default-font-size;
     @extend %hyphen;
+    @extend %text-left;
+    font-weight: normal;
+    line-height: $base-line;
   }
 }
 
@@ -48,28 +42,32 @@
     overflow: hidden;
   }
   .gm-hd {
-    @extend .h5;
     @extend %snap-left;
     padding-right: 3mm;
   }
   .gm-bd {
-    @extend .h5;
     overflow: hidden;
   }
 }
 .gm-jira-story {
+  @extend %text-center;
   .gm-hd {
     @extend %text-center;
   }
   .gm-bd {
-    @extend %text-center;
-    @extend .h3;
+    @extend %h3;
+    background-color: $grey-dark;
+    border-radius: .2em;
+    color: #FFFFFF;
+    display: inline-block;
+    line-height: 1em;
+    padding: 0.25em 0.3em 0.05em;
   }
 }
 
 .gm-jira-qa {
   .gm-bd {
-    border-radius: 2em;
+    border-radius: 2rem;
     border: 1px solid $grey-light;
     height: 40px;
     margin: auto;
@@ -84,7 +82,7 @@
   }
   .gm-bd {
     color: $grey-light;
-    font-size: 0.8em;
+    font-size: 0.8rem;
     text-align: center;
     text-transform: uppercase;
   }

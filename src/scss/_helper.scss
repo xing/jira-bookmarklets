@@ -42,22 +42,29 @@
 }
 
 .gm-grid-item { display: inline-block; }
-@each $size in .1, .2, .4, .6 {
-  .gm-#{$size * 100} {
-    width: percentage($size);
+@each $size in 10, 20, 40, 60 {
+  .gm-#{$size} {
+    width: percentage($size/100);
   }
 }
 
-.h1 { font-size: 3em; }
-.h2 { font-size: 2.4em; }
-.h3 { font-size: 2em; }
-.h4 {
-  font-size: 1.4em;
-  line-height: 1.5em;
+%default-font-size {
+  font-size: 1rem;
 }
-.h5 {
-  font-size: .8em;
-  line-height: 1.4em;
+%h1 {
+  font-size: $font-size-h1;
+}
+%h2 {
+  font-size: $font-size-h2;
+}
+%h3 {
+  font-size: $font-size-h3;
+}
+%h4 {
+  font-size: $font-size-h4;
+}
+%h5 {
+  font-size: $font-size-h5;
 }
 
 @media print {

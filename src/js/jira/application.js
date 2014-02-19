@@ -100,7 +100,7 @@ xing.jira.Application = function (cssResources, options) {
         cachedTicketsMarkup += '' +
           '<li class="gm-output-item">' +
              tableBuilder.render(scope.tableMap.build(cachedTicketMap), builderRenderOptions) +
-             '<div class="gm-ticket-action-panel">' +
+             '<div class="gm-ticket-action-panel gm-print-hidden">' +
                '<button type="button" class="' + buttonSelecotrs + '">' +
                  local.modal.action.remove +
                '</button>' +
@@ -112,12 +112,12 @@ xing.jira.Application = function (cssResources, options) {
 
     $('body').append(
       $('<div id="gm-popup">' +
-         '<div class="gm-container jira-dialog box-shadow gm-print-hidden">' +
-           '<div class="jira-dialog-heading">' +
+         '<div class="gm-container jira-dialog box-shado">' +
+           '<div class="jira-dialog-heading gm-print-hidden">' +
              '<h2>' + local.modal.heading + '</h2>' +
            '</div>' +
            '<div class="jira-dialog-content">' +
-             '<div class="gm-page-counter h5">' +
+             '<div class="gm-page-counter gm-print-hidden">' +
                local.modal.ticketCount + ' ' + numberOfTickets +
                local.modal.pageCount + ' ' + numberOfPages +
              '</div>' +
@@ -227,6 +227,11 @@ xing.jira.Application = function (cssResources, options) {
         $('#gm-popup .form-body table').eq(index).remove();
         scope.update(ticketCache.get());
       })
+      // .on('click', '.gm-change-collaborators', function () {
+      //   var index = $('.gm-output-list button').index(this);
+      //   console.log("ticket.data[inder] %o", ticketCache.data);
+      //   ticketCache.updateCollaborators(index, local.modal.collaboratorPrompt);
+      // })
       .on('click', '#gm-add-collaborator', function () {
         dataCollector.addCollaborators(local.modal.collaboratorPrompt);
       })

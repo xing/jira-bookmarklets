@@ -5,6 +5,7 @@
       , "scaffold"
       , "output"
       , "themes/default"
+      , "themes/scrum"
 ;
 
 /* Jira --------------------------------- */
@@ -17,11 +18,10 @@
 }
 /* Page separation counter ------------ */
 .gm-page-counter {
-  @extend .h5;
   color: $grey-dark;
   position: absolute;
-  right: 2em;
-  top: 2.2em;
+  right: 0.5rem;
+  top: 22px;
 }
 /* ------------ Page separation counter */
 /* --------------------------------- Jira */

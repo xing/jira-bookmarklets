@@ -23,6 +23,7 @@ module.exports = function (grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     appConfig: appConfig,
+
     jasmine: {
       all: {
         src: appConfig.src,
@@ -42,6 +43,10 @@ module.exports = function (grunt) {
       js: {
         files: ['src/js/**/*.js', 'test/spec/**/*.js'],
         tasks: ['jasmine']
+      },
+      sass: {
+        files: ['src/scss/**/*.scss'],
+        tasks: ['sass:dev']
       }
     },
 
@@ -63,6 +68,7 @@ module.exports = function (grunt) {
         }
       }
     },
+
     jshint: {
       files: [
         'Gruntfile.js',
@@ -72,6 +78,7 @@ module.exports = function (grunt) {
       ],
       options: grunt.file.readJSON('.jshintrc')
     },
+
     csslint: {
       options: {
         csslintrc: '.csslintrc'
@@ -80,6 +87,7 @@ module.exports = function (grunt) {
         src: ['src/css/*.css']
       }
     },
+
     yuidoc: {
       compile: {
         name: '<%= pkg.name %>',
@@ -92,6 +100,7 @@ module.exports = function (grunt) {
         }
       }
     },
+
     uglify: {
       sdk: {
         options: {

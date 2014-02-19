@@ -86,4 +86,47 @@ describe('TicketCache', function () {
 
   });
 
+  xdescribe('updateCollaborator()', function () {
+
+    beforeEach(function () {
+      subject.add({a: 'b', collaborators: ''});
+    });
+
+    it('add a name to the list', function () {
+      var names = 'Jeffrey';
+      spyOn(window, 'prompt').andReturn(names);
+      subject.updateCollaborators(0, names, '');
+
+      actual = subject.get();
+      expected = [{a: 'b', collaborators: names}];
+
+      expect(actual).toEqual(expected);
+    });
+
+  });
+
+  describe('_updateProperty()', function () {
+
+    var dummyTicket;
+
+    beforeEach(function () {
+      dummyTicket = {'blubber':'bam'};
+    });
+
+    it('do nothing if property name not exists', function () {
+      actual = subject._updateProperty(dummyTicket, 'foo', 'bar');
+      expected = dummyTicket;
+
+      expect(actual).toEqual(expected);
+    });
+
+    it('update value property', function () {
+      actual = subject._updateProperty(dummyTicket, 'blubber', 'bar');
+      expected = {'blubber':'bar'};
+
+      expect(actual).toEqual(expected);
+    });
+
+  });
+
 });

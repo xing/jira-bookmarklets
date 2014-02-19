@@ -92,4 +92,37 @@ xing.core.TicketCache = function () {
     return scope.get();
   };
 
+  /**
+   * Add/update collaborator list
+   * @method updateCollaborators
+   * @param {String} promptText is displayed in the prompt dialog
+   */
+  scope.updateCollaborators = function (index, promptText) {
+    var ticket = scope.get(index)[0],
+        names = ticket.collaborators,
+        confirmedNames = window.prompt(promptText, names || '')
+    ;
+
+    if (confirmedNames !== null) {
+      scope.data[index] = scope._updateProperty(ticket, 'collaborators', confirmedNames);
+      localStorage.setItem(scope.STORAGE_KEY, JSON.stringify(scope.data));
+    }
+  };
+
+  /**
+   * @private
+   * Update an property value of an cached ticket object
+   * @method updateProperty
+   * @param {Object} ticket To updating ticket
+   * @param {String} key Name of the property
+   * @param {Array|Object|String} key Name of the property
+   * @return {Object} updated ticket object
+   */
+  scope._updateProperty = function (ticket, key, value) {
+    if (ticket[key] !== undefined) {
+      ticket[key] = value;
+    }
+
+    return ticket;
+  };
 };

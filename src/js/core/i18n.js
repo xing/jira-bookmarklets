@@ -28,7 +28,7 @@ xing.core.I18n = function () {
     ticket: {
       collaborator: {
         title:  'Pairing partner',
-        action: '<button id="gm-add-collaborator" class="aui-button gm-snap-right">Collaborators</button>'
+        action: '<button class="aui-button gm-change-collaborators gm-snap-right gm-print-hidden">Collaborators</button>'
       },
       component: { title: 'Component' },
       closed: {
