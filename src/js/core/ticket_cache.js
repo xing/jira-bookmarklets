@@ -44,6 +44,7 @@ xing.core.TicketCache = function () {
   };
 
   /**
+   * Returns a specific ticket or the list of all tickets.
    * @method get
    * @param {Integer} [index] Index number of the item to be returned
    * @return {Array} List of cached ticket objects
@@ -93,20 +94,29 @@ xing.core.TicketCache = function () {
   };
 
   /**
+   * Returns the names of all collaborators
+   * @method updateCollaborators
+   * @param {Integer} index Position number in the list where the collaborators should be updated.
+   * @return {String}
+   */
+  scope.getCollaborators = function (index) {
+    var ticket = scope.get(index)[0];
+    return ticket && ticket.collaborators || '';
+  };
+
+  /**
    * Add/update collaborator list
    * @method updateCollaborators
-   * @param {String} promptText is displayed in the prompt dialog
+   * @see getCollaborators
+   * @param {String} confirmedNames A coma separated string with all names. e.g (Jeffrey Lebowski, Maude)
    */
-  scope.updateCollaborators = function (index, promptText) {
-    var ticket = scope.get(index)[0],
-        names = ticket.collaborators,
-        confirmedNames = window.prompt(promptText, names || '')
+  scope.updateCollaborators = function (index, names) {
+    var tickets = scope.get(),
+        ticket = tickets[index]
     ;
 
-    if (confirmedNames !== null) {
-      scope.data[index] = scope._updateProperty(ticket, 'collaborators', confirmedNames);
-      localStorage.setItem(scope.STORAGE_KEY, JSON.stringify(scope.data));
-    }
+    tickets[index] = scope._updateProperty(ticket, 'collaborators', names);
+    localStorage.setItem(scope.STORAGE_KEY, JSON.stringify(tickets));
   };
 
   /**

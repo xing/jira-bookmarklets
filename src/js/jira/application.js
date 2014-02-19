@@ -112,7 +112,7 @@ xing.jira.Application = function (cssResources, options) {
 
     $('body').append(
       $('<div id="gm-popup">' +
-         '<div class="gm-container jira-dialog box-shado">' +
+         '<div class="gm-container jira-dialog box-shadow">' +
            '<div class="jira-dialog-heading gm-print-hidden">' +
              '<h2>' + local.modal.heading + '</h2>' +
            '</div>' +

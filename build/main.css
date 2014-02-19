@@ -3,15 +3,15 @@
   text-align: left;
 }
 
-.gm-center, .gm-jira-story, .gm-jira-story .gm-hd {
+.gm-center, .gm-jira-story {
   text-align: center;
 }
 
-.gm-snap-left, .gm-jira-pairing .gm-hd {
+.gm-snap-left, .gm-jira-pairing .gm-hd, .gm-jira-story .gm-hd {
   float: left;
 }
 
-.gm-snap-right {
+.gm-snap-right, .gm-jira-story .gm-bd {
   float: right;
 }
 
@@ -47,16 +47,12 @@
   font-size: 1rem;
 }
 
-.gm-jira-number .gm-bd {
+.gm-jira-number .gm-bd, .gm-jira-story .gm-bd {
   font-size: 2.1rem;
 }
 
 .gm-jira-title .gm-bd {
   font-size: 1.8rem;
-}
-
-.gm-jira-story .gm-bd {
-  font-size: 1.5rem;
 }
 
 @media print {
@@ -225,8 +221,11 @@
   height: 6.5cm;
 }
 
+.gm-jira-description {
+  overflow: hidden;
+}
 .gm-jira-description .gm-inner {
-  height: 2.7cm;
+  height: 5.4cm;
 }
 .gm-jira-description .gm-bd {
   font-weight: normal;
@@ -244,12 +243,9 @@
 }
 
 .gm-jira-story .gm-bd {
-  background-color: #999999;
-  border-radius: .2em;
-  color: #FFFFFF;
+  font-weight: bold;
   display: inline-block;
   line-height: 1em;
-  padding: 0.25em 0.3em 0.05em;
 }
 
 .gm-jira-qa .gm-bd {
@@ -276,6 +272,9 @@
 
 .gm-scrum-layout .gm-jira-title .gm-inner {
   height: 3.4cm;
+}
+.gm-scrum-layout + .gm-ticket-action-panel {
+  bottom: 0.9em;
 }
 
 /* Jira --------------------------------- */

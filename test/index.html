@@ -428,9 +428,16 @@
                             <div class='mod-content'>
                               <div id="description-val">
                                 <div class="user-content-block">
-                                  <p>We need to support "like" as verb within our AS implementation. </p>
-                                  <p>Only known combinations (object/verb/actor): user/like/jobposting, user/like/article, user/like/companyprofileupdate, user/like/companyprofile, user/like/event, user/like/group, user/like/poll, user/like/thread</p>
-                                  <p>Before we can release this feature to production, we should give the mobile team the opportunity to test against all the changes at once. Therefore we have a common branch for all upcoming AS changes: <a href="https://source.xing.com/xws/xws/tree/new_as_types">https://source.xing.com/xws/xws/tree/new_as_types</a></p>
+                                  <p><b><ins>As is</ins>:</b><br>
+                                    No Tracking enabled when the search is successful.</p>
+                                  <p>event33 (user search successful) and the page name/ channel name is </p>
+                                  <p>s.pageName="mobile/app/android/li/search/search_all";<br>
+                                    s.channel="mobile/app/android/li/search";<br>
+                                    <b><ins>To be</ins>:</b><br>
+                                    Please verify at your end. This tracking has not been enabled.</p>
+                                  <p>event33 (user search successful) and the page name/ channel name is </p>
+                                  <p>s.pageName="mobile/app/android/li/search/search_all";<br>
+                                    s.channel="mobile/app/android/li/search";</p>
                                 </div>
                               </div>
                             </div>

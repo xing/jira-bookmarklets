@@ -33,11 +33,9 @@ xing.core.table.layout = {
       ['created', 'dueDate', 'reporter', 'start', 'closed']
     ],
     scrum: [
-      ['number', 'type', 'component', 'target'],
+      ['number', 'type', 'component', 'storyPoints'],
       [ { 'title': { maxLength: 150 } } ],
-      [ { 'description': { maxLength: 400 } } ],
-      ['collobarators'],
-      ['created', 'dueDate', 'start', 'closed', 'storyPoints']
+      [ { 'description': { maxLength: 600 } } ]
     ]
   },
 

@@ -86,17 +86,33 @@ describe('TicketCache', function () {
 
   });
 
-  xdescribe('updateCollaborator()', function () {
+  describe('getCollaborator()', function () {
+
+    var names;
+    beforeEach(function () {
+      names = 'Jeffrey Lebowski, Maude';
+      subject.add({a: 'b', collaborators: names});
+    });
+
+    it('add a name to the list', function () {
+      actual = subject.getCollaborators(0);
+      expected = names;
+
+      expect(actual).toEqual(expected);
+    });
+
+  });
+
+  describe('updateCollaborator()', function () {
 
     beforeEach(function () {
       subject.add({a: 'b', collaborators: ''});
     });
 
+
     it('add a name to the list', function () {
       var names = 'Jeffrey';
-      spyOn(window, 'prompt').andReturn(names);
-      subject.updateCollaborators(0, names, '');
-
+      subject.updateCollaborators(0, names);
       actual = subject.get();
       expected = [{a: 'b', collaborators: names}];
 
