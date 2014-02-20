@@ -28,7 +28,7 @@ xing.core.table.layout = {
   _layouts: {
     default: [
       ['number', 'type', 'component', 'target'],
-      ['title'],
+      [ { 'title': { maxLength: 350 } } ],
       ['collobarators'],
       ['created', 'dueDate', 'reporter', 'start', 'closed']
     ],

@@ -2,6 +2,7 @@ Namespace.create('xing.jira');
 
 /**
  * @module xing.jira.TableMapCell
+ * @requires xing.jira.helpers.Label
  * @class TableMapCell
  */
 xing.jira.TableMapCell = function () {
@@ -10,6 +11,8 @@ xing.jira.TableMapCell = function () {
   var scope = this,
       MAX_COLS = 5
   ;
+
+  scope.labelHelper = new xing.jira.helpers.Label();
   scope.PREFIX = 'gm-jira-';
 
   /**
@@ -60,7 +63,7 @@ xing.jira.TableMapCell = function () {
         title: { text: options.local.type.title },
         body: {
           options: {
-            cssClass: 'gm-label-' + options.data.typeSelector
+            cssClass: scope.labelHelper.getSelector(options.data.typeSelector)
           },
           text: options.data.type
         }
@@ -148,7 +151,7 @@ xing.jira.TableMapCell = function () {
         title: { text: options.local.dueDate.title },
         body: {
           options: {
-            cssClass: (options.data.dueDate ? 'gm-label-danger' : '')
+            cssClass: scope.labelHelper.getSelector(options.data.dueDate ? 'bug' : undefined)
           },
           text: options.data.dueDate
         }

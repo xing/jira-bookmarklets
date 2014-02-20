@@ -3,11 +3,7 @@
   padding: 0;
 }
 .gm-output-item {
-       -o-box-sizing: border-box;
-      -ms-box-sizing: border-box;
-     -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  @include box-sizing(border-box);
   height: 12.2cm;
   overflow: hidden;
   page-break-inside: avoid;
@@ -27,7 +23,8 @@
     &:before {
       @extend %output-page-count-label;
       content: "Begin of page " counter(page-counter);
-      margin-bottom: 1em;
+      margin-bottom: 0.2em;
+      margin-top: -0.3em;
     }
   }
   &:nth-child(even) {
@@ -35,11 +32,28 @@
     &:after {
       @extend %output-page-count-label;
       content: "End of page " counter(page-counter);
-      margin-top: 1em;
     }
   }
 }
-@media print {
+
+// screen only definitions
+@mixin screenOutputLayout {
+
+  .gm-output-item {
+    &:hover .gm-ticket-action-panel {
+      opacity: 1;
+    }
+    &:nth-child(even) .gm-ticket-action-panel {
+      bottom: 2.3em;
+      top: 0;
+    }
+  }
+
+}
+
+// print only definitions
+@mixin printOutputLayout {
+
   .gm-output-item {
     &:nth-child(even) {
       border-bottom: none;
@@ -49,4 +63,5 @@
       display: none!important;
     }
   }
+
 }

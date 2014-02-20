@@ -14,7 +14,7 @@ xing.core.DataCollector = function () {
   ;
 
   /**
-   * Local storage key for collaborartors caching
+   * Local storage key for collaborators caching
    * @property COLLABORATOR_KEY
    * @type String
    * @static

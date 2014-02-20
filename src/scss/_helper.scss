@@ -1,4 +1,4 @@
-// abstract
+// abstract placeholder
 %text-left {
   text-align: left;
 }
@@ -17,11 +17,7 @@
 }
 
 %hyphen {
-         hyphens: auto;
-      -o-hyphens: auto;
-     -ms-hyphens: auto;
-    -moz-hyphens: auto;
-  -wekit-hyphens: auto;
+  @include hyphens(auto);
 }
 
 // classes
@@ -41,6 +37,7 @@
   @extend %snap-right;
 }
 
+// simple grid
 .gm-grid-item { display: inline-block; }
 @each $size in 10, 20, 40, 60 {
   .gm-#{$size} {
@@ -48,6 +45,7 @@
   }
 }
 
+// fonts
 %default-font-size {
   font-size: 1rem;
 }

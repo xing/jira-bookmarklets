@@ -1,4 +1,3 @@
-@charset "UTF-8";
 .gm-left, .gm-ltr, .gm-jira-number, .gm-jira-title .gm-bd, .gm-jira-description .gm-bd {
   text-align: left;
 }
@@ -16,11 +15,11 @@
 }
 
 .gm-jira-title .gm-bd, .gm-jira-description .gm-bd {
-  hyphens: auto;
   -o-hyphens: auto;
   -ms-hyphens: auto;
   -moz-hyphens: auto;
-  -wekit-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
 }
 
 .gm-grid-item {
@@ -61,7 +60,7 @@
   }
 }
 .gm-table, .gm-table th, .gm-table td {
-  border: 1px solid #dddddd;
+  border: 1px solid #cccccc;
 }
 
 .gm-table {
@@ -76,14 +75,14 @@
 }
 
 .gm-hd {
-  color: #999999;
+  color: #333333;
   text-align: left;
   text-transform: uppercase;
 }
 
 /* -------------------- ticket pagination */
 .gm-ticket-section {
-  background-color: #999999;
+  background-color: #333333;
   display: inline-block;
   height: 8px;
   line-height: 0;
@@ -91,26 +90,6 @@
   position: relative;
   text-indent: -99em;
   width: 12px;
-}
-
-.gm-remove-ticket {
-  background-color: #cccccc;
-}
-.gm-remove-ticket:hover {
-  background-color: #e94902;
-}
-.gm-remove-ticket:hover:after {
-  color: white;
-  content: "✖";
-  display: inline-block;
-  height: 100%;
-  left: 0;
-  line-height: 0.5em;
-  position: absolute;
-  text-align: center;
-  text-indent: 10%;
-  top: 0;
-  width: 100%;
 }
 
 .gm-warning {
@@ -121,12 +100,8 @@
   color: white;
 }
 
-.gm-button-danger {
-  color: #cc0000;
-}
-
 .gm-label-danger, .gm-label-bug, .gm-label-user-story {
-  background-color: #999999;
+  background-color: #333333;
   border-radius: 0.2em;
   color: white;
   display: inline-block;
@@ -136,22 +111,25 @@
 }
 
 .gm-label-danger, .gm-label-bug {
-  background-color: #cc0000;
+  background-color: #d04437;
 }
 
 .gm-label-user-story {
-  background-color: #8caf68;
+  background-color: #14892c;
 }
 
 .gm-pick-more i {
-  font-size: 1.4em;
+  font-size: 1.5rem;
   font-style: normal;
   font-weight: bold;
   line-height: 0;
 }
 
-.gm-container .gm-print {
-  margin: 0 10px 0 0;
+.gm-page-counter {
+  color: #333333;
+  position: absolute;
+  right: 0.5rem;
+  top: 22px;
 }
 
 .gm-output-list {
@@ -172,7 +150,7 @@
 }
 
 .gm-output-item:nth-child(odd):before, .gm-output-item:nth-child(even):after {
-  color: #dddddd;
+  color: #cccccc;
   display: block;
   text-align: center;
 }
@@ -186,24 +164,16 @@
 }
 .gm-output-item:nth-child(odd):before {
   content: "Begin of page " counter(page-counter);
-  margin-bottom: 1em;
+  margin-bottom: 0.2em;
+  margin-top: -0.3em;
 }
 .gm-output-item:nth-child(even) {
-  border-bottom: 2px dashed #dddddd;
+  border-bottom: 2px dashed #cccccc;
 }
 .gm-output-item:nth-child(even):after {
   content: "End of page " counter(page-counter);
-  margin-top: 1em;
 }
 
-@media print {
-  .gm-output-item:nth-child(even) {
-    border-bottom: none;
-  }
-  .gm-output-item:before, .gm-output-item:after {
-    display: none !important;
-  }
-}
 .gm-inner {
   padding: 2mm 3mm;
 }
@@ -218,14 +188,14 @@
 .gm-jira-title .gm-inner {
   overflow: hidden;
   padding-bottom: 0;
-  height: 6.5cm;
+  height: 7.0cm;
 }
 
 .gm-jira-description {
   overflow: hidden;
 }
 .gm-jira-description .gm-inner {
-  height: 5.4cm;
+  height: 6.0cm;
 }
 .gm-jira-description .gm-bd {
   font-weight: normal;
@@ -250,7 +220,7 @@
 
 .gm-jira-qa .gm-bd {
   border-radius: 2rem;
-  border: 1px solid #dddddd;
+  border: 1px solid #cccccc;
   height: 40px;
   margin: auto;
   width: 40px;
@@ -261,7 +231,7 @@
   text-align: center;
 }
 .gm-date-content .gm-bd {
-  color: #dddddd;
+  color: #cccccc;
   font-size: 0.8rem;
   text-align: center;
   text-transform: uppercase;
@@ -274,10 +244,10 @@
   height: 3.4cm;
 }
 .gm-scrum-layout + .gm-ticket-action-panel {
-  bottom: 0.9em;
+  bottom: 2.15em;
+  top: 4.9em;
 }
 
-/* Jira --------------------------------- */
 .global .aui-message {
   left: 50%;
   margin-left: -220px;
@@ -286,36 +256,26 @@
   z-index: 101;
 }
 
-/* Page separation counter ------------ */
-.gm-page-counter {
-  color: #999999;
-  position: absolute;
-  right: 0.5rem;
-  top: 22px;
-}
-
-/* ------------ Page separation counter */
-/* --------------------------------- Jira */
 @media print {
+  .gm-output-item:nth-child(even) {
+    border-bottom: none;
+  }
+  .gm-output-item:before, .gm-output-item:after {
+    display: none !important;
+  }
+
   html, body {
     background-color: white;
   }
 
   #page,
-  .aui-blanket,
   #gm-add-collaborator {
     display: none;
   }
 
-  .gm-container.jira-dialog {
-    border: none;
-    margin: 0;
-    padding: 0;
-  }
-
   .gm-container {
-    box-shadow: none !important;
     border-radius: 0 !important;
+    box-shadow: none !important;
     left: 0;
     margin: 0;
     max-height: none;
@@ -324,12 +284,24 @@
     top: 0;
     width: 100%;
   }
-
+  .gm-container.jira-dialog {
+    border: none;
+    margin: 0;
+    padding: 0;
+  }
   .gm-container .form-body {
     padding: 0 !important;
   }
 }
 @media screen {
+  .gm-output-item:hover .gm-ticket-action-panel {
+    opacity: 1;
+  }
+  .gm-output-item:nth-child(even) .gm-ticket-action-panel {
+    bottom: 2.3em;
+    top: 0;
+  }
+
   .gm-container {
     left: 50%;
     margin-left: -9cm;
@@ -337,47 +309,26 @@
     top: 0;
     width: 18.9cm;
   }
-
   .gm-container .form-body {
     height: 460px;
     padding: 2mm !important;
   }
 
-  /* Delete button ---------------------- */
   .gm-ticket-action-panel {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
-    bottom: 8.5em;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
+    bottom: 8.3em;
     justify-content: center;
     left: 0;
+    opacity: 0;
     position: absolute;
     right: 0;
     text-align: center;
-    top: 6.2em;
+    top: 4.9em;
     transition: 0.4s;
-    opacity: 0;
   }
-
-  .gm-output-item:hover .gm-ticket-action-panel {
-    opacity: 1;
-  }
-
-  .gm-output-item:nth-child(even) .gm-ticket-action-panel {
-    bottom: 2.3em;
-    top: 0;
-  }
-
-  .aui-button.gm-button-danger:hover {
-    border-color: #8f3601;
-  }
-
-  .aui-button.gm-pick-more:hover {
-    border-color: #8caf68;
-  }
-
-  /* ---------------------- Delete button */
 }

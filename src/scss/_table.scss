@@ -4,7 +4,7 @@
 .gm-table {
   @extend %table-cell;
   border-collapse: collapse;
-  font: $default-font-size helvetica, arial, sans-serif;
+  font: $default-font-size $font-stack;
   line-height: $base-line;
   padding-bottom: 2mm;
   width: 100%;

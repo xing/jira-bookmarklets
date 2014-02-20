@@ -1,13 +1,22 @@
+// Atlassian colors
+$aui-charcoal: #333333;
+$aui-medium:   #707070;
+$aui-ash-gray: #CCCCCC;
+$aui-green:    #14892C;
+$aui-red:      #D04437;
+// colors
 $red-dark:    #8F3601;
-$red:         #CC0000;
+$red:         $aui-red;
 $red-light:   #E94902;
 
-$grey-dark:   #999999;
-$grey:        #CCCCCC;
-$grey-light:  #DDDDDD;
+$grey-dark:   $aui-charcoal;
+$grey:        $aui-medium;
+$grey-light:  $aui-ash-gray;
 
-$green:       #8CAF68;
+$green:       $aui-green;
 
+// fonts/typo
+$font-stack:        helvetica, arial, sans-serif;
 $base-line:         1.3334em;
 $default-font-size: 8.5pt;
 $font-size-h6:      1rem;

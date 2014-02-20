@@ -93,7 +93,7 @@ xing.jira.Application = function (cssResources, options) {
     cachedTicketMaps.forEach(function (cachedTicketMap) {
       var number = cachedTicketMap.number,
           currentNumber = map.number,
-          buttonSelecotrs = 'aui-button gm-button-danger js-gm-remove-ticket'
+          buttonSelectors = 'aui-button js-gm-remove-ticket'
       ;
 
       if (number !== currentNumber) {
@@ -101,7 +101,7 @@ xing.jira.Application = function (cssResources, options) {
           '<li class="gm-output-item">' +
              tableBuilder.render(scope.tableMap.build(cachedTicketMap), builderRenderOptions) +
              '<div class="gm-ticket-action-panel gm-print-hidden">' +
-               '<button type="button" class="' + buttonSelecotrs + '">' +
+               '<button type="button" class="' + buttonSelectors + '">' +
                  local.modal.action.remove +
                '</button>' +
              '</div>' +
@@ -136,10 +136,10 @@ xing.jira.Application = function (cssResources, options) {
                    'class="gm-pick-more aui-button">' +
                    '<i>+</i>' +
                  '</button>&nbsp;' +
-                 '<button class="gm-print aui-button">' +
+                 '<button class="js-gm-print-action aui-button aui-button-primary">' +
                    local.modal.action.print +
                 '</button>' +
-                '<a class="gm-cancel cancel" href="#">' +
+                '<a class="js-gm-cancel-action aui-button aui-button-link" href="#">' +
                    local.modal.action.cancel +
                 '</a>' +
                '</div>' +
@@ -204,7 +204,7 @@ xing.jira.Application = function (cssResources, options) {
     scope.update(ticketCache.get());
 
     $('body')
-      .on('click', '.gm-print', function (event) {
+      .on('click', '.js-gm-print-action', function (event) {
         event.preventDefault();
         window.print();
         ticketCache.remove();
@@ -214,7 +214,7 @@ xing.jira.Application = function (cssResources, options) {
         event.preventDefault();
         scope.cacheTicketHandler();
       })
-      .on('click', '.gm-cancel', function (event) {
+      .on('click', '.js-gm-cancel-action', function (event) {
         event.preventDefault();
         scope._hidePopup();
       })
@@ -259,7 +259,7 @@ xing.jira.Application = function (cssResources, options) {
 
     ticketCache.latest = {
       number:        presenter.getString($('#key-val').text()),
-      description:   presenter.getString($('#description-val').text()),
+      description:   presenter.getString($('#description-val').html()),
       storyPoints:   presenter.getString($('#customfield_10080-val').text()),
       dueDate:       presenter.getDate($('#due-date time').attr('datetime')),
       collaborators: presenter.getStorageItem(collaboratorKey).join(' '),
@@ -267,7 +267,7 @@ xing.jira.Application = function (cssResources, options) {
       typeSelector:  presenter.dashalizer(type),
       reporter:      presenter.getString($('#reporter-val span').text()),
       created:       presenter.getDate($('#create-date time').attr('datetime')),
-      title:         title.truncate(220),
+      title:         presenter.getString($('#summary-val').text()),
       component:     presenter.getString($('#components-field').text()),
       target:        presenter.getElementText($target)
     };
