@@ -149,13 +149,15 @@
 }
 .gm-output-item:nth-child(odd):before {
   content: "Begin of page " counter(page-counter);
-  margin-bottom: 0.2em;
-  margin-top: -0.3em;
+  font-size: 0.6rem;
+  margin-bottom: 0.4em;
+  margin-top: 0.2em;
 }
 .gm-output-item:nth-child(even) {
   border-bottom: 2px dashed #cccccc;
 }
 .gm-output-item:nth-child(even):after {
+  font-size: 0.6rem;
   content: "End of page " counter(page-counter);
 }
 
@@ -229,8 +231,12 @@
   height: 3.4cm;
 }
 .gm-scrum-layout + .gm-ticket-action-panel {
-  bottom: 2.15em;
+  bottom: 0.55em;
   top: 4.9em;
+}
+.gm-output-item:nth-child(2n) .gm-scrum-layout + .gm-ticket-action-panel {
+  bottom: 1.75em;
+  top: 3.55em;
 }
 
 .global .aui-message {
@@ -283,8 +289,8 @@
     opacity: 1;
   }
   .gm-output-item:nth-child(even) .gm-ticket-action-panel {
-    bottom: 2.3em;
-    top: 0;
+    bottom: 9.6em;
+    top: 3.5em;
   }
 
   .gm-container {
@@ -306,14 +312,14 @@
     display: flex;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.3);
-    bottom: 8.3em;
+    bottom: 8.35em;
     justify-content: center;
     left: 0;
     opacity: 0;
     position: absolute;
     right: 0;
     text-align: center;
-    top: 4.9em;
+    top: 4.85em;
     transition: 0.4s;
   }
 }

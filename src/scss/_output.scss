@@ -23,14 +23,16 @@
     &:before {
       @extend %output-page-count-label;
       content: "Begin of page " counter(page-counter);
-      margin-bottom: 0.2em;
-      margin-top: -0.3em;
+      font-size: $font-size-milli;
+      margin-bottom: 0.4em;
+      margin-top: 0.2em;
     }
   }
   &:nth-child(even) {
     border-bottom: 2px dashed $grey-light;
     &:after {
       @extend %output-page-count-label;
+      font-size: $font-size-milli;
       content: "End of page " counter(page-counter);
     }
   }
@@ -44,8 +46,8 @@
       opacity: 1;
     }
     &:nth-child(even) .gm-ticket-action-panel {
-      bottom: 2.3em;
-      top: 0;
+      bottom: 9.6em;
+      top: 3.5em;
     }
   }
 

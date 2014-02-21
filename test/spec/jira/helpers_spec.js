@@ -8,7 +8,7 @@ describe('xing.jira.helpers.Label', function () {
       subject = new xing.jira.helpers.Label();
     });
 
-    it('returns default value if param exist', function () {
+    it('returns default value if no param exist', function () {
       actual = subject.getSelector();
       expected = subject.DEFAULT_LABEL_SELECTORS;
 
@@ -22,7 +22,7 @@ describe('xing.jira.helpers.Label', function () {
       expect(actual).toEqual(expected);
     });
 
-    it('returns nothing if the parameter false', function () {
+    it('returns nothing if param is false', function () {
       actual = subject.getSelector(false);
       expected = '';
 
