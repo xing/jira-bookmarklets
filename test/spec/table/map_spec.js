@@ -5,15 +5,12 @@ describe('xing.core.table.Map', function () {
 
   describe('build()', function () {
 
-   xdescribe('general parameter handling', function () {
+    describe('general parameter handling', function () {
       var data;
 
       beforeEach(function () {
-        var localSpy = (new xing.core.I18n()).local();//jasmine.createSpyObj('ticket', [ 'collaborator', 'component', 'closed', 'created' ]);
-        // var localSpy = jasmine.createSpyObj('ticket', [ 'collaborator', 'component', 'closed', 'created' ]);
-        // spyOn(local.ticket, '');
-
-        subject = new xing.core.table.Map(new xing.jira.TableMapCell(), localSpy);
+        var localStub = { ticket: { number: '', title: '', reporter: { title: 'Reporter' } } };
+        subject = new xing.core.table.Map(new xing.jira.TableMapCell(), localStub);
         data = {number: 'x-1', title: 'bam', reporter: 'tim'};
         spyOn(xing.core.table.layout, 'get').and.returnValue( [ [ 'number' ], [ 'title', 'reporter' ] ] );
       });
@@ -46,7 +43,7 @@ describe('xing.core.table.Map', function () {
         map = [ 'field' ];
 
         expected = [{data: {field: '01234'}, local: ''}];
-        actual = subject.build(data, map)
+        actual = subject.build(data, map);
 
         expect(actual).toEqual(expected);
       });
@@ -55,7 +52,7 @@ describe('xing.core.table.Map', function () {
         map = [ [ 'field' ] ];
 
         expected = [ [ {data: {field: '01234'}, local: ''} ] ];
-        actual = subject.build(data, map)
+        actual = subject.build(data, map);
 
         expect(actual).toEqual(expected);
       });
@@ -64,7 +61,7 @@ describe('xing.core.table.Map', function () {
         map = [ {field: {maxLength: 4} } ];
 
         expected = [ {data: {field: '012…'}, local: ''} ];
-        actual = subject.build(data, map)
+        actual = subject.build(data, map);
 
         expect(actual).toEqual(expected);
       });

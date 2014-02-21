@@ -102,6 +102,7 @@ xing.jira.Application = function (cssResources, options) {
              tableBuilder.render(scope.tableMap.build(cachedTicketMap), builderRenderOptions) +
              '<div class="gm-ticket-action-panel gm-print-hidden">' +
                '<button type="button" class="' + buttonSelectors + '">' +
+                 '<span class="aui-icon aui-icon-small aui-iconfont-add">Add</span>' +
                  local.modal.action.remove +
                '</button>' +
              '</div>' +
@@ -118,8 +119,8 @@ xing.jira.Application = function (cssResources, options) {
            '</div>' +
            '<div class="jira-dialog-content">' +
              '<div class="gm-page-counter gm-print-hidden">' +
-               local.modal.ticketCount + ' ' + numberOfTickets +
-               local.modal.pageCount + ' ' + numberOfPages +
+               local.modal.ticketCount + ' <span class="aui-badge">' + numberOfTickets + '</span>' +
+               local.modal.pageCount + ' <span class="aui-badge">' + numberOfPages  + '</span>' +
              '</div>' +
              '<div class="form-body">' +
                '<ul class="gm-output-list">' +
@@ -253,8 +254,7 @@ xing.jira.Application = function (cssResources, options) {
     var $target = $('#greenhopper-agile-issue-web-panel dd a'),
         presenter = new nsXC.Presenter(),
         type = presenter.getString($('#type-val img').attr('alt')),
-        collaboratorKey = dataCollector.COLLABORATOR_KEY,
-        title = presenter.getString($('#summary-val').text())
+        collaboratorKey = dataCollector.COLLABORATOR_KEY
     ;
 
     ticketCache.latest = {

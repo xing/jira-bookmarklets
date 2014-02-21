@@ -42,7 +42,7 @@ module.exports = function (grunt) {
       grunt: { files: ['Gruntfile.js'] },
       js: {
         files: ['src/js/**/*.js', 'test/spec/**/*.js'],
-        tasks: ['jasmine']
+        tasks: ['jshint', 'jasmine']
       },
       sass: {
         files: ['src/scss/**/*.scss'],
@@ -74,7 +74,8 @@ module.exports = function (grunt) {
         'Gruntfile.js',
         'src/js/core/**/*.js',
         'src/js/jira/**/*.js',
-        'test/**/*.js'
+        'test/spec/**/*.js',
+        '!test/spec/*_helper.js'
       ],
       options: grunt.file.readJSON('.jshintrc')
     },

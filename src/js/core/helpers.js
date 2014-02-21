@@ -48,9 +48,11 @@ String.prototype.toArray = function (seperator) {
 Namespace.create('xing.core.helpers');
 
 xing.core.helpers.isArray =  function (obj) {
+  'use strict';
   return Object.prototype.toString.call(obj) === '[object Array]';
 };
 
 xing.core.helpers.isObject =  function (obj) {
+  'use strict';
   return Object.prototype.toString.call(obj) === '[object Object]';
 };

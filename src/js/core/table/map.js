@@ -73,6 +73,33 @@ xing.core.table.Map = function (tableCell, local, layoutName) {
   layoutName = layoutName || layout.DEFAULT_LAYOUT;
 
   /**
+   * Handle the different data types
+   * @method _mapSwitch
+   * @param {Object} data
+   * @param {String|Array|Object} mapItem
+   * @return {xing.jira.TableMapCell}
+   */
+  scope._mapSwitch = function (data, mapItem) {
+    var result;
+
+    if (typeof mapItem === 'string') {
+      result = tableCell[mapItem]({data: data, local: local.ticket});
+    }
+    else if (xing.core.helpers.isObject(mapItem)) {
+      var mapItemName = Object.keys(mapItem)[0];
+      if (mapItem[mapItemName].maxLength) {
+        data[mapItemName] = data[mapItemName].truncate(mapItem[mapItemName].maxLength);
+      }
+      result = tableCell[mapItemName]({data: data, local: local.ticket});
+    }
+    else {
+      result = scope.build(data, mapItem);
+    }
+
+    return result;
+  };
+
+  /**
    * @method build
    * @param {Object} data
    * @param {Array} map Multidimensional array with string values
@@ -85,22 +112,7 @@ xing.core.table.Map = function (tableCell, local, layoutName) {
     ;
 
     for (; index < length; index++) {
-      var item = map[index], result;
-
-      if (typeof item === 'string') {
-        result = tableCell[item]({data: data, local: local.ticket});
-      }
-      else if (xing.core.helpers.isObject(item)) {
-        var itemName = Object.keys(item)[0];
-        if (item[itemName].maxLength) {
-          data[itemName] = data[itemName].truncate(item[itemName].maxLength);
-        }
-        result = tableCell[itemName]({data: data, local: local.ticket});
-      }
-      else {
-        result = scope.build(data, item);
-      }
-      cellMap[index] = result;
+      cellMap[index] = scope._mapSwitch(data, map[index]);
     }
 
     return cellMap;
