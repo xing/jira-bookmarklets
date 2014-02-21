@@ -1,7 +1,7 @@
 @charset "UTF-8";
 
 .gm-hd {
-  color: $grey-dark;
+  color: $grey;
   text-align: left;
   text-transform: uppercase;
 }
@@ -15,14 +15,6 @@
   position: relative;
   text-indent: -99em;
   width: 12px;
-}
-
-.gm-warning {
-  background-color: $red-light;
-  color: white;
-  .gm-hd {
-    color: white;
-  }
 }
 
 %label {

@@ -75,7 +75,7 @@
 }
 
 .gm-hd {
-  color: #333333;
+  color: #707070;
   text-align: left;
   text-transform: uppercase;
 }
@@ -90,14 +90,6 @@
   position: relative;
   text-indent: -99em;
   width: 12px;
-}
-
-.gm-warning {
-  background-color: #e94902;
-  color: white;
-}
-.gm-warning .gm-hd {
-  color: white;
 }
 
 .gm-label-danger, .gm-label-bug, .gm-label-user-story {
