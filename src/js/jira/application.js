@@ -113,10 +113,10 @@ xing.jira.Application = function (cssResources, options) {
 
     $('body').append(
       $('<div id="gm-popup">' +
-         '<div class="gm-container jira-dialog box-shadow">' +
-           '<div class="jira-dialog-heading gm-print-hidden">' +
+         '<section class="gm-container jira-dialog box-shadow">' +
+           '<header class="jira-dialog-heading gm-print-hidden">' +
              '<h2>' + local.modal.heading + '</h2>' +
-           '</div>' +
+           '</header>' +
            '<div class="jira-dialog-content">' +
              '<div class="gm-page-counter gm-print-hidden">' +
                local.modal.ticketCount + ' <span class="aui-badge">' + numberOfTickets + '</span>' +
@@ -128,7 +128,7 @@ xing.jira.Application = function (cssResources, options) {
                  '<li class="gm-output-item">' + currentTicketMarkup + '</li>' +
                '</ul>' +
              '</div>' +
-             '<div class="buttons-container form-footer gm-print-hidden">' +
+             '<footer class="buttons-container form-footer gm-print-hidden">' +
                '<div class="buttons">' +
                  '<label for="gm-select-ticket">' +
                    local.modal.select +
@@ -144,9 +144,9 @@ xing.jira.Application = function (cssResources, options) {
                    local.modal.action.cancel +
                 '</a>' +
                '</div>' +
-             '</div>' +
+             '</footer>' +
            '</div>' +
-        '</div>'  +
+        '</section>' +
          '<div class="aui-blanket gm-print-hidden"></div>' +
        '</div>'
       )

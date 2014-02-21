@@ -138,7 +138,19 @@ xing.jira.TableMapCell = function () {
    * @see number
    */
   scope.created = function (options) {
-    return scope._titleBody(options, 'created');
+    var item = 'created';
+    return {
+      cell: {
+        options: { cssClass: scope.PREFIX + item },
+        title: { text: options.local[item].title },
+        body:  {
+          options: {
+            cssClass: scope.labelHelper.getSelector()
+          },
+          text: options.data[item]
+        }
+      }
+    };
   };
 
   /**
