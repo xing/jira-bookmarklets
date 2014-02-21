@@ -57,6 +57,9 @@ xing.jira.helpers.Label = function () {
    */
   scope.getSelector = function (type) {
     var result;
+    if (type === false) {
+      return  '';
+    }
 
     result = scope._filter(type, scope.DEFAULT_TYPES);
     result += scope._filter(type, scope.AGILE_TYPES);

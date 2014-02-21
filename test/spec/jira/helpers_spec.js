@@ -22,6 +22,13 @@ describe('xing.jira.helpers.Label', function () {
       expect(actual).toEqual(expected);
     });
 
+    it('returns nothing if the parameter false', function () {
+      actual = subject.getSelector(false);
+      expected = '';
+
+      expect(actual).toEqual(expected);
+    });
+
     it('returns specific value if a key is matching', function () {
       actual = subject.getSelector('bug');
       expected = subject.DEFAULT_LABEL_SELECTORS + ' ' +

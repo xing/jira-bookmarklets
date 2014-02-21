@@ -163,7 +163,7 @@ xing.jira.TableMapCell = function () {
         title: { text: options.local.dueDate.title },
         body: {
           options: {
-            cssClass: scope.labelHelper.getSelector(options.data.dueDate ? 'bug' : undefined)
+            cssClass: scope.labelHelper.getSelector(options.data.dueDate ? 'bug' : false)
           },
           text: options.data.dueDate
         }
