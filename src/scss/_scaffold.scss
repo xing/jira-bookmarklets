@@ -45,14 +45,6 @@
   @extend %label;
   background-color: $green;
 }
-.gm-pick-more i {
-  font: {
-    size: $font-size-h3;
-    style: normal;
-    weight: bold;
-  };
-  line-height: 0;
-}
 .gm-page-counter {
   color: $grey-dark;
   position: absolute;

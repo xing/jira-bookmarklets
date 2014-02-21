@@ -102,7 +102,7 @@ xing.jira.Application = function (cssResources, options) {
              tableBuilder.render(scope.tableMap.build(cachedTicketMap), builderRenderOptions) +
              '<div class="gm-ticket-action-panel gm-print-hidden">' +
                '<button type="button" class="' + buttonSelectors + '">' +
-                 '<span class="aui-icon aui-icon-small aui-iconfont-add">Add</span>' +
+                 '<i class="aui-icon aui-icon-small aui-iconfont-remove-label"></i>' +
                  local.modal.action.remove +
                '</button>' +
              '</div>' +
@@ -133,10 +133,9 @@ xing.jira.Application = function (cssResources, options) {
                  '<label for="gm-select-ticket">' +
                    local.modal.select +
                  '</label>&nbsp;' +
-                 '<button id="gm-select-ticket" ' +
-                   'class="gm-pick-more aui-button">' +
-                   '<i>+</i>' +
-                 '</button>&nbsp;' +
+                 '<button id="gm-select-ticket" class="js-gm-pick-more aui-button" original-title="' + local.modal.select + '">' +
+                   '<i class="aui-icon aui-icon-small aui-iconfont-add"></i>' +
+                 '</button>' +
                  '<button class="js-gm-print-action aui-button aui-button-primary">' +
                    local.modal.action.print +
                 '</button>' +
@@ -211,7 +210,7 @@ xing.jira.Application = function (cssResources, options) {
         ticketCache.remove();
         scope._hidePopup();
       })
-      .on('click', '.gm-pick-more', function (event) {
+      .on('click', '.js-gm-pick-more', function (event) {
         event.preventDefault();
         scope.cacheTicketHandler();
       })
