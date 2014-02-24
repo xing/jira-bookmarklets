@@ -6,12 +6,4 @@
       height: 3.4cm;
     }
   }
-  + .gm-ticket-action-panel {
-    bottom: 0.55em;
-    top: 4.9em;
-    .gm-output-item:nth-child(2n) & {
-      bottom: 1.75em;
-      top: 3.55em;
-    }
-  }
 }

@@ -1,28 +1,33 @@
 // Atlassian colors
-$aui-charcoal: #333333;
-$aui-medium:   #707070;
-$aui-ash-gray: #CCCCCC;
-$aui-green:    #14892C;
-$aui-red:      #D04437;
+$aui-charcoal:   #333333;
+$aui-medium:     #707070;
+$aui-light-gray: #F5F5F5;
+$aui-ash-gray:   #CCCCCC;
+$aui-green:      #14892C;
+$aui-red:        #D04437;
 // colors
-$red-dark:    #8F3601;
-$red:         $aui-red;
-$red-light:   #E94902;
+$red-dark:       #8F3601;
+$red:            $aui-red;
+$red-light:      #E94902;
 
-$grey-dark:   $aui-charcoal;
-$grey:        $aui-medium;
-$grey-light:  $aui-ash-gray;
+$grey-dark:      $aui-charcoal;
+$grey:           $aui-medium;
+$grey-light:     $aui-ash-gray;
+$grey-lighter:   $aui-light-gray;
 
-$green:       $aui-green;
+$green:          $aui-green;
 
 // fonts/typo
 $font-stack:        helvetica, arial, sans-serif;
 $base-line:         1.3334em;
 $default-font-size: 8.5pt;
-$font-size-milli:   0.6rem;
-$font-size-h6:      1.0rem;
-$font-size-h5:      1.2rem;
+$font-size-milli:   0.8rem !default;
+$font-size-h6:      1.0rem !default;
+$font-size-h5:      1.2rem !default;
 $font-size-h4:      1.3rem !default;
 $font-size-h3:      1.5rem !default;
 $font-size-h2:      1.8rem !default;
 $font-size-h1:      2.1rem !default;
+// table
+$table-border-size: 1px;
+$table-border-color: $grey-light;

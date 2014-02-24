@@ -44,10 +44,7 @@
   .gm-output-item {
     &:hover .gm-ticket-action-panel {
       opacity: 1;
-    }
-    &:nth-child(even) .gm-ticket-action-panel {
-      bottom: 9.6em;
-      top: 3.5em;
+      bottom: $table-border-size;
     }
   }
 

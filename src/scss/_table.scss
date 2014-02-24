@@ -1,5 +1,5 @@
 %table-cell {
-  border: 1px solid $grey-light;
+  border: $table-border-size solid $table-border-color;
 }
 .gm-table {
   @extend %table-cell;

@@ -5,40 +5,10 @@
   text-align: left;
   text-transform: uppercase;
 }
-/* -------------------- ticket pagination */
-.gm-ticket-section {
-  background-color: $grey-dark;
-  display: inline-block;
-  height: 8px;
-  line-height: 0;
-  overflow: hidden;
-  position: relative;
-  text-indent: -99em;
-  width: 12px;
-}
 
-%label {
-  background-color: $grey-dark;
-  border-radius: 0.2em;
-  color: white;
-  display: inline-block;
-  font-weight: bold;
-  line-height: 1em;
-  padding: 4px 8px 2px;
-}
-.gm-label-danger {
-  @extend %label;
-  background-color: $red;
-}
-.gm-label-bug {
-  @extend .gm-label-danger;
-}
-.gm-label-user-story {
-  @extend %label;
-  background-color: $green;
-}
 .gm-page-counter {
-  color: $grey-dark;
+  font-size: $font-size-milli;
+  color: $grey;
   position: absolute;
   right: 0.5rem;
   top: 22px;
@@ -60,16 +30,17 @@
   }
   .gm-ticket-action-panel {
     @include display-flex;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    bottom: 8.35em;
+    align-items: right;
+    background-color: $grey-lighter;
+    border-top: $table-border-size solid $table-border-color;
+    bottom: -3rem;
     justify-content: center;
-    left: 0;
+    left: $table-border-size;
     opacity: 0;
+    padding: 0.4rem 0;
     position: absolute;
-    right: 0;
+    right: $table-border-size;
     text-align: center;
-    top: 4.85em;
     transition: 0.4s;
   }
 

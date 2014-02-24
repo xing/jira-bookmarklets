@@ -80,38 +80,9 @@
   text-transform: uppercase;
 }
 
-/* -------------------- ticket pagination */
-.gm-ticket-section {
-  background-color: #333333;
-  display: inline-block;
-  height: 8px;
-  line-height: 0;
-  overflow: hidden;
-  position: relative;
-  text-indent: -99em;
-  width: 12px;
-}
-
-.gm-label-danger, .gm-label-bug, .gm-label-user-story {
-  background-color: #333333;
-  border-radius: 0.2em;
-  color: white;
-  display: inline-block;
-  font-weight: bold;
-  line-height: 1em;
-  padding: 4px 8px 2px;
-}
-
-.gm-label-danger, .gm-label-bug {
-  background-color: #d04437;
-}
-
-.gm-label-user-story {
-  background-color: #14892c;
-}
-
 .gm-page-counter {
-  color: #333333;
+  font-size: 0.8rem;
+  color: #707070;
   position: absolute;
   right: 0.5rem;
   top: 22px;
@@ -149,7 +120,7 @@
 }
 .gm-output-item:nth-child(odd):before {
   content: "Begin of page " counter(page-counter);
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   margin-bottom: 0.4em;
   margin-top: 0.2em;
 }
@@ -157,7 +128,7 @@
   border-bottom: 2px dashed #cccccc;
 }
 .gm-output-item:nth-child(even):after {
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   content: "End of page " counter(page-counter);
 }
 
@@ -230,14 +201,6 @@
 .gm-scrum-layout .gm-jira-title .gm-inner {
   height: 3.4cm;
 }
-.gm-scrum-layout + .gm-ticket-action-panel {
-  bottom: 0.55em;
-  top: 4.9em;
-}
-.gm-output-item:nth-child(2n) .gm-scrum-layout + .gm-ticket-action-panel {
-  bottom: 1.75em;
-  top: 3.55em;
-}
 
 .global .aui-message {
   left: 50%;
@@ -287,10 +250,7 @@
 @media screen {
   .gm-output-item:hover .gm-ticket-action-panel {
     opacity: 1;
-  }
-  .gm-output-item:nth-child(even) .gm-ticket-action-panel {
-    bottom: 9.6em;
-    top: 3.5em;
+    bottom: 1px;
   }
 
   .gm-container {
@@ -310,16 +270,17 @@
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    background-color: rgba(0, 0, 0, 0.3);
-    bottom: 8.35em;
+    align-items: right;
+    background-color: whitesmoke;
+    border-top: 1px solid #cccccc;
+    bottom: -3rem;
     justify-content: center;
-    left: 0;
+    left: 1px;
     opacity: 0;
+    padding: 0.4rem 0;
     position: absolute;
-    right: 0;
+    right: 1px;
     text-align: center;
-    top: 4.85em;
     transition: 0.4s;
   }
 }
