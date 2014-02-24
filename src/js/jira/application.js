@@ -24,6 +24,7 @@ xing.jira.Application = function (cssResources, options) {
       dataCollector,
       ticketCache,
       local,
+      markup,
       tableBuilder
   ;
 
@@ -36,6 +37,7 @@ xing.jira.Application = function (cssResources, options) {
     dataCollector  = new nsXC.DataCollector();
     ticketCache    = new nsXC.TicketCache();
     tableBuilder   = new nsXC.table.Builder();
+    markup         = new nsXC.Markup();
     local          = (new nsXC.I18n()).local();
     scope.tableMap = new nsXC.table.Map(new xing.jira.TableMapCell(), local, scope.layoutName);
     scope.addStyle(cssResources);
@@ -65,6 +67,7 @@ xing.jira.Application = function (cssResources, options) {
       scope._hidePopup();
     }
   };
+
   /**
    * @private
    * @method _hidePopup
@@ -81,7 +84,6 @@ xing.jira.Application = function (cssResources, options) {
   scope._updateHTML = function (cachedTicketMaps) {
     $('#gm-popup').remove();
 
-
     var map = scope.tableMap.build(ticketCache.latest),
         builderRenderOptions = {layoutName: scope.layoutName},
         currentTicketMarkup = tableBuilder.render(map, builderRenderOptions),
@@ -92,20 +94,14 @@ xing.jira.Application = function (cssResources, options) {
 
     cachedTicketMaps.forEach(function (cachedTicketMap) {
       var number = cachedTicketMap.number,
-          currentNumber = map.number,
-          buttonSelectors = 'aui-button js-gm-remove-ticket'
+          currentNumber = map.number
       ;
 
       if (number !== currentNumber) {
         cachedTicketsMarkup += '' +
           '<li class="gm-output-item">' +
              tableBuilder.render(scope.tableMap.build(cachedTicketMap), builderRenderOptions) +
-             '<div class="gm-ticket-action-panel gm-print-hidden">' +
-               '<button type="button" class="' + buttonSelectors + '">' +
-                 '<i class="aui-icon aui-icon-small aui-iconfont-remove-label"></i>' +
-                 local.modal.action.remove +
-               '</button>' +
-             '</div>' +
+             markup.ticketPanel(local.modal.action.remove) +
            '</li>'
         ;
       }
@@ -114,38 +110,13 @@ xing.jira.Application = function (cssResources, options) {
     $('body').append(
       $('<div id="gm-popup">' +
          '<section class="gm-container jira-dialog box-shadow">' +
-           '<header class="jira-dialog-heading gm-print-hidden">' +
-             '<h2>' + local.modal.heading + '</h2>' +
-           '</header>' +
+           markup.dialogHeader(local.modal.heading) +
            '<div class="jira-dialog-content">' +
-             '<div class="gm-page-counter gm-print-hidden">' +
-               local.modal.ticketCount + ' <span class="aui-badge">' + numberOfTickets + '</span>' +
-               local.modal.pageCount + ' <span class="aui-badge">' + numberOfPages  + '</span>' +
-             '</div>' +
-             '<div class="form-body">' +
-               '<ul class="gm-output-list">' +
-                 cachedTicketsMarkup +
-                 '<li class="gm-output-item">' + currentTicketMarkup + '</li>' +
-               '</ul>' +
-             '</div>' +
-             '<footer class="buttons-container form-footer gm-print-hidden">' +
-               '<div class="buttons">' +
-                 '<label for="gm-select-ticket">' +
-                   local.modal.select +
-                 '</label>&nbsp;' +
-                 '<button id="gm-select-ticket" class="js-gm-pick-more aui-button" original-title="' + local.modal.select + '">' +
-                   '<i class="aui-icon aui-icon-small aui-iconfont-add"></i>' +
-                 '</button>' +
-                 '<button class="js-gm-print-action aui-button aui-button-primary">' +
-                   local.modal.action.print +
-                '</button>' +
-                '<a class="js-gm-cancel-action aui-button aui-button-link" href="#">' +
-                   local.modal.action.cancel +
-                '</a>' +
-               '</div>' +
-             '</footer>' +
+             markup.pageCounter(local.modal.ticketCount, local.modal.pageCount, numberOfTickets, numberOfPages) +
+             markup.ticketPreview(cachedTicketsMarkup, currentTicketMarkup) +
            '</div>' +
-        '</section>' +
+           markup.dialogFooter(local.modal.select, local.modal.action.print, local.modal.action.cancel) +
+         '</section>' +
          '<div class="aui-blanket gm-print-hidden"></div>' +
        '</div>'
       )
