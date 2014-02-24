@@ -1,38 +1,33 @@
+%output-page-count-label {
+  color: $grey-light;
+  display: block;
+  font-size: $font-size-milli;
+  padding: 0.2rem 0;
+  text-align: center;
+}
+
 .gm-output-list {
+  counter-reset: page-counter;
   margin: 0;
   padding: 0;
 }
 .gm-output-item {
   @include box-sizing(border-box);
-  height: 12.2cm;
   overflow: hidden;
   page-break-inside: avoid;
   position: relative;
-}
-%output-page-count-label {
-  color: $grey-light;
-  display: block;
-  text-align: center;
-}
-.gm-output-list {
-  counter-reset: page-counter;
-}
-.gm-output-item {
   &:nth-child(odd) {
+    margin-bottom: 0.4rem;
     counter-increment: page-counter;
     &:before {
       @extend %output-page-count-label;
       content: "Begin of page " counter(page-counter);
-      font-size: $font-size-milli;
-      margin-bottom: 0.4em;
-      margin-top: 0.2em;
     }
   }
   &:nth-child(even) {
-    border-bottom: 2px dashed $grey-light;
     &:after {
       @extend %output-page-count-label;
-      font-size: $font-size-milli;
+      border-bottom: 2px dashed $grey-light;
       content: "End of page " counter(page-counter);
     }
   }
@@ -41,10 +36,29 @@
 // screen only definitions
 @mixin screenOutputLayout {
 
+  .gm-ticket-action-panel {
+    @include display-flex;
+    align-items: right;
+    background-color: $grey-lighter;
+    border-top: $table-border-size solid $table-border-color;
+    bottom: $table-border-size;
+    justify-content: center;
+    left: $table-border-size;
+    opacity: 0;
+    padding: 0.4rem 0;
+    position: absolute;
+    right: $table-border-size;
+    text-align: center;
+    transition: 0.4s;
+  }
   .gm-output-item {
     &:hover .gm-ticket-action-panel {
       opacity: 1;
-      bottom: $table-border-size;
+    }
+    &:nth-child(even) {
+      .gm-ticket-action-panel {
+        bottom: 1.7rem;
+      }
     }
   }
 
@@ -54,6 +68,7 @@
 @mixin printOutputLayout {
 
   .gm-output-item {
+    height: 12.2cm;
     &:nth-child(even) {
       border-bottom: none;
     }

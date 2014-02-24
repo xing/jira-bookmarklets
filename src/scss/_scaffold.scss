@@ -28,21 +28,6 @@
       padding: 2mm !important;
     }
   }
-  .gm-ticket-action-panel {
-    @include display-flex;
-    align-items: right;
-    background-color: $grey-lighter;
-    border-top: $table-border-size solid $table-border-color;
-    bottom: -3rem;
-    justify-content: center;
-    left: $table-border-size;
-    opacity: 0;
-    padding: 0.4rem 0;
-    position: absolute;
-    right: $table-border-size;
-    text-align: center;
-    transition: 0.4s;
-  }
 
 }
 // print only definitions

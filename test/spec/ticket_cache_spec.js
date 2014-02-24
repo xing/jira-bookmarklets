@@ -42,7 +42,7 @@ describe('TicketCache', function () {
       expect(actual).toEqual(expected);
     });
 
-    it('add an item in a array if a item exists', function () {
+    it('add an item in a array if a item is given', function () {
       subject.add({a:'b'});
       expected = [{a:'b'}];
       actual = subject.get();
@@ -76,7 +76,7 @@ describe('TicketCache', function () {
       expect(actual).toEqual(expected);
     });
 
-    it('remove the all items the in cache if no argument given', function () {
+    it('remove the all items the in cache if no argument exists', function () {
       subject.remove();
       expected = [];
       actual = subject.get();
@@ -89,12 +89,24 @@ describe('TicketCache', function () {
   describe('getCollaborator()', function () {
 
     var names;
-    beforeEach(function () {
-      names = 'Jeffrey Lebowski, Maude';
-      subject.add({a: 'b', collaborators: names});
+    afterEach(function () {
+      subject.remove();
     });
 
-    it('add a name to the list', function () {
+    it('returns the default list when no param is given', function () {
+      names = 'Walter, Donny';
+      subject.default.collaborators = names;
+
+      actual = subject.getCollaborators();
+      expected = names;
+
+      expect(actual).toEqual(expected);
+    });
+
+    it('returns a string of names when an proper param is given', function () {
+      names = 'Jeffrey Lebowski, Maude';
+      subject.add({a: 'b', collaborators: names});
+
       actual = subject.getCollaborators(0);
       expected = names;
 
@@ -105,13 +117,13 @@ describe('TicketCache', function () {
 
   describe('updateCollaborator()', function () {
 
-    beforeEach(function () {
-      subject.add({a: 'b', collaborators: ''});
+    afterEach(function () {
+      subject.remove();
     });
-
 
     it('add a name to the list', function () {
       var names = 'Jeffrey';
+      subject.add({a: 'b', collaborators: ''});
       subject.updateCollaborators(0, names);
       actual = subject.get();
       expected = [{a: 'b', collaborators: names}];

@@ -198,13 +198,19 @@ xing.jira.Application = function (cssResources, options) {
         $('#gm-popup .form-body table').eq(index).remove();
         scope.update(ticketCache.get());
       })
-      // .on('click', '.gm-change-collaborators', function () {
-      //   var index = $('.gm-output-list button').index(this);
-      //   console.log("ticket.data[inder] %o", ticketCache.data);
-      //   ticketCache.updateCollaborators(index, local.modal.collaboratorPrompt);
-      // })
-      .on('click', '#gm-add-collaborator', function () {
-        dataCollector.addCollaborators(local.modal.collaboratorPrompt);
+      //* @param {String} promptText Is displayed in the prompt dialog
+      .on('click', '.gm-change-collaborators', function () {
+
+        var index = $('.gm-output-list button').index(this),
+            names = ticketCache.getCollaborators(index),
+            confirmedNames = window.prompt(local.modal.collaboratorPrompt, names || '')
+        ;
+
+        if (confirmedNames !== null) {
+          ticketCache.updateCollaborators(index, confirmedNames.trimWhitespace());
+          scope.update();
+        }
+
       })
     ;
   };
@@ -223,8 +229,7 @@ xing.jira.Application = function (cssResources, options) {
   scope.collectDataFromDom = function () {
     var $target = $('#greenhopper-agile-issue-web-panel dd a'),
         presenter = new nsXC.Presenter(),
-        type = presenter.getString($('#type-val img').attr('alt')),
-        collaboratorKey = dataCollector.COLLABORATOR_KEY
+        type = presenter.getString($('#type-val img').attr('alt'))
     ;
 
     ticketCache.latest = {
@@ -232,7 +237,7 @@ xing.jira.Application = function (cssResources, options) {
       description:   presenter.getString($('#description-val').text()),
       storyPoints:   presenter.getString($('#customfield_10080-val').text()),
       dueDate:       presenter.getDate($('#due-date time').attr('datetime')),
-      collaborators: presenter.getStorageItem(collaboratorKey).join(' '),
+      collaborators: ticketCache.getCollaborators(),
       type:          type,
       typeSelector:  presenter.dashalizer(type),
       reporter:      presenter.getString($('#reporter-val span').text()),

@@ -10,7 +10,7 @@ xing.core.TicketCache = function () {
 
   var scope = this,
     hostname = location.hostname,
-    separator = hostname ? '.' : ''
+    separator = hostname ? '.' : 'local.'
   ;
 
   /**
@@ -21,6 +21,19 @@ xing.core.TicketCache = function () {
    * @final
    */
   scope.STORAGE_KEY = hostname + separator + 'ticket';
+
+  /**
+   * Local storage key for default collaborators
+   * @see STORAGE_KEY
+   */
+  scope.DEFAULT_COLLABORATOR_KEY = hostname + separator + 'default_collaborators';
+
+  /**
+   * Default values for temporary tickets
+   */
+  scope.default = {
+    collaborators: localStorage.getItem(scope.DEFAULT_COLLABORATOR_KEY)
+  };
 
   /**
    * @type Object
@@ -97,26 +110,34 @@ xing.core.TicketCache = function () {
    * Returns the names of all collaborators
    * @method updateCollaborators
    * @param {Integer} index Position number in the list where the collaborators should be updated.
-   * @return {String}
+   * @return {String} A coma separate string. e.g. "Jeffrey Lebowski, Maude, Walter"
    */
   scope.getCollaborators = function (index) {
     var ticket = scope.get(index)[0];
-    return ticket && ticket.collaborators || '';
+
+    return (ticket && ticket.collaborators || scope.default.collaborators);
   };
 
   /**
    * Add/update collaborator list
    * @method updateCollaborators
    * @see getCollaborators
-   * @param {String} confirmedNames A coma separated string with all names. e.g (Jeffrey Lebowski, Maude)
+   * @param {String} names A coma separated string with all names. e.g (Jeffrey Lebowski, Maude)
    */
   scope.updateCollaborators = function (index, names) {
     var tickets = scope.get(),
         ticket = tickets[index]
     ;
-
-    tickets[index] = scope._updateProperty(ticket, 'collaborators', names);
-    localStorage.setItem(scope.STORAGE_KEY, JSON.stringify(tickets));
+    if (ticket) {
+      tickets[index] = scope._updateProperty(ticket, 'collaborators', names);
+      localStorage.setItem(scope.STORAGE_KEY, JSON.stringify(tickets));
+    }
+    else {
+      scope.default.collaborators = names;
+      localStorage.setItem(scope.DEFAULT_COLLABORATOR_KEY, names);
+      scope._updateProperty(scope.latest, 'collaborators', names);
+    }
+    scope.update();
   };
 
   /**

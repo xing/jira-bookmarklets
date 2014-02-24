@@ -127,7 +127,7 @@ xing.jira.TableMapCell = function () {
           text: options.local.collaborator.title
         },
         body: {
-          text: options.data.collaborators + options.local.collaborator.action
+          text: options.data.collaborators.split(/,/).join(' ') + options.local.collaborator.action
         }
       }
     };

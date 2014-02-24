@@ -88,7 +88,16 @@
   top: 22px;
 }
 
+.gm-output-item:nth-child(odd):before, .gm-output-item:nth-child(even):after {
+  color: #cccccc;
+  display: block;
+  font-size: 0.8rem;
+  padding: 0.2rem 0;
+  text-align: center;
+}
+
 .gm-output-list {
+  counter-reset: page-counter;
   margin: 0;
   padding: 0;
 }
@@ -99,36 +108,19 @@
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
-  height: 12.2cm;
   overflow: hidden;
   page-break-inside: avoid;
   position: relative;
 }
-
-.gm-output-item:nth-child(odd):before, .gm-output-item:nth-child(even):after {
-  color: #cccccc;
-  display: block;
-  text-align: center;
-}
-
-.gm-output-list {
-  counter-reset: page-counter;
-}
-
 .gm-output-item:nth-child(odd) {
+  margin-bottom: 0.4rem;
   counter-increment: page-counter;
 }
 .gm-output-item:nth-child(odd):before {
   content: "Begin of page " counter(page-counter);
-  font-size: 0.8rem;
-  margin-bottom: 0.4em;
-  margin-top: 0.2em;
-}
-.gm-output-item:nth-child(even) {
-  border-bottom: 2px dashed #cccccc;
 }
 .gm-output-item:nth-child(even):after {
-  font-size: 0.8rem;
+  border-bottom: 2px dashed #cccccc;
   content: "End of page " counter(page-counter);
 }
 
@@ -211,6 +203,9 @@
 }
 
 @media print {
+  .gm-output-item {
+    height: 12.2cm;
+  }
   .gm-output-item:nth-child(even) {
     border-bottom: none;
   }
@@ -248,9 +243,30 @@
   }
 }
 @media screen {
+  .gm-ticket-action-panel {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    align-items: right;
+    background-color: whitesmoke;
+    border-top: 1px solid #cccccc;
+    bottom: 1px;
+    justify-content: center;
+    left: 1px;
+    opacity: 0;
+    padding: 0.4rem 0;
+    position: absolute;
+    right: 1px;
+    text-align: center;
+    transition: 0.4s;
+  }
+
   .gm-output-item:hover .gm-ticket-action-panel {
     opacity: 1;
-    bottom: 1px;
+  }
+  .gm-output-item:nth-child(even) .gm-ticket-action-panel {
+    bottom: 1.7rem;
   }
 
   .gm-container {
@@ -263,24 +279,5 @@
   .gm-container .form-body {
     height: 460px;
     padding: 2mm !important;
-  }
-
-  .gm-ticket-action-panel {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    align-items: right;
-    background-color: whitesmoke;
-    border-top: 1px solid #cccccc;
-    bottom: -3rem;
-    justify-content: center;
-    left: 1px;
-    opacity: 0;
-    padding: 0.4rem 0;
-    position: absolute;
-    right: 1px;
-    text-align: center;
-    transition: 0.4s;
   }
 }

@@ -8,19 +8,7 @@ Namespace.create('xing.core');
 xing.core.DataCollector = function () {
   'use strict';
 
-  var scope = this,
-    hostname = location.hostname,
-    separator = hostname ? '.' : ''
-  ;
-
-  /**
-   * Local storage key for collaborators caching
-   * @property COLLABORATOR_KEY
-   * @type String
-   * @static
-   * @final
-   */
-  scope.COLLABORATOR_KEY = hostname + separator + 'collaborators';
+  var scope = this;
 
   /**
    * List of subscribed observers
@@ -58,22 +46,6 @@ xing.core.DataCollector = function () {
     scope.observers.forEach(function (observer) {
       observer.update();
     });
-  };
-
-  /**
-   * Add/update collaborator list
-   * @method addCollaborators
-   * @param {String} promptText is displayed in the prompt dialog
-   */
-  scope.addCollaborators = function (promptText) {
-    var collaborators = localStorage.getItem(scope.COLLABORATOR_KEY) || '',
-        updatedCollaborators = window.prompt(promptText, collaborators || '')
-    ;
-
-    if (updatedCollaborators !== null) {
-      localStorage.setItem(scope.COLLABORATOR_KEY, updatedCollaborators);
-      this.update({collaborators: updatedCollaborators.toArray()});
-    }
   };
 
 };

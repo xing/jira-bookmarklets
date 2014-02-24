@@ -8,7 +8,7 @@ describe('table.Builder', function () {
   });
 
   describe('_text()', function () {
-    it('returns value of "text" property when exists', function () {
+    it('returns value of "text" property when is given', function () {
       var stub = {text: 'bam'};
       expected = 'bam';
       actual = subject._text(stub);
@@ -16,7 +16,7 @@ describe('table.Builder', function () {
       expect(expected).toEqual(actual);
     });
 
-    it('returns a empty string when no "text" property exists', function () {
+    it('returns a empty string when no "text" property is given', function () {
       var stub = {};
       expected = '';
       actual = subject._text(stub);
@@ -82,7 +82,7 @@ describe('table.Builder', function () {
       expect(expected).toEqual(actual);
     });
 
-    it('returns head element when "title" text exist', function () {
+    it('returns head element when "title" text is given', function () {
       cellStub = {
         cell: {
           title: {
@@ -97,7 +97,7 @@ describe('table.Builder', function () {
       expect(expected).toEqual(actual);
     });
 
-    it('returns body element when "body" text exist', function () {
+    it('returns body element when "body" text is given', function () {
       cellStub = {
         cell: {
           body: {
