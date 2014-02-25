@@ -123,6 +123,9 @@
   border-bottom: 2px dashed #cccccc;
   content: "End of page " counter(page-counter);
 }
+.gm-output-item:not(:last-child) {
+  color: #707070;
+}
 
 .gm-inner {
   padding: 2mm 3mm;
@@ -182,7 +185,6 @@
 }
 .gm-date-content .gm-bd {
   color: #cccccc;
-  font-size: 0.8rem;
   text-align: center;
   text-transform: uppercase;
 }
@@ -217,8 +219,7 @@
     background-color: white;
   }
 
-  #page,
-  #gm-add-collaborator {
+  #page {
     display: none;
   }
 

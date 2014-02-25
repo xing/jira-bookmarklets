@@ -31,6 +31,9 @@
       content: "End of page " counter(page-counter);
     }
   }
+  &:not(:last-child) {
+    color: $grey;
+  }
 }
 
 // screen only definitions
