@@ -1,6 +1,7 @@
 Namespace.create('xing.jira');
 
 /**
+ * Definitions of each ticket cell type which are presented in the Table layout.
  * @module xing.jira.TableMapCell
  * @requires xing.jira.helpers.Label
  * @class TableMapCell

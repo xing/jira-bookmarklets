@@ -1,7 +1,7 @@
 # Jira Helpers
 
 This is a summary of client side script helpers.
-It exist 2 bookmarklets that improve your Jira workflow.
+It exist 2 bookmarklets that improve your Jira work flow.
 
 ## Bookmarklet installation
 
@@ -48,6 +48,25 @@ You have to allow to print background colors in your browser print settings
 - in Firefox: *Appearance: Print Color Backgrounds*
 - in Google Chrome: *Options: Background colors and -images*
 
+**How to create a new print layout?**
+
+1. Define a new item in the `xing.core.table.layout` object.
+   - requires a multi dimensional array `_layout` object like the existing (e.g. `kanban`)
+   - requires a static item the represent the new layout (e.g. `KANBAN_LAYOUT: 'kanban'`)
+2. Define the Grunt task in the Gruntfile.js:
+
+``` javascript
+addBookmarletKanban: {
+  options: {
+    banner: appConfig.templates.banner(),
+    footer: appConfig.templates.addPluginFooter('xing.core.table.layout.KANBAN_LAYOUT')
+  },
+  files: {
+    'build/add-ticket-lay-kanban-bookmarklet.js': appConfig.src
+  }
+}
+```
+
 ## Project setup
 
 The build process based on [node.js](nodejs) please make sure you have a
@@ -68,16 +87,10 @@ the `Grundfile.js`.
 
 Run theses following command in the terminal for:
 
-_create the new compressed JavaScript resources_
+_create the new compressed JavaScript and CSS resources_
 
 ``` bash
-$ grunt compress:js
-```
-
-_create the new compressed CSS resources_
-
-``` bash
-$ grunt compress:css
+$ grunt build
 ```
 
 _run tests_
@@ -92,6 +105,18 @@ _watch resources and run tests continuously_
 $ grunt watch
 ```
 
+_generate documentation_
+
+``` bash
+$ grunt yuidoc
+```
+
+### Available Layouts
+
+![Default layout](https://source.xing.com/xws/jira-helpers/tree/develop/screenshots/default-layout-example.png "Default layout")
+![Scrum layout](https://source.xing.com/xws/jira-helpers/tree/develop/screenshots/scrum-layout-example.png "Scrum layout")
+
+
 #### Config
 
 For changing the base request path for fetching the remote resources you can
@@ -104,12 +129,17 @@ adjust this in the `src/config.json` file.
 
 ### Version 2
 
+**v2.2.0**
+
+- allow to create several ticket layouts
+- simplify scrum layout
+
 **v2.1.0**
 
 - make it possible to have different print ticket layouts
 - two different layouts are now available:
-  - [default](/xws/jira-helpers/blob/master/demo/default-layout-example.png)
-  - [scrum](/xws/jira-helpers/blob/master/demo/scrum-layout-example.png) that shows story points
+  - [default](https://source.xing.com/xws/jira-helpers/tree/develop/screenshots/default-layout-example.png)
+  - [scrum](https://source.xing.com/xws/jira-helpers/tree/develop/screenshots/scrum-layout-example.png) that shows story points
 
 **v2.0.0**
 

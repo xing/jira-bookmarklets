@@ -16,8 +16,6 @@ String.prototype.truncate = function (maxlength) {
 };
 /**
  * Return a trimed string with whitespace and newlines to a single line.
- * @module xing.jira
- * @class String
  * @return {String}
  * @example
  *   '   foo
@@ -30,8 +28,6 @@ String.prototype.trimWhitespace = function () {
 };
 /**
  * Return an array
- * @module xing.jira
- * @class String
  * @param {String} A character they used as separator. Detault: ','
  * @return {Array}
  */

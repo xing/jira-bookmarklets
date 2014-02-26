@@ -6,10 +6,10 @@ Namespace.create('xing.jira');
  * @class Application
  * @requires AJS
  * @requires jQuery
- * @requires xing.core.table
+ * @requires xing.core.Observer
+ * @requires xing.core.ticketCache
  * @requires xing.core.Presenter
  * @requires xing.core.I18n
- * @requires xing.core.DataCollector
  * @requires xing.jira.TableMapCell
  * @type Object
  * @param {String} cssResources A string of CSS definitions. e.g. 'body { color: red; }'
@@ -21,7 +21,7 @@ xing.jira.Application = function (cssResources, options) {
 
   var scope = this,
       nsXC = xing.core,
-      dataCollector,
+      observer,
       ticketCache,
       local,
       markup,
@@ -34,7 +34,7 @@ xing.jira.Application = function (cssResources, options) {
    */
   scope.initialze = function (cssResources, options) {
     scope.layoutName = options && options.layoutName || '';
-    dataCollector  = new nsXC.DataCollector();
+    observer  = new nsXC.Observer();
     ticketCache    = new nsXC.TicketCache();
     tableBuilder   = new nsXC.table.Builder();
     markup         = new nsXC.Markup();
@@ -112,7 +112,7 @@ xing.jira.Application = function (cssResources, options) {
          '<section class="gm-container jira-dialog box-shadow">' +
            markup.dialogHeader(local.modal.heading) +
            '<div class="jira-dialog-content">' +
-             markup.pageCounter(local.modal.ticketCount, local.modal.pageCount, numberOfTickets, numberOfPages) +
+             markup.pageCounter(local.modal.ticketCount, numberOfTickets, local.modal.pageCount, numberOfPages) +
              markup.ticketPreview(cachedTicketsMarkup, currentTicketMarkup) +
            '</div>' +
            markup.dialogFooter(local.modal.select, local.modal.action.print, local.modal.action.cancel) +
@@ -169,8 +169,8 @@ xing.jira.Application = function (cssResources, options) {
   scope.showPopup = function () {
     if ($('#gm-popup')[0]) { return; }
     // register observer
-    dataCollector.subscribe(this);
-    dataCollector.subscribe(ticketCache);
+    observer.subscribe(this);
+    observer.subscribe(ticketCache);
 
     scope.update(ticketCache.get());
 
@@ -246,7 +246,7 @@ xing.jira.Application = function (cssResources, options) {
       component:     presenter.getString($('#components-field').text()),
       target:        presenter.getElementText($target)
     };
-    dataCollector.update();
+    observer.update();
   };
 
   scope.initialze(cssResources, options);

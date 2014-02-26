@@ -108,7 +108,7 @@ xing.core.TicketCache = function () {
 
   /**
    * Returns the names of all collaborators
-   * @method updateCollaborators
+   * @method getCollaborators
    * @param {Integer} index Position number in the list where the collaborators should be updated.
    * @return {String} A coma separate string. e.g. "Jeffrey Lebowski, Maude, Walter"
    */

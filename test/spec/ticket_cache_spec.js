@@ -1,4 +1,4 @@
-describe('TicketCache', function () {
+describe('xing.core.TicketCache', function () {
   'use strict';
 
   var subject, expected, actual;

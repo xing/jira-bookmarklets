@@ -1,4 +1,4 @@
-describe('table.Builder', function () {
+describe('xing.core.table.Builder', function () {
   'use strict';
 
   var subject, expected, actual;

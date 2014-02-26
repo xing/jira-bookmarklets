@@ -1,21 +1,23 @@
 Namespace.create('xing.core');
 
 /**
+ * A general observer pattern.
+ * All subscriber objects must have the `update()` method.
  * @module xing.core
- * @class DataCollector
- * @requires String
+ * @class Observer
  */
-xing.core.DataCollector = function () {
+xing.core.Observer = function () {
   'use strict';
 
   var scope = this;
 
   /**
+   * @private
    * List of subscribed observers
-   * @property observers
+   * @property _observers
    * @type Array
    */
-  scope.observers = [];
+  scope._observers = [];
 
   /**
    * Register observer objects
@@ -23,7 +25,7 @@ xing.core.DataCollector = function () {
    * @param {Object} subscriber
    */
   scope.subscribe = function (subscriber) {
-    scope.observers.push(subscriber);
+    scope._observers.push(subscriber);
   };
 
   /**
@@ -34,16 +36,16 @@ xing.core.DataCollector = function () {
   scope.unsubscribe = function (subscriber) {
     var index = scope.observer.indexOf(subscriber);
     if (index >= 0) {
-      scope.observers.splice(index);
+      scope._observers.splice(index);
     }
   };
 
   /**
-   * Trigger all observers to make an update
+   * Trigger all observers to make an update.
    * @method update
    */
   scope.update = function () {
-    scope.observers.forEach(function (observer) {
+    scope._observers.forEach(function (observer) {
       observer.update();
     });
   };

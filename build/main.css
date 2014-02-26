@@ -123,9 +123,6 @@
   border-bottom: 2px dashed #cccccc;
   content: "End of page " counter(page-counter);
 }
-.gm-output-item:not(:last-child) {
-  color: #707070;
-}
 
 .gm-inner {
   padding: 2mm 3mm;
@@ -268,6 +265,9 @@
   }
   .gm-output-item:nth-child(even) .gm-ticket-action-panel {
     bottom: 1.7rem;
+  }
+  .gm-output-item:not(:last-child) {
+    color: #707070;
   }
 
   .gm-container {

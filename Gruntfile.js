@@ -8,7 +8,12 @@ module.exports = function (grunt) {
 
   var appConfig = {
     src: [
-      'bower_components/jquery/dist/jquery.min.js',
+      'bower_components/namespace-js/src/namespace.js',
+      'src/js/core/**/*.js',
+      'src/js/jira/**/*.js'
+    ],
+    testSrc: [
+      'bower_components/jquery/dist/jquery.js',
       'bower_components/namespace-js/src/namespace.js',
       'src/js/core/**/*.js',
       'src/js/jira/**/*.js'
@@ -17,6 +22,29 @@ module.exports = function (grunt) {
       src: '',
       path: 'build/main.min.css',
       delay: 1000
+    },
+    templates: {
+      banner: function () { return 'javascript:void(function(){'; },
+      printPluginFooter: function (layout) {
+        var options = layout ? ', { layoutName: ' + layout + ' }' : '';
+        return '' +
+          "var xingJiraApp = new xing.jira.Application('<%= appConfig.cssMin.src %>'" + options + ");" +
+          'xingJiraApp.versionTimestamp="<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
+          'xingJiraApp.version="<%= pkg.version %>";' +
+          'xingJiraApp.showPopup();' +
+          '})();'
+        ;
+      },
+      addPluginFooter: function (layout) {
+        var options = layout ? ', { layoutName: ' + layout + ' }' : '';
+        return '' +
+          'var xingJiraApp = new xing.jira.Application("", ' + options + ');' +
+          'xingJiraApp.versionTimestamp="<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
+          'xingJiraApp.version="<%= pkg.version %>";' +
+          'xingJiraApp.cacheTicketHandler();' +
+          '})();'
+        ;
+      }
     }
   };
 
@@ -26,7 +54,7 @@ module.exports = function (grunt) {
 
     jasmine: {
       all: {
-        src: appConfig.src,
+        src: appConfig.testSrc,
         options: {
           helpers: 'test/spec/*_helper.js',
           specs: 'test/spec/**/*_spec.js',
@@ -114,13 +142,8 @@ module.exports = function (grunt) {
       },
       printBookmarklet: {
         options: {
-          banner: 'javascript:void(function(){',
-          footer: "var xingJiraApp = new xing.jira.Application('<%= appConfig.cssMin.src %>');" +
-                  'xingJiraApp.versionTimestamp=' +
-                    '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
-                  'xingJiraApp.version="<%= pkg.version %>";' +
-                  'xingJiraApp.showPopup();' +
-                  '})();'
+          banner: appConfig.templates.banner(),
+          footer: appConfig.templates.printPluginFooter()
         },
         files: {
           'build/ticket-print-bookmarklet.js': appConfig.src
@@ -128,16 +151,8 @@ module.exports = function (grunt) {
       },
       printBookmarkletScrum: {
         options: {
-          banner: 'javascript:void(function(){',
-          footer: "var xingJiraApp = new xing.jira.Application(" +
-                    "'<%= appConfig.cssMin.src %>', " +
-                    '{ layoutName: xing.core.table.layout.SCRUM_LAYOUT }' +
-                  ");" +
-                  'xingJiraApp.versionTimestamp=' +
-                    '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
-                  'xingJiraApp.version="<%= pkg.version %>";' +
-                  'xingJiraApp.showPopup();' +
-                  '})();'
+          banner: appConfig.templates.banner(),
+          footer: appConfig.templates.printPluginFooter('xing.core.table.layout.SCRUM_LAYOUT')
         },
         files: {
           'build/ticket-print-lay-scrum-bookmarklet.js': appConfig.src
@@ -145,13 +160,8 @@ module.exports = function (grunt) {
       },
       addBookmarlet: {
         options: {
-          banner: 'javascript:void(function(){',
-          footer: 'var xingJiraApp = new xing.jira.Application();' +
-                  'xingJiraApp.versionTimestamp=' +
-                    '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
-                  'xingJiraApp.version="<%= pkg.version %>";' +
-                  'xingJiraApp.cacheTicketHandler();' +
-                  '})();'
+          banner: appConfig.templates.banner(),
+          footer: appConfig.templates.addPluginFooter()
         },
         files: {
           'build/add-ticket-bookmarklet.js': appConfig.src
@@ -159,16 +169,8 @@ module.exports = function (grunt) {
       },
       addBookmarletScrum: {
         options: {
-          banner: 'javascript:void(function(){',
-          footer: 'var xingJiraApp = new xing.jira.Application(' +
-                    '"", ' +
-                    '{ layoutName: xing.core.table.layout.SCRUM_LAYOUT }' +
-                  ');' +
-                  'xingJiraApp.versionTimestamp=' +
-                    '"<%= grunt.template.today("yyyy-mm-dd h:MM:ss TT") %>";' +
-                  'xingJiraApp.version="<%= pkg.version %>";' +
-                  'xingJiraApp.cacheTicketHandler();' +
-                  '})();'
+          banner: appConfig.templates.banner(),
+          footer: appConfig.templates.addPluginFooter('xing.core.table.layout.SCRUM_LAYOUT')
         },
         files: {
           'build/add-ticket-lay-scrum-bookmarklet.js': appConfig.src
@@ -188,7 +190,8 @@ module.exports = function (grunt) {
     }, config.delay);
   });
 
-  grunt.registerTask('default', ['sass:dist', 'cssmin', 'uglify']);
+  grunt.registerTask('build',   ['sass:dist', 'cssmin', 'uglify']);
   grunt.registerTask('test',    ['jasmine:all']);
+  grunt.registerTask('default', 'build');
 
 };

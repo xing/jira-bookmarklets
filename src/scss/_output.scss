@@ -31,9 +31,6 @@
       content: "End of page " counter(page-counter);
     }
   }
-  &:not(:last-child) {
-    color: $grey;
-  }
 }
 
 // screen only definitions
@@ -62,6 +59,9 @@
       .gm-ticket-action-panel {
         bottom: 1.7rem;
       }
+    }
+    &:not(:last-child) {
+      color: $grey;
     }
   }
 

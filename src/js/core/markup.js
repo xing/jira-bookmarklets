@@ -1,7 +1,9 @@
 Namespace.create('xing.core');
 
 /**
- * This is a library of the most markup snippets of the bookmarlet
+ * This is a library of the most markup snippet methods for the layout.
+ * @module xing.core
+ * @class Markup
  */
 xing.core.Markup = function () {
   'use strict';
@@ -58,11 +60,11 @@ xing.core.Markup = function () {
   /**
    * @method pageCounter
    * @param {String} ticketText
-   * @param {String} pageText
    * @param {String} ticketCount
+   * @param {String} pageText
    * @param {String} pageCount
    */
-  scope.pageCounter = function (ticketText, pageText, ticketCount, pageCount) {
+  scope.pageCounter = function (ticketText, ticketCount, pageText, pageCount) {
     return '' +
       '<div class="gm-page-counter gm-print-hidden">' +
         ticketText + ' <span class="aui-badge">' + ticketCount + '</span>' +
@@ -72,7 +74,7 @@ xing.core.Markup = function () {
   };
 
   /**
-   * @method pageCounter
+   * @method ticketPreview
    * @param {String} cachedTicketsMarkup
    * @param {String} currentTicketMarkup
    */

@@ -1,9 +1,9 @@
 Namespace.create('xing.jira.helpers');
 
 /**
- * @module xing.jira.helpers.Label
- * @class helper
- * @type literal
+ * @module xing.jira.helpers
+ * @class Label
+ * @type function
  */
 xing.jira.helpers.Label = function () {
   'use strict';
@@ -14,13 +14,13 @@ xing.jira.helpers.Label = function () {
    * @property NAMESPACE
    * @type String
    * @static
-   * @final
    */
   scope.NAMESPACE = 'aui-lozenge';
 
   /**
    * @property DEFAULT_LABEL_SELECTORS
-   * @see NAMESPACE
+   * @type String
+   * @static
    */
   scope.DEFAULT_LABEL_SELECTORS = 'aui-lozenge aui-lozenge-subtle';
 
@@ -28,7 +28,7 @@ xing.jira.helpers.Label = function () {
    * Style mapping for of the common issue types.
    * @property DEFAULT_TYPES
    * @type Object
-   * @see NAMESPACE
+   * @static
    */
   scope.DEFAULT_TYPES = {
     'bug':         'error',
@@ -39,8 +39,9 @@ xing.jira.helpers.Label = function () {
 
   /**
    * Greenhopper/Jira Agile issue types
-   * @type AGILE_TYPES
-   * @see DEFAULT_TYPES
+   * @property AGILE_TYPES
+   * @type Object
+   * @static
    */
   scope.AGILE_TYPES = {
     'user-story':           'success',
@@ -58,7 +59,7 @@ xing.jira.helpers.Label = function () {
   scope.getSelector = function (type) {
     var result;
     if (type === false) {
-      return  '';
+      return '';
     }
 
     result = scope._filter(type, scope.DEFAULT_TYPES);

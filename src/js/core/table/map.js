@@ -1,8 +1,9 @@
 Namespace.create('xing.core.table');
 
 /**
- * @module xing.jira.table
- * @class Layout
+ * @module xing.core.table
+ * @class layout
+ * @for xing.core.table.Map
  * @type literal
  */
 xing.core.table.layout = {
@@ -24,6 +25,8 @@ xing.core.table.layout = {
   /**
    * Basic layout types
    * @property _layouts
+   * Available properties:
+   * collaborators, component, created, description, dueDate, number, reporter, storyPoints, target, title, type,
    */
   _layouts: {
     default: [
@@ -55,7 +58,7 @@ xing.core.table.layout = {
 };
 
 /**
- * @module xing.jira.table
+ * @module xing.core.table
  * @class Map
  * @type function
  * @requires xing.core.table.layout
