@@ -34,6 +34,10 @@ describe('xing.core.TicketCache', function () {
 
   describe('add()', function () {
 
+    beforeEach(function () {
+      subject.remove();
+    });
+
     it('do nothing if no item exists', function () {
       subject.add();
       expected = [];
@@ -45,6 +49,15 @@ describe('xing.core.TicketCache', function () {
     it('add an item in a array if a item is given', function () {
       subject.add({a:'b'});
       expected = [{a:'b'}];
+      actual = subject.get();
+
+      expect(actual).toEqual(expected);
+    });
+
+    it('add another item in an existing list of item', function () {
+      subject.add({a:'b'});
+      subject.add({c:'d'});
+      expected = [{a:'b'}, {c:'d'}];
       actual = subject.get();
 
       expect(actual).toEqual(expected);

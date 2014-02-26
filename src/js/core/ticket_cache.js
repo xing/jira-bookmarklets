@@ -32,7 +32,7 @@ xing.core.TicketCache = function () {
    * Default values for temporary tickets
    */
   scope.default = {
-    collaborators: localStorage.getItem(scope.DEFAULT_COLLABORATOR_KEY)
+    collaborators: localStorage.getItem(scope.DEFAULT_COLLABORATOR_KEY) || ''
   };
 
   /**
@@ -86,9 +86,9 @@ xing.core.TicketCache = function () {
   };
 
   /**
-   * Remove an ticket from the cached ticket list
+   * Remove tickets from the cached ticket list.
    * @method remove
-   * @param {Integer} [index] Index number of the item to be returned
+   * @param {Integer} [index] Remove an specific item in the list
    * @return {Array} list of updated cached tickets
    */
   scope.remove = function (index) {
@@ -128,6 +128,9 @@ xing.core.TicketCache = function () {
     var tickets = scope.get(),
         ticket = tickets[index]
     ;
+
+    names = names || '';
+
     if (ticket) {
       tickets[index] = scope._updateProperty(ticket, 'collaborators', names);
       localStorage.setItem(scope.STORAGE_KEY, JSON.stringify(tickets));

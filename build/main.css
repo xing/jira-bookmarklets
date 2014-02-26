@@ -257,7 +257,6 @@
     position: absolute;
     right: 1px;
     text-align: center;
-    transition: 0.4s;
   }
 
   .gm-output-item:hover .gm-ticket-action-panel {
@@ -266,7 +265,7 @@
   .gm-output-item:nth-child(even) .gm-ticket-action-panel {
     bottom: 1.7rem;
   }
-  .gm-output-item:not(:last-child) {
+  .gm-output-item:not(.is-current) {
     color: #707070;
   }
 

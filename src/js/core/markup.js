@@ -82,8 +82,8 @@ xing.core.Markup = function () {
     return '' +
       '<div class="form-body">' +
         '<ul class="gm-output-list">' +
+          '<li class="gm-output-item is-current">' + currentTicketMarkup + '</li>' +
           cachedTicketsMarkup +
-          '<li class="gm-output-item">' + currentTicketMarkup + '</li>' +
         '</ul>' +
       '</div>'
     ;
