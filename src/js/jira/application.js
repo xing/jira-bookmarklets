@@ -102,7 +102,7 @@ xing.jira.Application = function (cssResources, options) {
           '<li class="gm-output-item">' +
              tableBuilder.render(scope.tableMap.build(cachedTicketMap), builderRenderOptions) +
              markup.ticketPanel(local.modal.action.remove) +
-           '</li>'
+          '</li>'
         ;
       }
     });
@@ -175,20 +175,24 @@ xing.jira.Application = function (cssResources, options) {
     scope.update(ticketCache.get());
 
     $('body')
+
       .on('click', '.js-gm-print-action', function (event) {
         event.preventDefault();
         window.print();
         ticketCache.remove();
         scope._hidePopup();
       })
+
       .on('click', '.js-gm-pick-more', function (event) {
         event.preventDefault();
         scope.cacheTicketHandler();
       })
+
       .on('click', '.js-gm-cancel-action', function (event) {
         event.preventDefault();
         scope._hidePopup();
       })
+
       .on('click', '.js-gm-remove-ticket', function (event) {
         event.preventDefault();
         var $target = $(event.target).parents('li'),
@@ -198,14 +202,20 @@ xing.jira.Application = function (cssResources, options) {
         $('#gm-popup .form-body table').eq(index).remove();
         scope.update(ticketCache.get());
       })
-      //* @param {String} promptText Is displayed in the prompt dialog
-      .on('click', '.gm-change-collaborators', function () {
 
-        var index = $('.gm-output-list button').index(this),
-            names = ticketCache.getCollaborators(index),
-            confirmedNames = window.prompt(local.modal.collaboratorPrompt, names || '')
+      .on('click', '.gm-change-collaborators', function () {
+        var index = $('.gm-output-list button').index(this) - 1,
+            names, confirmedNames
         ;
 
+        if ($(this).parents('.is-current')) {
+          names = ticketCache.getCollaborators();
+        }
+        else {
+          names = ticketCache.getCollaborators(index);
+        }
+
+        confirmedNames = window.prompt(local.modal.collaboratorPrompt, names || '');
         if (confirmedNames !== null) {
           ticketCache.updateCollaborators(index, confirmedNames.trimWhitespace());
           scope.update();

@@ -72,7 +72,6 @@ xing.core.Markup = function () {
       '</div>'
     ;
   };
-
   /**
    * @method ticketPreview
    * @param {String} cachedTicketsMarkup
