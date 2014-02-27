@@ -1,16 +1,16 @@
-.gm-left, .gm-ltr, .gm-jira-number, .gm-jira-title .gm-bd, .gm-jira-description .gm-bd {
+.gm-jira-number, .gm-jira-title .gm-bd, .gm-jira-description .gm-bd {
   text-align: left;
 }
 
-.gm-center, .gm-jira-story {
+.gm-jira-story {
   text-align: center;
 }
 
-.gm-snap-left, .gm-jira-pairing .gm-hd, .gm-jira-story .gm-hd {
+.gm-jira-pairing .gm-hd, .gm-jira-story .gm-hd {
   float: left;
 }
 
-.gm-snap-right, .gm-jira-story .gm-bd {
+.gm-jira-story .gm-bd, .gm-change-collaborators {
   float: right;
 }
 
@@ -20,26 +20,6 @@
   -moz-hyphens: auto;
   -webkit-hyphens: auto;
   hyphens: auto;
-}
-
-.gm-grid-item {
-  display: inline-block;
-}
-
-.gm-10 {
-  width: 10%;
-}
-
-.gm-20 {
-  width: 20%;
-}
-
-.gm-40 {
-  width: 40%;
-}
-
-.gm-60 {
-  width: 60%;
 }
 
 .gm-jira-description .gm-bd {
@@ -128,6 +108,9 @@
   padding: 2mm 3mm;
 }
 
+.gm-jira-number {
+  min-width: 30%;
+}
 .gm-jira-number .gm-bd {
   word-break: break-all;
 }
@@ -176,6 +159,9 @@
   width: 40px;
 }
 
+.gm-date-content {
+  width: 20%;
+}
 .gm-date-content .gm-hd {
   padding: 0 0 1px;
   text-align: center;

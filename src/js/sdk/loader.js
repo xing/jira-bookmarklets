@@ -2,8 +2,8 @@
  * Loads specific scripts, depending on the parameters.
  * @class SDK Loader
  * @param {Object} options
- *   @param {Integer} [options.kit] Represent the serveral bookmarklet types *(default: tricket-print)*.
- *   @param {Integer} [options.env] Represent the environment aka branch name *(default: master)*.
+ *   @param {Integer} [options.kit] Represent the serveral bookmarklet types (default: tricket-print).
+ *   @param {Integer} [options.env] Represent the environment aka branch name (default: master).
  *   @param {String}  [options.path] Host url path of where the actual resource to be loaded.
  */
 (function (options) {

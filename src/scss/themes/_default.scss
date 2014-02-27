@@ -4,6 +4,7 @@
 
 .gm-jira-number {
   @extend %text-left;
+  min-width: 30%;
   .gm-bd {
     @extend %h1;
     word-break: break-all;
@@ -75,6 +76,7 @@
 }
 
 .gm-date-content {
+  width: 20%;
   .gm-hd {
     padding: 0 0 1px;
     text-align: center;
@@ -87,4 +89,7 @@
   .gm-inner {
     min-height: 1.2cm;
   }
+}
+.gm-change-collaborators {
+  @extend %snap-right;
 }

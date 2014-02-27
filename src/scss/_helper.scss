@@ -20,31 +20,6 @@
   @include hyphens(auto);
 }
 
-// classes
-.gm-center {
-  @extend %text-center;
-}
-.gm-left {
-  @extend %text-left;
-}
-.gm-ltr {
-  @extend %text-left;
-}
-.gm-snap-left {
-  @extend %snap-left;
-}
-.gm-snap-right {
-  @extend %snap-right;
-}
-
-// simple grid
-.gm-grid-item { display: inline-block; }
-@each $size in 10, 20, 40, 60 {
-  .gm-#{$size} {
-    width: percentage($size/100);
-  }
-}
-
 // fonts
 %default-font-size {
   font-size: 1rem;
@@ -54,15 +29,6 @@
 }
 %h2 {
   font-size: $font-size-h2;
-}
-%h3 {
-  font-size: $font-size-h3;
-}
-%h4 {
-  font-size: $font-size-h4;
-}
-%h5 {
-  font-size: $font-size-h5;
 }
 
 @media print {

@@ -205,7 +205,7 @@ xing.jira.TableMapCell = function () {
   scope.start = function (options) {
     return {
       cell: {
-        options: { cssClass: 'gm-date-content gm-20' },
+        options: { cssClass: 'gm-date-content' },
         title: { text: options.local.start.title },
         body: { text: options.local.start.body }
       }
@@ -219,7 +219,7 @@ xing.jira.TableMapCell = function () {
   scope.closed = function (options) {
     return {
       cell: {
-        options: { cssClass: 'gm-date-content gm-20' },
+        options: { cssClass: 'gm-date-content' },
         title: { text: options.local.closed.title },
         body: { text: options.local.closed.body }
       }
