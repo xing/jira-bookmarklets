@@ -1,6 +1,6 @@
 {
   "name": "jira-helpers",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "homepage": "http://dev.xing.com",
   "scripts": {
     "test": "grunt test"
