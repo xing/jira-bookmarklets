@@ -1,2 +1,5 @@
 node_modules/*
 _SpecRunner.html
+.sass-cache/
+bower_components
+docs/
