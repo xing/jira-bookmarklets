@@ -1,0 +1,27 @@
+@charset "UTF-8";
+@import "settings"
+      , "mixins"
+      , "helper"
+      , "table"
+      , "scaffold"
+      , "output"
+      , "themes/default"
+      , "themes/scrum"
+;
+// JIRA overrides
+.global .aui-message {
+  left: 50%;
+  margin-left: -220px;
+  position: absolute;
+  top: 20px;
+  z-index: 101;
+}
+
+@media print {
+  @include printOutputLayout;
+  @include printScaffoldLayout;
+}
+@media screen {
+  @include screenOutputLayout;
+  @include screenScaffoldLayout;
+}

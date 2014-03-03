@@ -1,0 +1,20 @@
+@mixin display-flex {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display:     -ms-flexbox;
+  display:         flex;
+}
+
+@mixin box-sizing($value) {
+  @each $vendor in o, ms, moz, webkit {
+    -#{$vendor}-box-sizing: $value;
+  }
+  box-sizing: $value;
+}
+
+@mixin hyphens($value) {
+  @each $vendor in o, ms, moz, webkit {
+    -#{$vendor}-hyphens: $value;
+  }
+  hyphens: $value;
+}

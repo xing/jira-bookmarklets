@@ -1,5 +1,5 @@
-node_modules/*
-_SpecRunner.html
-.sass-cache/
-bower_components
+node_modules/
+_SpecRunner.tml
 docs/
+.sass-cache
+bower_components

@@ -16,8 +16,6 @@ String.prototype.truncate = function (maxlength) {
 };
 /**
  * Return a trimed string with whitespace and newlines to a single line.
- * @module xing.jira
- * @class String
  * @return {String}
  * @example
  *   '   foo
@@ -30,8 +28,6 @@ String.prototype.trimWhitespace = function () {
 };
 /**
  * Return an array
- * @module xing.jira
- * @class String
  * @param {String} A character they used as separator. Detault: ','
  * @return {Array}
  */
@@ -40,4 +36,19 @@ String.prototype.toArray = function (seperator) {
 
   seperator = new RegExp(seperator || ',');
   return this.split(seperator);
+};
+
+/**
+ * Specific helpers
+ */
+Namespace.create('xing.core.helpers');
+
+xing.core.helpers.isArray =  function (obj) {
+  'use strict';
+  return Object.prototype.toString.call(obj) === '[object Array]';
+};
+
+xing.core.helpers.isObject =  function (obj) {
+  'use strict';
+  return Object.prototype.toString.call(obj) === '[object Object]';
 };

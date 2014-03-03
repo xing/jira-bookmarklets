@@ -1,0 +1,62 @@
+@charset "UTF-8";
+
+.gm-hd {
+  color: $grey;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.gm-page-counter {
+  font-size: $font-size-milli;
+  color: $grey;
+  position: absolute;
+  right: 0.5rem;
+  top: 22px;
+}
+
+// screen only definitions
+@mixin screenScaffoldLayout {
+
+  .gm-container {
+    left: 50%;
+    margin-left: -9cm;
+    margin-top: 5%;
+    top: 0;
+    width: 18.9cm;
+    .form-body {
+      height: 460px;
+      padding: 2mm !important;
+    }
+  }
+
+}
+// print only definitions
+@mixin printScaffoldLayout {
+
+  html, body {
+    background-color: white;
+  }
+  #page {
+    display: none;
+  }
+  .gm-container {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    left: 0;
+    margin: 0;
+    max-height: none;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    width: 100%;
+    &.jira-dialog {
+      border: none;
+      margin: 0;
+      padding: 0;
+    }
+    .form-body {
+      padding: 0 !important;
+    }
+  }
+
+}

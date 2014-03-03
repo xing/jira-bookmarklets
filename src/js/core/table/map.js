@@ -1,8 +1,9 @@
 Namespace.create('xing.core.table');
 
 /**
- * @module xing.jira.table
- * @class Layout
+ * @module xing.core.table
+ * @class layout
+ * @for xing.core.table.Map
  * @type literal
  */
 xing.core.table.layout = {
@@ -24,19 +25,20 @@ xing.core.table.layout = {
   /**
    * Basic layout types
    * @property _layouts
+   * Available properties:
+   * collaborators, component, created, description, dueDate, number, reporter, storyPoints, target, title, type,
    */
   _layouts: {
     default: [
       ['number', 'type', 'component', 'target'],
-      ['title'],
+      [ { 'title': { maxLength: 350 } } ],
       ['collobarators'],
       ['created', 'dueDate', 'reporter', 'start', 'closed']
     ],
     scrum: [
-      ['number', 'type', 'component', 'target'],
-      ['title'],
-      ['collobarators'],
-      ['created', 'dueDate', 'start', 'closed', 'storyPoints']
+      ['number', 'type', 'component', 'storyPoints'],
+      [ { 'title': { maxLength: 150 } } ],
+      [ { 'description': { maxLength: 600 } } ]
     ]
   },
 
@@ -56,22 +58,49 @@ xing.core.table.layout = {
 };
 
 /**
- * @module xing.jira.table
+ * @module xing.core.table
  * @class Map
  * @type function
- * @requires xing.core.I18n
- * @param {function} tableCell
+ * @requires xing.core.table.layout
+ * @param {xing.jira.TableMapCell} tableCell
+ * @param {xing.core.I18n} local
  * @param {String} [layoutName]
  */
-xing.core.table.Map = function (tableCell, layoutName) {
+xing.core.table.Map = function (tableCell, local, layoutName) {
   'use strict';
 
   var scope = this,
-      local = (new xing.core.I18n()).local().ticket,
       layout = xing.core.table.layout
   ;
 
   layoutName = layoutName || layout.DEFAULT_LAYOUT;
+
+  /**
+   * Handle the different data types
+   * @method _mapSwitch
+   * @param {Object} data
+   * @param {String|Array|Object} mapItem
+   * @return {xing.jira.TableMapCell}
+   */
+  scope._mapSwitch = function (data, mapItem) {
+    var result;
+
+    if (typeof mapItem === 'string') {
+      result = tableCell[mapItem]({data: data, local: local.ticket});
+    }
+    else if (xing.core.helpers.isObject(mapItem)) {
+      var mapItemName = Object.keys(mapItem)[0];
+      if (mapItem[mapItemName].maxLength) {
+        data[mapItemName] = data[mapItemName].truncate(mapItem[mapItemName].maxLength);
+      }
+      result = tableCell[mapItemName]({data: data, local: local.ticket});
+    }
+    else {
+      result = scope.build(data, mapItem);
+    }
+
+    return result;
+  };
 
   /**
    * @method build
@@ -86,15 +115,7 @@ xing.core.table.Map = function (tableCell, layoutName) {
     ;
 
     for (; index < length; index++) {
-      var item = map[index];
-
-      if (typeof item === 'string') {
-        local = local;
-        cellMap[index] = tableCell[item]({data: data, local: local});
-      }
-      else {
-        cellMap[index] = scope.build(data, item);
-      }
+      cellMap[index] = scope._mapSwitch(data, map[index]);
     }
 
     return cellMap;

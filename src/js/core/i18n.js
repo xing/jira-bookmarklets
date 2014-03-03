@@ -17,7 +17,7 @@ xing.core.I18n = function () {
       heading: 'Print preview',
       select: 'Select another:',
       action: {
-        addCollaborator: 'Add Collaborators',
+        addCollaborator: 'Collaborators',
         remove: 'Remove ticket form the list',
         print: 'Print',
         cancel: 'Cancel'
@@ -28,7 +28,7 @@ xing.core.I18n = function () {
     ticket: {
       collaborator: {
         title:  'Pairing partner',
-        action: '<button id="gm-add-collaborator" class="aui-button gm-snap-right"><i>+</i> Add Collaborators</button>'
+        action: '<button class="aui-button gm-change-collaborators gm-print-hidden">Collaborators</button>'
       },
       component: { title: 'Component' },
       closed: {
@@ -36,9 +36,10 @@ xing.core.I18n = function () {
         body:  'Day | Time'
       },
       created:     { title: 'Created' },
-      storyPoints: { title: 'Story Points' },
+      description: { title: 'Description' },
       dueDate:     { title: 'Due date' },
       reporter:    { title: 'Reporter' },
+      storyPoints: { title: 'Story Points' },
       target:      { title: 'Target' },
       type:        { title: 'Type' },
       start:    {

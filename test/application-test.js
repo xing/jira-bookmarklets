@@ -1,17 +1,16 @@
+'use strict';
+
 var xingJiraApp;
-$.get('../output/main.min.css')
+$.get('../build/main.min.css')
   .success(function (cssResources) {
-    'use strict';
     run(cssResources);
   }).complete(function () {
-    'use strict';
     run('');
   })
 ;
 function run(cssResources) {
-  'use strict';
   // xingJiraApp = new xing.jira.Application(cssResources);
-  xingJiraApp = new xing.jira.Application(cssResources, xing.core.table.layout.SCRUM_LAYOUT);
+  xingJiraApp = new xing.jira.Application(cssResources, {layoutName: xing.core.table.layout.SCRUM_LAYOUT});
   xingJiraApp.showPopup();
   var AJS = {};
   AJS.messages = {};

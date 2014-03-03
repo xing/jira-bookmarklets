@@ -1,0 +1,18 @@
+%table-cell {
+  border: $table-border-size solid $table-border-color;
+}
+.gm-table {
+  @extend %table-cell;
+  border-collapse: collapse;
+  font: $default-font-size $font-stack;
+  line-height: $base-line;
+  padding-bottom: 2mm;
+  width: 100%;
+  th {
+    @extend %table-cell;
+  }
+  td {
+    @extend %table-cell;
+    vertical-align: top;
+  }
+}

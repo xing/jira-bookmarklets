@@ -1,7 +1,9 @@
 Namespace.create('xing.jira');
 
 /**
+ * Definitions of each ticket cell type which are presented in the Table layout.
  * @module xing.jira.TableMapCell
+ * @requires xing.jira.helpers.Label
  * @class TableMapCell
  */
 xing.jira.TableMapCell = function () {
@@ -11,6 +13,9 @@ xing.jira.TableMapCell = function () {
       MAX_COLS = 5
   ;
 
+  scope.labelHelper = new xing.jira.helpers.Label();
+  scope.PREFIX = 'gm-jira-';
+
   /**
    * @private
    * @method _titleBody
@@ -19,6 +24,7 @@ xing.jira.TableMapCell = function () {
   scope._titleBody = function (options, item) {
     return {
       cell: {
+        options: { cssClass: scope.PREFIX + item },
         title: { text: options.local[item].title },
         body:  { text: options.data[item] }
       }
@@ -37,11 +43,11 @@ xing.jira.TableMapCell = function () {
       cell: {
         options: {
           colspan: 2,
-          cssClass: 'gm-number gm-ltr'
+          cssClass: scope.PREFIX + 'number'
         },
         body: {
           text: options.data.number,
-          options: { cssClass: 'h1', title: options.data.number }
+          options: { title: options.data.number }
         }
       }
     };
@@ -54,13 +60,28 @@ xing.jira.TableMapCell = function () {
   scope.type = function (options) {
     return {
       cell: {
+        options: { cssClass: scope.PREFIX + 'type' },
         title: { text: options.local.type.title },
         body: {
           options: {
-            cssClass: 'gm-label gm-label-' + options.data.typeSelector
+            cssClass: scope.labelHelper.getSelector(options.data.typeSelector)
           },
           text: options.data.type
         }
+      }
+    };
+  };
+
+  /**
+   * @method description
+   * @see number
+   */
+  scope.description = function (options) {
+    return {
+      head: true,
+      cell: {
+        options: { colspan: MAX_COLS, cssClass: scope.PREFIX + 'description' },
+        body: { text: options.data.description }
       }
     };
   };
@@ -89,11 +110,8 @@ xing.jira.TableMapCell = function () {
     return {
       head: true,
       cell: {
-        options: { colspan: MAX_COLS, cssClass: 'gm-title gm-ltr' },
-        body: {
-          text: options.data.title,
-          options: { cssClass: 'h2 gm-hyphen' }
-        }
+        options: { colspan: MAX_COLS, cssClass: scope.PREFIX + 'title' },
+        body: { text: options.data.title }
       }
     };
   };
@@ -105,14 +123,12 @@ xing.jira.TableMapCell = function () {
   scope.collobarators = function (options) {
     return {
       cell: {
-        options: {colspan: MAX_COLS, cssClass: 'gm-pairing'},
+        options: {colspan: MAX_COLS, cssClass: scope.PREFIX + 'pairing'},
         title: {
-          text: options.local.collaborator.title,
-          options: { cssClass: 'gm-snap-left h5' }
+          text: options.local.collaborator.title
         },
         body: {
-          text: options.data.collaborators + options.local.collaborator.action,
-          options: { cssClass: 'h5' }
+          text: options.data.collaborators.split(/,/).join(' ') + options.local.collaborator.action
         }
       }
     };
@@ -123,11 +139,23 @@ xing.jira.TableMapCell = function () {
    * @see number
    */
   scope.created = function (options) {
-    return scope._titleBody(options, 'created');
+    var item = 'created';
+    return {
+      cell: {
+        options: { cssClass: scope.PREFIX + item },
+        title: { text: options.local[item].title },
+        body:  {
+          options: {
+            cssClass: scope.labelHelper.getSelector()
+          },
+          text: options.data[item]
+        }
+      }
+    };
   };
 
   /**
-   * @method deuDate
+   * @method dueDate
    * @see number
    */
   scope.dueDate = function (options) {
@@ -136,7 +164,7 @@ xing.jira.TableMapCell = function () {
         title: { text: options.local.dueDate.title },
         body: {
           options: {
-            cssClass: (options.data.dueDate ? 'gm-label-danger gm-label' : '')
+            cssClass: scope.labelHelper.getSelector(options.data.dueDate ? 'bug' : false)
           },
           text: options.data.dueDate
         }
@@ -159,12 +187,11 @@ xing.jira.TableMapCell = function () {
   scope.storyPoints = function (options) {
     return {
       cell: {
+        options: { cssClass: scope.PREFIX + 'story' },
         title: {
-          options: { cssClass: 'gm-center' },
           text: options.local.storyPoints.title
         },
         body:  {
-          options: { cssClass: 'gm-center h3'},
           text: options.data.storyPoints
         }
       }
@@ -178,7 +205,7 @@ xing.jira.TableMapCell = function () {
   scope.start = function (options) {
     return {
       cell: {
-        options: { cssClass: 'gm-date-content gm-20' },
+        options: { cssClass: 'gm-date-content' },
         title: { text: options.local.start.title },
         body: { text: options.local.start.body }
       }
@@ -192,7 +219,7 @@ xing.jira.TableMapCell = function () {
   scope.closed = function (options) {
     return {
       cell: {
-        options: { cssClass: 'gm-date-content gm-20' },
+        options: { cssClass: 'gm-date-content' },
         title: { text: options.local.closed.title },
         body: { text: options.local.closed.body }
       }

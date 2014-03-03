@@ -6,35 +6,42 @@ Namespace.create('xing.jira');
  * @class Application
  * @requires AJS
  * @requires jQuery
- * @requires xing.core.table
+ * @requires xing.core.Observer
+ * @requires xing.core.ticketCache
  * @requires xing.core.Presenter
  * @requires xing.core.I18n
- * @requires xing.core.DataCollector
  * @requires xing.jira.TableMapCell
  * @type Object
  * @param {String} cssResources A string of CSS definitions. e.g. 'body { color: red; }'
- * @param {String} [layout] Type name of ticket layout. default: 'default'
+ * @param {Object} options Hash of optional parameters
+ *   @param {Object} [options.layoutName] Layout class selector necessary for specific themes
  */
-xing.jira.Application = function (cssResources, layoutName) {
+xing.jira.Application = function (cssResources, options) {
   'use strict';
 
   var scope = this,
       nsXC = xing.core,
-      dataCollector,
+      observer,
+      ticketCache,
       local,
+      markup,
       tableBuilder
   ;
 
   /**
    * @method initialize
+   * @see xing.jira.Application
    */
-  scope.initialze = function (cssResources) {
-    dataCollector  = new nsXC.DataCollector();
+  scope.initialze = function (cssResources, options) {
+    scope.layoutName = options && options.layoutName || '';
+    observer  = new nsXC.Observer();
+    ticketCache    = new nsXC.TicketCache();
     tableBuilder   = new nsXC.table.Builder();
-    scope.tableMap = new nsXC.table.Map(new xing.jira.TableMapCell(), layoutName);
+    markup         = new nsXC.Markup();
     local          = (new nsXC.I18n()).local();
+    scope.tableMap = new nsXC.table.Map(new xing.jira.TableMapCell(), local, scope.layoutName);
     scope.addStyle(cssResources);
-    scope.collectDataFromDom(dataCollector);
+    scope.collectDataFromDom();
   };
 
   /**
@@ -60,6 +67,7 @@ xing.jira.Application = function (cssResources, layoutName) {
       scope._hidePopup();
     }
   };
+
   /**
    * @private
    * @method _hidePopup
@@ -73,73 +81,43 @@ xing.jira.Application = function (cssResources, layoutName) {
    * @private
    * @method _updateHTML
    */
-  scope._updateHTML = function (cachedTickets) {
+  scope._updateHTML = function (cachedTicketMaps) {
     $('#gm-popup').remove();
 
-    var map = scope.tableMap.build(dataCollector.ticketData),
-        currentTicketMarkup = tableBuilder.render(map),
+    var map = scope.tableMap.build(ticketCache.latest),
+        builderRenderOptions = {layoutName: scope.layoutName},
+        currentTicketMarkup = tableBuilder.render(map, builderRenderOptions),
         cachedTicketsMarkup = '',
-        numberOfTickets = cachedTickets.length + 1,
+        numberOfTickets = cachedTicketMaps.length + 1,
         numberOfPages = Math.ceil(numberOfTickets / 2)
     ;
 
-    cachedTickets.forEach(function (markup) {
-      var number = $(markup).find('.gm-number').text(),
-          currentNumber = $(currentTicketMarkup).find('.gm-number').text(),
-          buttonSelecotrs = 'aui-button gm-button-danger js-gm-remove-ticket'
+    cachedTicketMaps.forEach(function (cachedTicketMap) {
+      var number = cachedTicketMap.number,
+          currentNumber = map.number
       ;
 
       if (number !== currentNumber) {
         cachedTicketsMarkup += '' +
           '<li class="gm-output-item">' +
-             markup +
-             '<div class="gm-ticket-action-panel">' +
-               '<button type="button" class="' + buttonSelecotrs + '">' +
-                 local.modal.action.remove +
-               '</button>' +
-             '</div>' +
-           '</li>'
+             tableBuilder.render(scope.tableMap.build(cachedTicketMap), builderRenderOptions) +
+             markup.ticketPanel(local.modal.action.remove) +
+          '</li>'
         ;
       }
     });
 
     $('body').append(
       $('<div id="gm-popup">' +
-         '<div class="gm-container jira-dialog box-shadow ">' +
-           '<div class="jira-dialog-heading">' +
-             '<h2>' + local.modal.heading + '</h2>' +
-           '</div>' +
+         '<section class="gm-container jira-dialog box-shadow">' +
+           markup.dialogHeader(local.modal.heading) +
            '<div class="jira-dialog-content">' +
-             '<div class="gm-page-counter h5">' +
-               local.modal.ticketCount + ' ' + numberOfTickets +
-               local.modal.pageCount + ' ' + numberOfPages +
-             '</div>' +
-             '<div class="form-body">' +
-               '<ul class="gm-output-list">' +
-                 cachedTicketsMarkup +
-                 '<li class="gm-output-item">' + currentTicketMarkup + '</li>' +
-               '</ul>' +
-             '</div>' +
-             '<div class="buttons-container form-footer">' +
-               '<div class="buttons">' +
-                 '<label for="gm-select-ticket">' +
-                   local.modal.select +
-                 '</label>&nbsp;' +
-                 '<button id="gm-select-ticket" ' +
-                   'class="gm-pick-more aui-button">' +
-                   '<i>+</i>' +
-                 '</button>&nbsp;' +
-                 '<button class="gm-print aui-button">' +
-                   local.modal.action.print +
-                '</button>' +
-                '<a class="gm-cancel cancel" href="#">' +
-                   local.modal.action.cancel +
-                '</a>' +
-               '</div>' +
-             '</div>' +
+             markup.pageCounter(local.modal.ticketCount, numberOfTickets, local.modal.pageCount, numberOfPages) +
+             markup.ticketPreview(cachedTicketsMarkup, currentTicketMarkup) +
            '</div>' +
-        '</div>'  +
-         '<div class="aui-blanket"></div>' +
+           markup.dialogFooter(local.modal.select, local.modal.action.print, local.modal.action.cancel) +
+         '</section>' +
+         '<div class="aui-blanket gm-print-hidden"></div>' +
        '</div>'
       )
     );
@@ -161,13 +139,9 @@ xing.jira.Application = function (cssResources, layoutName) {
    */
   scope.cacheTicketHandler = function () {
     scope.update();
-    var $latestTicket = $('#gm-popup .gm-table:last'),
-        markup = ''
-    ;
+    var map = ticketCache.latest;
 
-    markup = $latestTicket[0].outerHTML;
-
-    dataCollector.cacheTicket(markup.trimWhitespace());
+    ticketCache.add(map);
     scope._hidePopup();
     scope._showSuccessMessage();
   };
@@ -178,10 +152,12 @@ xing.jira.Application = function (cssResources, layoutName) {
    */
   scope._showSuccessMessage = function () {
     $('.aui-message').remove();
-    AJS.messages.success('.aui-page-header-inner', {
-      title: local.messages.ticketCached.title,
-      body: local.messages.ticketCached.body
-    });
+    if (window.AJS) {
+      AJS.messages.success('.aui-page-header-inner', {
+        title: local.messages.ticketCached.title,
+        body: local.messages.ticketCached.body
+      });
+    }
     setTimeout(function () {
       $('.aui-message').remove();
     }, 5000);
@@ -193,36 +169,58 @@ xing.jira.Application = function (cssResources, layoutName) {
   scope.showPopup = function () {
     if ($('#gm-popup')[0]) { return; }
     // register observer
-    dataCollector.subscribe(this);
+    observer.subscribe(this);
+    observer.subscribe(ticketCache);
 
-    scope._updateHTML(dataCollector.getCachedTickets());
+    scope.update(ticketCache.get());
 
     $('body')
-      .on('click', '.gm-print', function (event) {
+
+      .on('click', '.js-gm-print-action', function (event) {
         event.preventDefault();
         window.print();
-        dataCollector.removeCachedTickets();
+        ticketCache.remove();
         scope._hidePopup();
       })
-      .on('click', '.gm-pick-more', function (event) {
+
+      .on('click', '.js-gm-pick-more', function (event) {
         event.preventDefault();
         scope.cacheTicketHandler();
       })
-      .on('click', '.gm-cancel', function (event) {
+
+      .on('click', '.js-gm-cancel-action', function (event) {
         event.preventDefault();
         scope._hidePopup();
       })
+
       .on('click', '.js-gm-remove-ticket', function (event) {
         event.preventDefault();
         var $target = $(event.target).parents('li'),
           index = $target.index($target)
         ;
-        dataCollector.removeCachedTickets(index);
+        ticketCache.remove(index);
         $('#gm-popup .form-body table').eq(index).remove();
-        scope._updateHTML(dataCollector.getCachedTickets());
+        scope.update(ticketCache.get());
       })
-      .on('click', '#gm-add-collaborator', function () {
-        dataCollector.addCollaborators(local.modal.collaboratorPrompt);
+
+      .on('click', '.gm-change-collaborators', function () {
+        var index = $('.gm-output-list button').index(this) - 1,
+            names, confirmedNames
+        ;
+
+        if ($(this).parents('.is-current')) {
+          names = ticketCache.getCollaborators();
+        }
+        else {
+          names = ticketCache.getCollaborators(index);
+        }
+
+        confirmedNames = window.prompt(local.modal.collaboratorPrompt, names || '');
+        if (confirmedNames !== null) {
+          ticketCache.updateCollaborators(index, confirmedNames.trimWhitespace());
+          scope.update();
+        }
+
       })
     ;
   };
@@ -231,36 +229,35 @@ xing.jira.Application = function (cssResources, layoutName) {
    * @method update
    */
   scope.update = function () {
-    scope._updateHTML(dataCollector.getCachedTickets());
+    scope._updateHTML(ticketCache.get());
   };
 
   /**
    * Collect and formatted data from the DOM
    * @method collectDataFromDom
    */
-  scope.collectDataFromDom = function (dataCollector) {
+  scope.collectDataFromDom = function () {
     var $target = $('#greenhopper-agile-issue-web-panel dd a'),
         presenter = new nsXC.Presenter(),
-        type = presenter.getString($('#type-val img').attr('alt')),
-        collaboratorKey = dataCollector.COLLABORATOR_KEY,
-        title = presenter.getString($('#summary-val').text())
+        type = presenter.getString($('#type-val img').attr('alt'))
     ;
 
-    dataCollector.update({
+    ticketCache.latest = {
       number:        presenter.getString($('#key-val').text()),
       description:   presenter.getString($('#description-val').text()),
       storyPoints:   presenter.getString($('#customfield_10080-val').text()),
       dueDate:       presenter.getDate($('#due-date time').attr('datetime')),
-      collaborators: presenter.getStorageItem(collaboratorKey).join(' '),
+      collaborators: ticketCache.getCollaborators(),
       type:          type,
       typeSelector:  presenter.dashalizer(type),
       reporter:      presenter.getString($('#reporter-val span').text()),
       created:       presenter.getDate($('#create-date time').attr('datetime')),
-      title:         title.truncate(220),
+      title:         presenter.getString($('#summary-val').text()),
       component:     presenter.getString($('#components-field').text()),
       target:        presenter.getElementText($target)
-    });
+    };
+    observer.update();
   };
 
-  scope.initialze(cssResources);
+  scope.initialze(cssResources, options);
 };

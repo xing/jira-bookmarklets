@@ -1,0 +1,95 @@
+.gm-inner {
+  padding: 2mm 3mm;
+}
+
+.gm-jira-number {
+  @extend %text-left;
+  min-width: 30%;
+  .gm-bd {
+    @extend %h1;
+    word-break: break-all;
+  }
+}
+
+.gm-jira-title {
+  .gm-bd {
+    @extend %text-left;
+    @extend %h2;
+    @extend %hyphen;
+    line-height: 1em;
+  }
+  .gm-inner {
+    overflow: hidden;
+    padding-bottom: 0;
+    height: 7.0cm;
+  }
+}
+
+.gm-jira-description {
+  overflow: hidden;
+  .gm-inner {
+    height: 6.0cm;
+  }
+  .gm-bd {
+    @extend %default-font-size;
+    @extend %hyphen;
+    @extend %text-left;
+    font-weight: normal;
+    line-height: $base-line;
+  }
+}
+
+.gm-jira-pairing {
+  .gm-inner {
+    overflow: hidden;
+  }
+  .gm-hd {
+    @extend %snap-left;
+    padding-right: 3mm;
+  }
+  .gm-bd {
+    overflow: hidden;
+  }
+}
+.gm-jira-story {
+  @extend %text-center;
+  .gm-hd {
+    @extend %snap-left;
+  }
+  .gm-bd {
+    @extend %h1;
+    @extend %snap-right;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 1em;
+  }
+}
+
+.gm-jira-qa {
+  .gm-bd {
+    border-radius: 2rem;
+    border: 1px solid $grey-light;
+    height: 40px;
+    margin: auto;
+    width: 40px;
+  }
+}
+
+.gm-date-content {
+  width: 20%;
+  .gm-hd {
+    padding: 0 0 1px;
+    text-align: center;
+  }
+  .gm-bd {
+    color: $grey-light;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  .gm-inner {
+    min-height: 1.2cm;
+  }
+}
+.gm-change-collaborators {
+  @extend %snap-right;
+}

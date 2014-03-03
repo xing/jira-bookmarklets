@@ -48,6 +48,7 @@ xing.core.table.Builder = function () {
       attr = attr.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
       attrs += ' ' + attr + '="' + value + '"';
     }
+
     return attrs;
   };
 
@@ -76,12 +77,15 @@ xing.core.table.Builder = function () {
         result = '',
         tag = cellData.head ? 'th' : 'td'
     ;
+
     result += scope._cellTitle(cell);
     result += scope._cellBody(cell);
 
-    return '<' + tag + scope._addCssClass(cell) + '>' +
-             '<div class="gm-inner">' + result + '</div>' +
-           '</' + tag + '>';
+    return '' +
+      '<' + tag + scope._addCssClass(cell) + '>' +
+        '<div class="gm-inner">' + result + '</div>' +
+      '</' + tag + '>'
+    ;
   };
 
   /**
@@ -94,9 +98,10 @@ xing.core.table.Builder = function () {
     if ('body' in cell) {
       var body = cell.body;
 
-      result += '<div' + scope._addCssClass(body, 'gm-bd') + '>' +
+      result = '<div' + scope._addCssClass(body, 'gm-bd') + '>' +
                   scope._text(body) +
-                '</div>';
+                '</div>'
+      ;
     }
     return result;
   };
@@ -108,11 +113,12 @@ xing.core.table.Builder = function () {
   scope._cellTitle = function (cell) {
     var result = '';
 
-    if ('title' in cell) {
+    if (cell.title) {
       var title = cell.title;
-      result += '<div' + scope._addCssClass(title, 'gm-hd') + '>' +
+      result = '<div' + scope._addCssClass(title, 'gm-hd') + '>' +
                   scope._text(title) +
-                '</div>';
+                '</div>'
+      ;
     }
     return result;
   };
@@ -120,15 +126,18 @@ xing.core.table.Builder = function () {
   /**
    * @method render
    * @param {xing.jira.table.Map} tableData
+   * @param {Object} options Hash of optional parameters
+   *   @param {Object} [options.layoutName] Layout class selector necessary for specific themes
    */
-  scope.render = function (tableData) {
-    var result = '';
-
+  scope.render = function (tableData, options) {
+    var result = '',
+        cssClass = options && options.layoutName ? ' gm-' + options.layoutName + '-layout' : ''
+    ;
     tableData.forEach(function (rowData) {
       result += scope.row(rowData);
     });
 
-    return '<table class="gm-table">' + result + '</table>';
+    return '<table class="gm-table' + cssClass + '">' + result + '</table>';
   };
 
 };

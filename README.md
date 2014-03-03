@@ -1,7 +1,8 @@
-# Jira Helpers
+# JIRA Helpers
 
 This is a summary of client side script helpers.
-It exist 2 bookmarklets that improve your Jira workflow.
+The helper gives you the possibility to print your JIRA Issues/Tickets.
+This helpers provides 2 different print layouts a default and a scrum one.
 
 ## Bookmarklet installation
 
@@ -13,13 +14,13 @@ It exist 2 bookmarklets that improve your Jira workflow.
 
 ### Bookmarklets with "default" layout
 
-**Print out your Jira tickets**
+**Print out your JIRA tickets**
 
 ``` javascript
 javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//source.xing.com/xws/jira-helpers/raw/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}());
 ```
 
-**Pick a Jira ticket for print**
+**Pick a JIRA ticket for print**
 
 ``` javascript
 javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//source.xing.com/xws/jira-helpers/raw/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:1}));
@@ -27,13 +28,13 @@ javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a
 
 ### Bookmarklets with "scrum" layout
 
-**Print out your Jira tickets**
+**Print out your JIRA tickets**
 
 ``` javascript
 javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//source.xing.com/xws/jira-helpers/raw/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:2}));
 ```
 
-**Pick a Jira ticket for print**
+**Pick a JIRA ticket for print**
 
 ``` javascript
 javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//source.xing.com/xws/jira-helpers/raw/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:3}));
@@ -47,6 +48,7 @@ You have to allow to print background colors in your browser print settings
 
 - in Firefox: *Appearance: Print Color Backgrounds*
 - in Google Chrome: *Options: Background colors and -images*
+
 
 ## Project setup
 
@@ -68,16 +70,10 @@ the `Grundfile.js`.
 
 Run theses following command in the terminal for:
 
-_create the new compressed JavaScript resources_
+_create the new compressed JavaScript and CSS resources_
 
 ``` bash
-$ grunt compress:js
-```
-
-_create the new compressed CSS resources_
-
-``` bash
-$ grunt compress:css
+$ grunt build
 ```
 
 _run tests_
@@ -92,6 +88,49 @@ _watch resources and run tests continuously_
 $ grunt watch
 ```
 
+_generate documentation_
+
+``` bash
+$ grunt yuidoc
+```
+
+### Available Layouts
+
+<img src="screenshots/default-layout-example.png"><br>
+Default layout
+
+<img src="screenshots/scrum-layout-example.png"><br>
+Scrum layout
+
+**How to create a new print layout?**
+
+1. Define a new item in the `xing.core.table.layout` object.
+   - requires a multi dimensional array `_layout` object like the existing (e.g. `kanban`)
+   - requires a static item the represent the new layout (e.g. `KANBAN_LAYOUT: 'kanban'`)
+2. Define the Grunt task in the Gruntfile.js to generate resources:
+
+``` javascript
+addBookmarkletKanban: {
+  options: {
+    banner: appConfig.templates.banner(),
+    footer: appConfig.templates.addPluginFooter('xing.core.table.layout.KANBAN_LAYOUT')
+  },
+  files: {
+    'build/add-ticket-lay-kanban-bookmarklet.js': appConfig.src
+  }
+}
+```
+
+3. Register layout in SDK loader script
+   - add the layout name in the `kits` list e.g. `'ticket-print-lay-kanban'`
+
+4. Run `grunt build` to create the resources and commit it and push it to your repository.
+
+5. Create a bookmark with the new generated content from [build/sdk-loader.js](build/sdk-loader.js) as _Location URL_ and set the index number of the kit that you want to use at the end of the line:
+   `…(options);}({ kit: 4, path: '//path.to.your/repository/jira-helpers/raw/' }));`
+
+6. The bookmarklet should now work on your JIRA issue pages.
+
 #### Config
 
 For changing the base request path for fetching the remote resources you can
@@ -104,12 +143,17 @@ adjust this in the `src/config.json` file.
 
 ### Version 2
 
+**v2.2.0**
+
+- allow to create several ticket layouts
+- simplify scrum layout
+
 **v2.1.0**
 
 - make it possible to have different print ticket layouts
 - two different layouts are now available:
-  - [default](/xws/jira-helpers/blob/master/demo/default-layout-example.png)
-  - [scrum](/xws/jira-helpers/blob/master/demo/scrum-layout-example.png) that shows story points
+  - [default](screenshots/default-layout-example.png)
+  - [scrum](screenshots/scrum-layout-example.png) that shows story points
 
 **v2.0.0**
 
@@ -144,7 +188,7 @@ adjust this in the `src/config.json` file.
 
 **v1.0.0**
 
-- Bookmarklet to print formatted Jira ticket
+- Bookmarklet to print formatted JIRA ticket
 
 ## Contact
 

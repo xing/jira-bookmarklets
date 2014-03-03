@@ -1,6 +1,7 @@
 Namespace.create('xing.core');
 
 /**
+ * Provides a collection of promises methods.
  * @module xing.jira
  * @class Presenter
  * @requires String
@@ -11,10 +12,10 @@ xing.core.Presenter = function () {
   var scope = this;
 
   /**
-   * Will trim a string with whitespace and newlines like this:
+   * Return a replace whitespace in a string to dashes.
    * @public
    * @method dashalizer
-   * @return {String} 'Foo Bar' 'foo-bar'
+   * @return {String} 'Foo Bar' => 'foo-bar'
    */
   scope.dashalizer = function (string) {
     return string.toLowerCase().replace(/ /g, '-');

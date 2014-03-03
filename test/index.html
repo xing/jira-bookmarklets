@@ -3,12 +3,11 @@
   <head>
     <meta charset="utf-8">
     <title>QUnit basic example</title>
-    <link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.11.0.css">
-    <style type="text/css">
-      .gm-container {
-        margin: 0!important;
-      }
-    </style>
+    <link rel="stylesheet" href="fixtures/aui/css/aui.css">
+    <link rel="stylesheet" href="fixtures/batch.css">
+    <link rel="stylesheet" href="fixtures/batch_global.css">
+    <link rel="stylesheet" href="fixtures/batch_general.css">
+    <link rel="stylesheet" href="../build/main.css">
   </head>
   <body>
     <div id="qunit"></div>
@@ -430,9 +429,16 @@
                             <div class='mod-content'>
                               <div id="description-val">
                                 <div class="user-content-block">
-                                  <p>We need to support "like" as verb within our AS implementation. </p>
-                                  <p>Only known combinations (object/verb/actor): user/like/jobposting, user/like/article, user/like/companyprofileupdate, user/like/companyprofile, user/like/event, user/like/group, user/like/poll, user/like/thread</p>
-                                  <p>Before we can release this feature to production, we should give the mobile team the opportunity to test against all the changes at once. Therefore we have a common branch for all upcoming AS changes: <a href="https://source.xing.com/xws/xws/tree/new_as_types">https://source.xing.com/xws/xws/tree/new_as_types</a></p>
+                                  <p><b><ins>As is</ins>:</b><br>
+                                    No Tracking enabled when the search is successful.</p>
+                                  <p>event33 (user search successful) and the page name/ channel name is </p>
+                                  <p>s.pageName="mobile/app/android/li/search/search_all";<br>
+                                    s.channel="mobile/app/android/li/search";<br>
+                                    <b><ins>To be</ins>:</b><br>
+                                    Please verify at your end. This tracking has not been enabled.</p>
+                                  <p>event33 (user search successful) and the page name/ channel name is </p>
+                                  <p>s.pageName="mobile/app/android/li/search/search_all";<br>
+                                    s.channel="mobile/app/android/li/search";</p>
                                 </div>
                               </div>
                             </div>
@@ -824,14 +830,17 @@
       </div>
 
     </div>
-    <script src="../src/js/vendor/jquery.js"></script>
-    <script src="../src/js/vendor/namespace.js"></script>
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/namespace-js/src/namespace.js"></script>
     <script src="../src/js/core/helpers.js"></script>
-    <script src="../src/js/core/data_collector.js"></script>
+    <script src="../src/js/core/observer.js"></script>
+    <script src="../src/js/core/ticket_cache.js"></script>
     <script src="../src/js/core/i18n.js"></script>
     <script src="../src/js/core/presenter.js"></script>
+    <script src="../src/js/core/markup.js"></script>
     <script src="../src/js/core/table/map.js"></script>
     <script src="../src/js/core/table/builder.js"></script>
+    <script src="../src/js/jira/helpers.js"></script>
     <script src="../src/js/jira/table_map_cell.js"></script>
     <script src="../src/js/jira/application.js"></script>
     <script src="application-test.js"></script>
