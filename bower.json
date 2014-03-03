@@ -6,8 +6,9 @@
   ],
   "description": "A collection of bookmarklets that helps you to print your JIRA tickets",
   "keywords": [
+    "jira",
     "bookmarklet",
-    "jira"
+    "plugin"
   ],
   "license": "MIT",
   "homepage": "http://dev.xing.com",
@@ -15,8 +16,7 @@
     "**/.*",
     "node_modules",
     "bower_components",
-    "test",
-    "tests"
+    "test"
   ],
   "dependencies": {
     "namespace-js": "~1.0.1",

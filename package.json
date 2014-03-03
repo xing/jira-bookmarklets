@@ -1,15 +1,24 @@
 {
   "name": "jira-bookmarklets",
   "version": "2.2.0",
-  "homepage": "http://dev.xing.com",
   "description": "A collection of bookmarklets that helps you to print your JIRA tickets",
+  "main": "Gruntfile.js",
+  "directories": {
+    "test": "test/spec"
+  },
   "scripts": {
+    "preinstall": "npm i grunt-cli -g",
     "test": "grunt test"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/xing/jira-bookmarklets.git"
   },
+  "keywords": [
+    "jira",
+    "bookmarklet",
+    "plugin"
+  ],
   "devDependencies": {
     "grunt": "~0.4.1",
     "grunt-contrib-uglify": "~0.2.4",
@@ -26,5 +35,9 @@
   },
   "author": "XING AG",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/xing/jira-bookmarklets/issues"
+  },
+  "homepage": "http://dev.xing.com",
   "readmeFilename": "README.md"
 }
