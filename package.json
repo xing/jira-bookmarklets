@@ -31,7 +31,8 @@
     "grunt-contrib-jshint": "~0.7.2",
     "grunt-contrib-csslint": "~0.1.2",
     "grunt-contrib-yuidoc": "~0.5.1",
-    "grunt-contrib-sass": "~0.5.1"
+    "grunt-contrib-sass": "~0.5.1",
+    "bower": "~1.2.8"
   },
   "author": "XING AG",
   "license": "MIT",
