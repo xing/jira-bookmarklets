@@ -1,6 +1,6 @@
 # JIRA Helpers
 
-This is a summary of client side script helpers.
+This is a collection of client side script helpers.
 The helper gives you the possibility to print your JIRA Issues/Tickets.
 This helpers provides 2 different print layouts a default and a scrum one.
 

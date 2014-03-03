@@ -1,10 +1,10 @@
 {
-  "name": "jira-helpers",
+  "name": "jira-bookmarklets",
   "version": "2.2.0",
   "authors": [
     "Christian Angermann <christian.angermann@xing.com>"
   ],
-  "description": "A bookmarklet that helps you to print your jira tickets for your daily work on your physical task board.",
+  "description": "A collection of bookmarklets that helps you to print your JIRA tickets",
   "keywords": [
     "bookmarklet",
     "jira"
