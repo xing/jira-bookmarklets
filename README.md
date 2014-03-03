@@ -1,4 +1,4 @@
-# JIRA Helpers
+# JIRA Bookmarklets
 
 This is a collection of client side script helpers.
 The helper gives you the possibility to print your JIRA Issues/Tickets.
