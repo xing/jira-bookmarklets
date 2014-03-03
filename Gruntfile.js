@@ -13,10 +13,12 @@ module.exports = function (grunt) {
       'src/js/jira/**/*.js'
     ],
     testSrc: [
-      'bower_components/jquery/dist/jquery.js',
-      'bower_components/namespace-js/src/namespace.js',
       'src/js/core/**/*.js',
       'src/js/jira/**/*.js'
+    ],
+    vendorSrc: [
+      'bower_components/jquery/dist/jquery.js',
+      'bower_components/namespace-js/src/namespace.js'
     ],
     cssMin: {
       src: '',
@@ -54,10 +56,11 @@ module.exports = function (grunt) {
 
     jasmine: {
       all: {
-        src: appConfig.testSrc,
+        src: '<%= appConfig.testSrc %>',
         options: {
           helpers: 'test/spec/*_helper.js',
           specs: 'test/spec/**/*_spec.js',
+          vendor: '<%= appConfig.vendorSrc %>',
           title: '<%= pkg.name %>'
         }
       }
