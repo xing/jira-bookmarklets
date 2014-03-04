@@ -244,7 +244,7 @@ xing.jira.Application = function (cssResources, options) {
 
     ticketCache.latest = {
       number:        presenter.getString($('#key-val').text()),
-      description:   presenter.getString($('#description-val').text()),
+      description:   presenter.getString($('#description-val').html()),
       storyPoints:   presenter.getString($('#customfield_10080-val').text()),
       dueDate:       presenter.getDate($('#due-date time').attr('datetime')),
       collaborators: ticketCache.getCollaborators(),

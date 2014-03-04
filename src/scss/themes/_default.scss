@@ -25,20 +25,6 @@
   }
 }
 
-.gm-jira-description {
-  overflow: hidden;
-  .gm-inner {
-    height: 6.0cm;
-  }
-  .gm-bd {
-    @extend %default-font-size;
-    @extend %hyphen;
-    @extend %text-left;
-    font-weight: normal;
-    line-height: $base-line;
-  }
-}
-
 .gm-jira-pairing {
   .gm-inner {
     overflow: hidden;
@@ -51,6 +37,7 @@
     overflow: hidden;
   }
 }
+
 .gm-jira-story {
   @extend %text-center;
   .gm-hd {

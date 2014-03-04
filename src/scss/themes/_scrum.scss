@@ -3,7 +3,21 @@
 
   .gm-jira-title {
     .gm-inner {
-      height: 3.4cm;
+      height: 3.2cm;
+    }
+  }
+
+  .gm-jira-description {
+    overflow: hidden;
+    .gm-inner {
+      height: 6.2cm;
+    }
+    .gm-bd {
+      @extend %default-font-size;
+      @extend %hyphen;
+      @extend %text-left;
+      font-weight: normal;
+      line-height: $base-line;
     }
   }
 
