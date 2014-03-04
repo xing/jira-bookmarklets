@@ -12,29 +12,31 @@ This helpers provides 2 different print layouts a default and a scrum one.
 4. Paste the script in the Location field and save it
 5. Then you can go on a JIRA ticket page and click the bookmarklet and magic will happen.
 
-### Bookmarklets with "default" layout
+### Bookmarklets via SDK loader
 
-**Print out your JIRA tickets**
+SDK loading has the advantage a stress-free update. New versions are automatically updated.
+
+Because of [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) you should use the direct link as bookmark Url.
+
+**Print out your JIRA tickets** – *default layout* – [direct link](https://raw.github.com/xing/jira-bookmarklets/master/build/ticket-print-bookmarklet.js)
 
 ``` javascript
 javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//source.xing.com/xws/jira-helpers/raw/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}());
 ```
 
-**Pick a JIRA ticket for print**
-
-``` javascript
-javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//source.xing.com/xws/jira-helpers/raw/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:1}));
-```
-
-### Bookmarklets with "scrum" layout
-
-**Print out your JIRA tickets**
+**Print out your JIRA tickets** – *scrum layout* – [direct link](https://raw.github.com/xing/jira-bookmarklets/master/build/ticket-print-lay-scrum-bookmarklet.js)
 
 ``` javascript
 javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//source.xing.com/xws/jira-helpers/raw/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:2}));
 ```
 
-**Pick a JIRA ticket for print**
+**Pick a JIRA ticket for print** – *default layout* – [direct link](https://raw.github.com/xing/jira-bookmarklets/master/build/add-ticket-bookmarklet.js)
+
+``` javascript
+javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//source.xing.com/xws/jira-helpers/raw/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:1}));
+```
+
+**Pick a JIRA ticket for print** – *scrum layout* – [direct link](https://raw.github.com/xing/jira-bookmarklets/master/build/add-ticket-lay-scrum-bookmarklet.js)
 
 ``` javascript
 javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//source.xing.com/xws/jira-helpers/raw/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:3}));
@@ -57,16 +59,23 @@ nodejs (>=0.8.2) installed.
 
 ### Install build environment
 
-Run this command in the terminal to download the dependencies.
+Run this commands in the terminal to fetch all dependencies.
 
 ``` bash
 $ npm install
+$ bower install
 ```
 
 ### Run build script
 
 The build process based on [Grunt](gruntjs). You can find the configuration in
 the `Grundfile.js`.
+
+If you will run on you machine you have to install it globaly
+
+``` bash
+$ npm install grunt-cli -g
+```
 
 Run theses following command in the terminal for:
 
@@ -142,6 +151,11 @@ adjust this in the `src/config.json` file.
 ## Release notes
 
 ### Version 2
+
+**v2.2.1**
+
+- *Scrum layout* support formatted text for the description
+- document how to use bookmarklet with direct loading insteat of async loading via SDK loader script
 
 **v2.2.0**
 
