@@ -1,6 +1,6 @@
 {
   "name": "jira-bookmarklets",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "description": "A collection of bookmarklets that helps you to print your JIRA tickets",
   "main": "Gruntfile.js",
   "directories": {
