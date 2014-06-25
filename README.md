@@ -1,4 +1,4 @@
-# JIRA Bookmarklets v2.2.1 [![Build Status](https://travis-ci.org/xing/jira-bookmarklets.png?branch=master)](https://travis-ci.org/xing/jira-bookmarklets)
+# JIRA Bookmarklets v2.2.2 [![Build Status](https://travis-ci.org/xing/jira-bookmarklets.png?branch=master)](https://travis-ci.org/xing/jira-bookmarklets)
 
 This is a collection of client side script helpers.
 The helper gives you the possibility to print your JIRA Issues/Tickets.
@@ -16,27 +16,28 @@ This helpers provides 2 different print layouts a default and a scrum one.
 
 SDK loading has the advantage a stress-free update. New versions are automatically updated.
 
-Because of [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) you should use the direct link as bookmark Url.
+**NOTE:** Because of [CORS](http://en.wikipedia.org/wiki/Cross-origin_resource_sharing) you should use the direct link as bookmark Url.
+Means: Press the direvt link and copy the resources directly into your bookmark.
 
-**Print out your JIRA tickets** – *default layout* – [direct link](https://rawgit.com/cange/jira-bookmarklets/master/build/ticket-print-bookmarklet.js)
+Print out your JIRA tickets – *default layout* – [direct link](https://rawgit.com/cange/jira-bookmarklets/master/build/ticket-print-bookmarklet.js)
 
 ``` javascript
 javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//rawgit.com/cange/jira-bookmarklets/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}());
 ```
 
-**Print out your JIRA tickets** – *scrum layout* – [direct link](https://rawgit.com/cange/jira-bookmarklets/master/build/ticket-print-lay-scrum-bookmarklet.js)
+Print out your JIRA tickets – *scrum layout* – [direct link](https://rawgit.com/cange/jira-bookmarklets/master/build/ticket-print-lay-scrum-bookmarklet.js)
 
 ``` javascript
 javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//rawgit.com/cange/jira-bookmarklets/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:2}));
 ```
 
-**Pick a JIRA ticket for print** – *default layout* – [direct link](https://rawgit.com/cange/jira-bookmarklets/master/build/add-ticket-bookmarklet.js)
+Pick a JIRA ticket for print – *default layout* – [direct link](https://rawgit.com/cange/jira-bookmarklets/master/build/add-ticket-bookmarklet.js)
 
 ``` javascript
 javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//rawgit.com/cange/jira-bookmarklets/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:1}));
 ```
 
-**Pick a JIRA ticket for print** – *scrum layout* – [direct link](https://rawgit.com/cange/jira-bookmarklets/master/build/add-ticket-lay-scrum-bookmarklet.js)
+Pick a JIRA ticket for print – *scrum layout* – [direct link](https://rawgit.com/cange/jira-bookmarklets/master/build/add-ticket-lay-scrum-bookmarklet.js)
 
 ``` javascript
 javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//rawgit.com/cange/jira-bookmarklets/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:3}));
@@ -151,6 +152,10 @@ adjust this in the `src/config.json` file.
 ## Release notes
 
 ### Version 2
+
+**v2.2.2**
+
+- Fix MIME type issue to make the JS executable all supported browser
 
 **v2.2.1**
 
