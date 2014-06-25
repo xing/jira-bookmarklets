@@ -1,6 +1,6 @@
 {
   "name": "jira-bookmarklets",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "A collection of bookmarklets that helps you to print your JIRA tickets",
   "main": "Gruntfile.js",
   "directories": {
@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/xing/jira-bookmarklets.git"
+    "url": "https://github.com/cange/jira-bookmarklets.git"
   },
   "keywords": [
     "jira",
@@ -32,9 +32,10 @@
     "grunt-contrib-csslint": "~0.1.2",
     "grunt-contrib-yuidoc": "~0.5.1",
     "grunt-contrib-sass": "~0.5.1",
-    "bower": "~1.2.8"
+    "bower": "~1.2.8",
+    "grunt-string-replace": "~0.2.7"
   },
-  "author": "XING AG",
+  "author": "cange",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/xing/jira-bookmarklets/issues"

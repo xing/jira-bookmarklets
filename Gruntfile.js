@@ -179,7 +179,28 @@ module.exports = function (grunt) {
           'build/add-ticket-lay-scrum-bookmarklet.js': appConfig.src
         }
       }
+    },
+
+    'string-replace': {
+      dist: {
+        files: {
+          'README.md': './src/templates/readme.tmpl.md'
+        },
+        options: {
+          replacements: [{
+            pattern:      /(\#\{version\})/ig,
+            replacement:  '<%= pkg.version %>'
+          }, {
+            pattern:      /(\#\{author\})/ig,
+            replacement:  '<%= pkg.author %>'
+          }, {
+            pattern:     /(\#\{projectname\})/ig,
+            replacement: '<%= pkg.name %>'
+          }]
+        }
+      }
     }
+
   });
 
   grunt.registerTask('cssmin', 'Read CSS file async and cache the content', function () {
@@ -193,7 +214,7 @@ module.exports = function (grunt) {
     }, config.delay);
   });
 
-  grunt.registerTask('build',   ['sass:dist', 'cssmin', 'uglify']);
+  grunt.registerTask('build',   ['sass:dist', 'cssmin', 'uglify', 'string-replace']);
   grunt.registerTask('test',    ['jasmine:all']);
   grunt.registerTask('default', 'build');
 
