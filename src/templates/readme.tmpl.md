@@ -156,6 +156,7 @@ adjust this in the `src/config.json` file.
 **v2.2.2**
 
 - Fix MIME type issue to make the JS executable all supported browser
+- Improve the balance of title/description viewport size for the Scrum layout
 
 **v2.2.1**
 

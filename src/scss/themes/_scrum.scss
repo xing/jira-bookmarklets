@@ -1,16 +1,20 @@
+$table-viewport-height:    9.4cm;
+$table-title-height:       1.8cm;
+$table-description-height: $table-viewport-height - $table-title-height;
+
 // override
 .gm-scrum-layout {
 
   .gm-jira-title {
     .gm-inner {
-      height: 3.2cm;
+      height: $table-title-height;
     }
   }
 
   .gm-jira-description {
     overflow: hidden;
     .gm-inner {
-      height: 6.2cm;
+      height: $table-description-height;
     }
     .gm-bd {
       @extend %default-font-size;
