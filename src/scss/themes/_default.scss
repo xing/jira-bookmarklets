@@ -1,3 +1,5 @@
+$table-title-height:       7.0cm!default;
+
 .gm-inner {
   padding: 2mm 3mm;
 }
@@ -19,9 +21,9 @@
     line-height: 1em;
   }
   .gm-inner {
+    height: $table-title-height;
     overflow: hidden;
     padding-bottom: 0;
-    height: 7.0cm;
   }
 }
 
@@ -46,8 +48,8 @@
   .gm-bd {
     @extend %h1;
     @extend %snap-right;
-    font-weight: bold;
     display: inline-block;
+    font-weight: bold;
     line-height: 1em;
   }
 }

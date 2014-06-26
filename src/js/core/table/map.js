@@ -37,7 +37,7 @@ xing.core.table.layout = {
     ],
     scrum: [
       ['number', 'type', 'component', 'storyPoints'],
-      [ { 'title': { maxLength: 150 } } ],
+      [ { 'title': { maxLength: 87 } } ],
       ['description']
     ]
   },

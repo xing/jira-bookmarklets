@@ -1,4 +1,4 @@
-# JIRA Bookmarklets v2.2.2 [![Build Status](https://travis-ci.org/cange/jira-bookmarklets.png?branch=master)](https://travis-ci.org/cange/jira-bookmarklets)
+# JIRA Bookmarklets v2.2.2 [![Build Status](https://travis-ci.org/#{author}/#{projectname}.png?branch=master)](https://travis-ci.org/#{author}/#{projectname})
 
 This is a collection of client side script helpers.
 The helper gives you the possibility to print your JIRA Issues/Tickets.
@@ -19,25 +19,25 @@ SDK loading has the advantage a stress-free update. New versions are automatical
 Print out your JIRA tickets – *default layout*
 
 ``` javascript
-javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//rawgit.com/cange/jira-bookmarklets/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}());
+javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//rawgit.com/#{author}/#{projectname}/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}());
 ```
 
 Print out your JIRA tickets – *scrum layout*
 
 ``` javascript
-javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//rawgit.com/cange/jira-bookmarklets/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:2}));
+javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//rawgit.com/#{author}/#{projectname}/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:2}));
 ```
 
 Pick a JIRA ticket for print – *default layout*
 
 ``` javascript
-javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//rawgit.com/cange/jira-bookmarklets/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:1}));
+javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//rawgit.com/#{author}/#{projectname}/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:1}));
 ```
 
 Pick a JIRA ticket for print – *scrum layout*
 
 ``` javascript
-javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//rawgit.com/cange/jira-bookmarklets/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:3}));
+javascript:(function(options){!function(a){"use strict";a=a||{},a.kit=a.kit||0,a.env=a.env||0,a.path=a.path||"//rawgit.com/#{author}/#{projectname}/";var b=document,c=b.createElement("script"),d=["master","develop"],e=["ticket-print","add-ticket","ticket-print-lay-scrum","add-ticket-lay-scrum"],f=d[a.env],g=e[a.kit],h=a.path+f+"/build/"+g+"-bookmarklet.js";c.setAttribute("src",h),b.head.appendChild(c)}(options);}({kit:3}));
 ```
 
 ## FAQ
@@ -174,9 +174,9 @@ adjust this in the `src/config.json` file.
 
 **v2.0.0**
 
-- Load JavaScript from server/implement auto-update mechanism [Issue 3](https://rawgit.com/cange/jira-bookmarklets/issues/3)
+- Load JavaScript from server/implement auto-update mechanism [Issue 3](https://rawgit.com/#{author}/#{projectname}/issues/3)
   * you don’t have to update your local bookmarklet anymore, we will do it for you \o/
-- Print Multiple tickets [Issue 2](https://rawgit.com/cange/jira-bookmarklets/issues/2)
+- Print Multiple tickets [Issue 2](https://rawgit.com/#{author}/#{projectname}/issues/2)
   * Improve ticket prints - 2 tickets should now fits on one page
 - Update markup for JIRA 6.*
 - Overhaul remove a ticket interaction
@@ -211,11 +211,11 @@ adjust this in the `src/config.json` file.
 
 XING AG
 
-- https://github.com/cange
+- https://github.com/#{author}
 - https://github.com/xing
 - https://twitter.com/xingdevs
 - https://dev.xing.com
 
 ## License
 
-XING print bookmarklet is available under the MIT license. See the [LICENSE](/cange/jira-bookmarklets/blob/master/LICENSE) file for more info.
+XING print bookmarklet is available under the MIT license. See the [LICENSE](/#{author}/#{projectname}/blob/master/LICENSE) file for more info.
