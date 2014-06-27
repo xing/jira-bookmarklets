@@ -257,7 +257,6 @@ xing.jira.Application = function (cssResources, options) {
       target:        presenter.getElementText($target)
     };
     observer.update();
-    console.log("[JiraBkmrlt] storyPoints %o", ticketCache.latest.storyPoints, $('#customfield_12470-val'));
   };
 
   scope.initialze(cssResources, options);
