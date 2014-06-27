@@ -12,7 +12,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/cange/jira-bookmarklets.git"
+    "url": "https://github.com/xing/jira-bookmarklets.git"
   },
   "keywords": [
     "jira",
@@ -35,7 +35,7 @@
     "bower": "~1.2.8",
     "grunt-string-replace": "~0.2.7"
   },
-  "author": "cange",
+  "author": "xing",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/xing/jira-bookmarklets/issues"
