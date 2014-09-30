@@ -34,7 +34,7 @@ xing.core.table.Builder = function () {
         option
     ;
 
-    jQuery.extend(options, {cssClass: cssClass + additionalClass});
+    $.extend(options, {cssClass: cssClass + additionalClass});
 
     if (options.cssClass === ' ') {
       delete options.cssClass;

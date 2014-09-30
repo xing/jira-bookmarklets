@@ -59,7 +59,7 @@ xing.jira.Application = function (cssResources, options) {
    * @method _clickOutsidePopupHandler
    */
   scope._clickOutsidePopupHandler = function (event) {
-    var $target = jQuery(event.target),
+    var $target = $(event.target),
         $container = scope._getContainer($target)
     ;
     // remove popup is mouse clicked outside the popup
@@ -73,8 +73,8 @@ xing.jira.Application = function (cssResources, options) {
    * @method _hidePopup
    */
   scope._hidePopup = function () {
-    jQuery('#gm-popup').remove();
-    jQuery(document).off('click', scope._clickOutsidePopupHandler);
+    $('#gm-popup').remove();
+    $(document).off('click', scope._clickOutsidePopupHandler);
   };
 
   /**
@@ -82,7 +82,7 @@ xing.jira.Application = function (cssResources, options) {
    * @method _updateHTML
    */
   scope._updateHTML = function (cachedTicketMaps) {
-    jQuery('#gm-popup').remove();
+    $('#gm-popup').remove();
 
     var map = scope.tableMap.build(ticketCache.latest),
         builderRenderOptions = {layoutName: scope.layoutName},
@@ -107,8 +107,8 @@ xing.jira.Application = function (cssResources, options) {
       }
     });
 
-    jQuery('body').append(
-      jQuery('<div id="gm-popup">' +
+    $('body').append(
+      $('<div id="gm-popup">' +
          '<section class="gm-container jira-dialog box-shadow">' +
            markup.dialogHeader(local.modal.heading) +
            '<div class="jira-dialog-content">' +
@@ -127,11 +127,11 @@ xing.jira.Application = function (cssResources, options) {
    * @method addStyle
    */
   scope.addStyle = function (resources) {
-    if (jQuery('#gm-style')[0] || !resources) { return; }
+    if ($('#gm-style')[0] || !resources) { return; }
 
-    var $style = jQuery('<style id="gm-style" type="text/css"></style>');
+    var $style = $('<style id="gm-style" type="text/css"></style>');
 
-    jQuery(document.head).append($style.html(resources));
+    $(document.head).append($style.html(resources));
   };
 
   /**
@@ -151,7 +151,7 @@ xing.jira.Application = function (cssResources, options) {
    * @method _showSuccessMessage
    */
   scope._showSuccessMessage = function () {
-    jQuery('.aui-message').remove();
+    $('.aui-message').remove();
     if (window.AJS) {
       AJS.messages.success('.aui-page-header-inner', {
         title: local.messages.ticketCached.title,
@@ -159,7 +159,7 @@ xing.jira.Application = function (cssResources, options) {
       });
     }
     setTimeout(function () {
-      jQuery('.aui-message').remove();
+      $('.aui-message').remove();
     }, 5000);
   };
 
@@ -167,14 +167,14 @@ xing.jira.Application = function (cssResources, options) {
    * @method showPopup
    */
   scope.showPopup = function () {
-    if (jQuery('#gm-popup')[0]) { return; }
+    if ($('#gm-popup')[0]) { return; }
     // register observer
     observer.subscribe(this);
     observer.subscribe(ticketCache);
 
     scope.update(ticketCache.get());
 
-    jQuery('body')
+    $('body')
 
       .on('click', '.js-gm-print-action', function (event) {
         event.preventDefault();
@@ -195,20 +195,20 @@ xing.jira.Application = function (cssResources, options) {
 
       .on('click', '.js-gm-remove-ticket', function (event) {
         event.preventDefault();
-        var $target = jQuery(event.target).parents('li'),
+        var $target = $(event.target).parents('li'),
           index = $target.index($target)
         ;
         ticketCache.remove(index);
-        jQuery('#gm-popup .form-body table').eq(index).remove();
+        $('#gm-popup .form-body table').eq(index).remove();
         scope.update(ticketCache.get());
       })
 
       .on('click', '.gm-change-collaborators', function () {
-        var index = jQuery('.gm-output-list button').index(this) - 1,
+        var index = $('.gm-output-list button').index(this) - 1,
             names, confirmedNames
         ;
 
-        if (jQuery(this).parents('.is-current')) {
+        if ($(this).parents('.is-current')) {
           names = ticketCache.getCollaborators();
         }
         else {
@@ -237,22 +237,23 @@ xing.jira.Application = function (cssResources, options) {
    * @method collectDataFromDom
    */
   scope.collectDataFromDom = function () {
-    var $target = jQuery('#greenhopper-agile-issue-web-panel dd a'),
+    var $target = $('#greenhopper-agile-issue-web-panel dd a'),
         presenter = new nsXC.Presenter(),
-        type = presenter.getString(jQuery('#type-val img').attr('alt'))
+        type = presenter.getString($('#type-val img').attr('alt'))
     ;
 
     ticketCache.latest = {
-      number:        presenter.getString(jQuery('#key-val').text()),
-      description:   presenter.getString(jQuery('#description-val').html()),
-      storyPoints:   presenter.getString(jQuery('#customfield_12470-val').text()),
-      dueDate:       presenter.getDate(jQuery('#due-date time').attr('datetime')),
+      number:        presenter.getString($('#key-val').text()),
+      description:   presenter.getString($('#description-val').html()),
+      storyPoints:   presenter.getString($('#customfield_12470-val').text()),
+      dueDate:       presenter.getDate($('#due-date time').attr('datetime')),
       collaborators: ticketCache.getCollaborators(),
       type:          type,
       typeSelector:  presenter.dashalizer(type),
-      reporter:      presenter.getString(jQuery('#reporter-val span').text()),
-      created:       presenter.getDate(jQuery('#summary-val').text()),
-      component:     presenter.getString(jQuery('#components-field').text()),
+      reporter:      presenter.getString($('#reporter-val span').text()),
+      created:       presenter.getDate($('#create-date time').attr('datetime')),
+      title:         presenter.getString($('#summary-val').text()),
+      component:     presenter.getString($('#components-field').text()),
       target:        presenter.getElementText($target)
     };
     observer.update();
