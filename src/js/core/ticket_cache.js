@@ -53,7 +53,7 @@ xing.core.TicketCache = function () {
    * @method update
    */
   scope.update = function () {
-    scope.data = $.extend(scope.data, scope.latest);
+    scope.data = jQuery.extend(scope.data, scope.latest);
   };
 
   /**
